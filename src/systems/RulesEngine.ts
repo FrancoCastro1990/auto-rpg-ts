@@ -1,5 +1,6 @@
 import { Engine, Rule as JsonRule } from 'json-rules-engine';
 import { BattleParticipant, Rule, Action } from '../models/types';
+import { ValidationError, ConfigurationError, ErrorHandler } from '../utils/errors';
 
 export interface BattleFacts {
   actor: {
@@ -72,6 +73,10 @@ export class RulesEngineWrapper {
   }
 
   private parseCondition(condition: string): { path: string; operator: string; value: any } {
+    if (!condition || typeof condition !== 'string') {
+      throw new ValidationError('Condition must be a non-empty string');
+    }
+
     const trimmed = condition.trim();
 
     if (trimmed === 'always') {
@@ -85,32 +90,53 @@ export class RulesEngineWrapper {
     const hpPercentageMatch = trimmed.match(/^(ally|self)\.hp\s*<\s*(\d+)%$/);
     if (hpPercentageMatch) {
       const [, target, percentage] = hpPercentageMatch;
+      const percentValue = parseInt(percentage || '0');
+
+      if (isNaN(percentValue) || percentValue < 0 || percentValue > 100) {
+        throw new ValidationError(`Invalid percentage value in condition: ${condition}`);
+      }
+
       if (target === 'self') {
-        return { path: 'actor.hpPercentage', operator: 'percentageLessThan', value: parseInt(percentage || '0') };
+        return { path: 'actor.hpPercentage', operator: 'percentageLessThan', value: percentValue };
       } else {
-        return { path: 'lowestAllyHpPercentage', operator: 'percentageLessThan', value: parseInt(percentage || '0') };
+        return { path: 'lowestAllyHpPercentage', operator: 'percentageLessThan', value: percentValue };
       }
     }
 
     const mpPercentageMatch = trimmed.match(/^self\.mp\s*>\s*(\d+)%$/);
     if (mpPercentageMatch) {
-      const percentage = parseInt(mpPercentageMatch[1] || '0');
-      return { path: 'actor.mpPercentage', operator: 'percentageGreaterThan', value: percentage };
+      const percentValue = parseInt(mpPercentageMatch[1] || '0');
+
+      if (isNaN(percentValue) || percentValue < 0 || percentValue > 100) {
+        throw new ValidationError(`Invalid percentage value in condition: ${condition}`);
+      }
+
+      return { path: 'actor.mpPercentage', operator: 'percentageGreaterThan', value: percentValue };
     }
 
     const enemyCountMatch = trimmed.match(/^enemy\.count\s*>\s*(\d+)$/);
     if (enemyCountMatch) {
-      const count = parseInt(enemyCountMatch[1] || '0');
-      return { path: 'livingEnemies', operator: 'countGreaterThan', value: count };
+      const countValue = parseInt(enemyCountMatch[1] || '0');
+
+      if (isNaN(countValue) || countValue < 0) {
+        throw new ValidationError(`Invalid count value in condition: ${condition}`);
+      }
+
+      return { path: 'livingEnemies', operator: 'countGreaterThan', value: countValue };
     }
 
     const allyCountMatch = trimmed.match(/^ally\.count\s*>\s*(\d+)$/);
     if (allyCountMatch) {
-      const count = parseInt(allyCountMatch[1] || '0');
-      return { path: 'livingAllies', operator: 'countGreaterThan', value: count };
+      const countValue = parseInt(allyCountMatch[1] || '0');
+
+      if (isNaN(countValue) || countValue < 0) {
+        throw new ValidationError(`Invalid count value in condition: ${condition}`);
+      }
+
+      return { path: 'livingAllies', operator: 'countGreaterThan', value: countValue };
     }
 
-    throw new Error(`Unsupported condition: ${condition}`);
+    throw new ValidationError(`Unsupported condition format: ${condition}`);
   }
 
   private evaluateConditionDirect(condition: string, facts: BattleFacts): boolean {
@@ -163,6 +189,24 @@ export class RulesEngineWrapper {
     allies: BattleParticipant[],
     enemies: BattleParticipant[]
   ): BattleFacts {
+    // Validar entrada
+    if (!actor || typeof actor !== 'object') {
+      throw new ValidationError('Actor must be a valid BattleParticipant object');
+    }
+
+    if (!Array.isArray(allies)) {
+      throw new ValidationError('Allies must be an array');
+    }
+
+    if (!Array.isArray(enemies)) {
+      throw new ValidationError('Enemies must be an array');
+    }
+
+    // Validar que el actor tenga las propiedades necesarias
+    if (!actor.id || !actor.name || !actor.currentStats || !actor.maxStats) {
+      throw new ValidationError('Actor is missing required properties');
+    }
+
     const livingAllies = allies.filter(a => a.isAlive);
     const livingEnemies = enemies.filter(e => e.isAlive);
 
@@ -216,14 +260,37 @@ export class RulesEngineWrapper {
     allies: BattleParticipant[],
     enemies: BattleParticipant[]
   ): Promise<RuleResult[]> {
+    // Validar entrada
+    if (!actor || typeof actor !== 'object') {
+      throw new ValidationError('Actor must be a valid BattleParticipant object');
+    }
+
+    if (!Array.isArray(allies)) {
+      throw new ValidationError('Allies must be an array');
+    }
+
+    if (!Array.isArray(enemies)) {
+      throw new ValidationError('Enemies must be an array');
+    }
+
+    if (!actor.rules || !Array.isArray(actor.rules)) {
+      throw new ValidationError('Actor must have a valid rules array');
+    }
+
     const facts = this.createBattleFacts(actor, allies, enemies);
-
     const results: RuleResult[] = [];
-
     const sortedRules = [...actor.rules].sort((a, b) => b.priority - a.priority);
 
     for (const rule of sortedRules) {
       try {
+        if (!rule || typeof rule !== 'object') {
+          throw new ValidationError('Invalid rule object');
+        }
+
+        if (!rule.condition || typeof rule.condition !== 'string') {
+          throw new ValidationError('Rule must have a valid condition string');
+        }
+
         const success = this.evaluateConditionDirect(rule.condition, facts);
 
         results.push({
@@ -238,12 +305,14 @@ export class RulesEngineWrapper {
           break;
         }
       } catch (error) {
-        console.warn(`Failed to evaluate rule: ${rule.condition}`, error);
+        const err = error instanceof Error ? error : new Error(String(error));
+        console.warn(`Failed to evaluate rule: ${rule?.condition || 'unknown'}`, err.message);
+
         results.push({
           rule,
-          priority: rule.priority,
-          target: rule.target,
-          action: rule.action,
+          priority: rule.priority || 0,
+          target: rule.target || 'self',
+          action: rule.action || 'skip',
           success: false
         });
       }
@@ -257,8 +326,20 @@ export class RulesEngineWrapper {
     allies: BattleParticipant[],
     enemies: BattleParticipant[]
   ): Promise<RuleResult | null> {
-    const results = await this.evaluateRules(actor, allies, enemies);
+    // Validar entrada
+    if (!actor || typeof actor !== 'object') {
+      throw new ValidationError('Actor must be a valid BattleParticipant object');
+    }
 
+    if (!Array.isArray(allies)) {
+      throw new ValidationError('Allies must be an array');
+    }
+
+    if (!Array.isArray(enemies)) {
+      throw new ValidationError('Enemies must be an array');
+    }
+
+    const results = await this.evaluateRules(actor, allies, enemies);
     const successfulRules = results.filter(r => r.success);
 
     if (successfulRules.length === 0) {
@@ -271,26 +352,47 @@ export class RulesEngineWrapper {
   validateRule(rule: Rule): { valid: boolean; errors: string[] } {
     const errors: string[] = [];
 
-    try {
-      this.parseCondition(rule.condition);
-    } catch (error) {
-      errors.push(`Invalid condition: ${rule.condition}`);
+    // Validar que la regla sea un objeto válido
+    if (!rule || typeof rule !== 'object') {
+      errors.push('Rule must be a valid object');
+      return { valid: false, errors };
     }
 
+    // Validar condición
+    if (!rule.condition || typeof rule.condition !== 'string') {
+      errors.push('Rule must have a valid condition string');
+    } else {
+      try {
+        this.parseCondition(rule.condition);
+      } catch (error) {
+        const err = error instanceof Error ? error : new Error(String(error));
+        errors.push(`Invalid condition: ${err.message}`);
+      }
+    }
+
+    // Validar target
     const validTargets = [
       'weakestEnemy', 'strongestEnemy', 'lowestHpAlly',
       'randomAlly', 'randomEnemy', 'bossEnemy', 'self'
     ];
 
-    if (!validTargets.includes(rule.target)) {
-      errors.push(`Invalid target: ${rule.target}`);
+    if (!rule.target || typeof rule.target !== 'string') {
+      errors.push('Rule must have a valid target string');
+    } else if (!validTargets.includes(rule.target)) {
+      errors.push(`Invalid target: ${rule.target}. Valid targets: ${validTargets.join(', ')}`);
     }
 
-    if (!rule.action.match(/^(attack|cast:.+)$/)) {
-      errors.push(`Invalid action format: ${rule.action}`);
+    // Validar action
+    if (!rule.action || typeof rule.action !== 'string') {
+      errors.push('Rule must have a valid action string');
+    } else if (!rule.action.match(/^(attack|cast:.+)$/)) {
+      errors.push(`Invalid action format: ${rule.action}. Must be 'attack' or 'cast:skillName'`);
     }
 
-    if (rule.priority < 0 || rule.priority > 1000) {
+    // Validar priority
+    if (typeof rule.priority !== 'number' || isNaN(rule.priority)) {
+      errors.push('Rule priority must be a valid number');
+    } else if (rule.priority < 0 || rule.priority > 1000) {
       errors.push(`Priority should be between 0 and 1000: ${rule.priority}`);
     }
 
@@ -322,9 +424,30 @@ export class RulesEngineWrapper {
     allies: BattleParticipant[],
     enemies: BattleParticipant[]
   ): Promise<{ triggered: boolean; facts: BattleFacts }> {
+    // Validar entrada
+    if (!rule || typeof rule !== 'object') {
+      throw new ValidationError('Rule must be a valid object');
+    }
+
+    if (!actor || typeof actor !== 'object') {
+      throw new ValidationError('Actor must be a valid BattleParticipant object');
+    }
+
+    if (!Array.isArray(allies)) {
+      throw new ValidationError('Allies must be an array');
+    }
+
+    if (!Array.isArray(enemies)) {
+      throw new ValidationError('Enemies must be an array');
+    }
+
     const facts = this.createBattleFacts(actor, allies, enemies);
 
     try {
+      if (!rule.condition || typeof rule.condition !== 'string') {
+        throw new ValidationError('Rule must have a valid condition string');
+      }
+
       const triggered = this.evaluateConditionDirect(rule.condition, facts);
 
       return {
@@ -332,6 +455,9 @@ export class RulesEngineWrapper {
         facts
       };
     } catch (error) {
+      const err = error instanceof Error ? error : new Error(String(error));
+      console.warn(`Failed to test rule: ${err.message}`);
+
       return {
         triggered: false,
         facts

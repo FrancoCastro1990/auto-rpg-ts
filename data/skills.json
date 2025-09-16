@@ -317,5 +317,117 @@
     },
     "mpCost": 12,
     "description": "Inflicts fear, reducing all combat stats"
+  },
+  {
+    "id": "ice_blast",
+    "name": "Ice Blast",
+    "type": "attack",
+    "effect": {
+      "damage": 32,
+      "statModifier": {
+        "spd": -5
+      },
+      "duration": 2
+    },
+    "mpCost": 14,
+    "description": "Freezing attack that slows enemies"
+  },
+  {
+    "id": "wind_slash",
+    "name": "Wind Slash",
+    "type": "attack",
+    "effect": {
+      "damage": 28
+    },
+    "mpCost": 10,
+    "description": "Fast wind-based attack"
+  },
+  {
+    "id": "earthquake",
+    "name": "Earthquake",
+    "type": "attack",
+    "effect": {
+      "damage": 45
+    },
+    "mpCost": 20,
+    "description": "Powerful earth-shaking attack"
+  },
+  {
+    "id": "regeneration",
+    "name": "Regeneration",
+    "type": "heal",
+    "effect": {
+      "heal": 25,
+      "statModifier": {
+        "hp": 5
+      },
+      "duration": 3
+    },
+    "mpCost": 12,
+    "description": "Gradual healing over time"
+  },
+  {
+    "id": "haste",
+    "name": "Haste",
+    "type": "buff",
+    "effect": {
+      "statModifier": {
+        "spd": 12
+      },
+      "duration": 3
+    },
+    "mpCost": 10,
+    "description": "Greatly increases speed"
+  },
+  {
+    "id": "barrier",
+    "name": "Barrier",
+    "type": "buff",
+    "effect": {
+      "statModifier": {
+        "def": 15
+      },
+      "duration": 4
+    },
+    "mpCost": 14,
+    "description": "Creates a magical barrier for protection"
+  },
+  {
+    "id": "venom_strike",
+    "name": "Venom Strike",
+    "type": "attack",
+    "effect": {
+      "damage": 18,
+      "statModifier": {
+        "hp": -8
+      },
+      "duration": 5
+    },
+    "mpCost": 9,
+    "description": "Poisonous attack with lingering damage"
+  },
+  {
+    "id": "divine_shield",
+    "name": "Divine Shield",
+    "type": "buff",
+    "effect": {
+      "statModifier": {
+        "def": 20,
+        "mag": 10
+      },
+      "duration": 2
+    },
+    "mpCost": 18,
+    "description": "Holy protection against all damage"
+  },
+  {
+    "id": "chain_lightning",
+    "name": "Chain Lightning",
+    "type": "attack",
+    "effect": {
+      "damage": 40
+    },
+    "mpCost": 18,
+    "description": "Lightning that jumps between multiple targets"
   }
 ]

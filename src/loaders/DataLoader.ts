@@ -9,13 +9,7 @@ import {
   Stats,
   Rule
 } from '../models/types';
-
-export class DataLoadError extends Error {
-  constructor(message: string, public readonly file?: string) {
-    super(message);
-    this.name = 'DataLoadError';
-  }
-}
+import { DataLoadError, ValidationError, Validator } from '../utils/errors';
 
 export class DataLoader {
   private dataPath: string;

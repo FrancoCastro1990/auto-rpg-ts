@@ -141,5 +141,73 @@
         "action": "attack"
       }
     ]
+  },
+  {
+    "name": "Thrain",
+    "job": "Warrior",
+    "level": 2,
+    "rules": [
+      {
+        "priority": 100,
+        "condition": "enemy.isBoss",
+        "target": "bossEnemy",
+        "action": "cast:shield_bash"
+      },
+      {
+        "priority": 80,
+        "condition": "ally.hp < 40%",
+        "target": "self",
+        "action": "cast:taunt"
+      },
+      {
+        "priority": 60,
+        "condition": "self.mp > 40%",
+        "target": "strongestEnemy",
+        "action": "cast:power_strike"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "weakestEnemy",
+        "action": "attack"
+      }
+    ]
+  },
+  {
+    "name": "Elara",
+    "job": "WhiteMage",
+    "level": 2,
+    "rules": [
+      {
+        "priority": 100,
+        "condition": "ally.hp < 25%",
+        "target": "lowestHpAlly",
+        "action": "cast:greater_heal"
+      },
+      {
+        "priority": 80,
+        "condition": "ally.hp < 50%",
+        "target": "lowestHpAlly",
+        "action": "cast:heal"
+      },
+      {
+        "priority": 60,
+        "condition": "enemy.isBoss",
+        "target": "strongestEnemy",
+        "action": "cast:holy_light"
+      },
+      {
+        "priority": 40,
+        "condition": "self.mp > 60%",
+        "target": "strongestEnemy",
+        "action": "cast:blessing"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "weakestEnemy",
+        "action": "attack"
+      }
+    ]
   }
 ]

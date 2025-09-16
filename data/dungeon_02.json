@@ -1,0 +1,50 @@
+{
+  "id": 2,
+  "name": "Torre del Arcano",
+  "description": "Una antigua torre mágica llena de constructos arcanos y guardianes elementales, custodiando secretos olvidados del pasado",
+  "defaultMaxTurns": 25,
+  "battles": [
+    {
+      "id": 1,
+      "order": 0,
+      "enemies": [
+        { "type": "Slime", "name": "Slime Arcano" },
+        { "type": "Slime", "name": "Slime Eléctrico" }
+      ]
+    },
+    {
+      "id": 2,
+      "order": 1,
+      "enemies": [
+        { "type": "Goblin", "name": "Goblin Mecánico" },
+        { "type": "Goblin", "name": "Goblin Técnico" },
+        { "type": "Slime", "name": "Slime de Energía" }
+      ]
+    },
+    {
+      "id": 3,
+      "order": 2,
+      "enemies": [
+        { "type": "Orc", "name": "Orco Forjado" },
+        { "type": "DarkMage", "name": "Mago de las Runas" }
+      ]
+    },
+    {
+      "id": 4,
+      "order": 3,
+      "enemies": [
+        { "type": "DarkMage", "name": "Archimago" },
+        { "type": "DarkMage", "name": "Mago de las Sombras" },
+        { "type": "Orc", "name": "Orco Guardián" }
+      ]
+    },
+    {
+      "id": 5,
+      "order": 4,
+      "enemies": [
+        { "type": "ShadowLord", "name": "Archidemonio Arcano" }
+      ],
+      "maxTurns": 60
+    }
+  ]
+}

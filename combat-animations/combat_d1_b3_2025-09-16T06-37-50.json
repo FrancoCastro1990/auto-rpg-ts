@@ -1,0 +1,595 @@
+{
+  "metadata": {
+    "dungeonId": 1,
+    "dungeonName": "Cavernas de la Sombra",
+    "battleId": 3,
+    "battleOrder": 3,
+    "timestamp": "2025-09-16T06:37:50.475Z",
+    "duration": 0,
+    "victory": false,
+    "totalTurns": 1,
+    "maxTurns": 5
+  },
+  "initialState": {
+    "party": [
+      {
+        "id": "char_kael",
+        "name": "Kael",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 150,
+          "maxHp": 150,
+          "mp": 15,
+          "maxMp": 20,
+          "str": 18,
+          "def": 15,
+          "mag": 5,
+          "spd": 8
+        },
+        "abilities": [
+          "Basic Attack",
+          "Power Strike",
+          "Shield Bash",
+          "Taunt"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_luna",
+        "name": "Luna",
+        "job": "WhiteMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 80,
+          "maxHp": 80,
+          "mp": 40,
+          "maxMp": 50,
+          "str": 6,
+          "def": 8,
+          "mag": 20,
+          "spd": 12
+        },
+        "abilities": [
+          "Basic Attack",
+          "Heal",
+          "Greater Heal",
+          "Blessing",
+          "Holy Light"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_zara",
+        "name": "Zara",
+        "job": "BlackMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 70,
+          "maxHp": 70,
+          "mp": 45,
+          "maxMp": 60,
+          "str": 5,
+          "def": 6,
+          "mag": 25,
+          "spd": 10
+        },
+        "abilities": [
+          "Basic Attack",
+          "Fireball",
+          "Lightning Bolt",
+          "Curse",
+          "Meteor"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_raven",
+        "name": "Raven",
+        "job": "Rogue",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 100,
+          "maxHp": 100,
+          "mp": 20,
+          "maxMp": 30,
+          "str": 14,
+          "def": 15,
+          "mag": 8,
+          "spd": 28
+        },
+        "abilities": [
+          "Basic Attack",
+          "Backstab",
+          "Poison Blade",
+          "Shadow Step",
+          "Smoke Bomb"
+        ],
+        "buffs": [
+          {
+            "name": "Shadow Step",
+            "type": "buff",
+            "duration": 3,
+            "remainingTurns": 3,
+            "statModifier": {
+              "spd": 10,
+              "def": 5
+            }
+          }
+        ]
+      }
+    ],
+    "enemies": [
+      {
+        "id": "enemy_goblin_guerrero",
+        "name": "Goblin Guerrero",
+        "job": "GoblinWarrior",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": false,
+        "stats": {
+          "hp": 24,
+          "maxHp": 60,
+          "mp": 10,
+          "maxMp": 15,
+          "str": 12,
+          "def": 8,
+          "mag": 4,
+          "spd": 10
+        },
+        "abilities": [
+          "Basic Attack",
+          "Goblin Rush"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "enemy_goblin_arquero",
+        "name": "Goblin Arquero",
+        "job": "GoblinWarrior",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": false,
+        "stats": {
+          "hp": 0,
+          "maxHp": 60,
+          "mp": 15,
+          "maxMp": 15,
+          "str": 12,
+          "def": 8,
+          "mag": 4,
+          "spd": 10
+        },
+        "abilities": [
+          "Basic Attack",
+          "Goblin Rush"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "enemy_slime_3",
+        "name": "Slime 3",
+        "job": "SlimeJob",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": false,
+        "stats": {
+          "hp": 15,
+          "maxHp": 45,
+          "mp": 10,
+          "maxMp": 10,
+          "str": 8,
+          "def": 4,
+          "mag": 2,
+          "spd": 5
+        },
+        "abilities": [
+          "Basic Attack",
+          "Slime Attack"
+        ],
+        "buffs": []
+      }
+    ],
+    "turnOrder": [
+      "char_raven",
+      "char_luna",
+      "char_zara",
+      "enemy_goblin_guerrero",
+      "char_kael"
+    ]
+  },
+  "turns": [
+    {
+      "turnNumber": 1,
+      "timestamp": 1758004671475,
+      "actions": [
+        {
+          "id": "action_1_char_raven",
+          "actorId": "char_raven",
+          "actorName": "Raven",
+          "type": "ability",
+          "success": true,
+          "message": "Raven casts Shadow Step on Raven (buff applied for 3 turns)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "char_raven",
+          "targetName": "Raven",
+          "abilityId": "shadow_step",
+          "abilityName": "Shadow Step",
+          "mpCost": 10
+        }
+      ],
+      "stateChanges": []
+    },
+    {
+      "turnNumber": 2,
+      "timestamp": 1758004672475,
+      "actions": [
+        {
+          "id": "action_1_char_luna",
+          "actorId": "char_luna",
+          "actorName": "Luna",
+          "type": "ability",
+          "success": true,
+          "message": "Luna casts Holy Light on Goblin Guerrero for 36 damage (24/60 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_goblin_guerrero",
+          "targetName": "Goblin Guerrero",
+          "abilityId": "holy_light",
+          "abilityName": "Holy Light",
+          "mpCost": 10,
+          "damage": 36
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_goblin_guerrero",
+          "participantName": "Goblin Guerrero",
+          "statChanges": {
+            "hp": {
+              "before": 60,
+              "after": 24,
+              "change": -36
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 3,
+      "timestamp": 1758004673475,
+      "actions": [
+        {
+          "id": "action_1_char_zara",
+          "actorId": "char_zara",
+          "actorName": "Zara",
+          "type": "ability",
+          "success": true,
+          "message": "Zara casts Lightning Bolt on Goblin Arquero for 56 damage (4/60 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_goblin_arquero",
+          "targetName": "Goblin Arquero",
+          "abilityId": "lightning_bolt",
+          "abilityName": "Lightning Bolt",
+          "mpCost": 15,
+          "damage": 56
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_goblin_arquero",
+          "participantName": "Goblin Arquero",
+          "statChanges": {
+            "hp": {
+              "before": 56,
+              "after": 0,
+              "change": -56
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {
+            "isAlive": {
+              "before": true,
+              "after": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "turnNumber": 4,
+      "timestamp": 1758004674475,
+      "actions": [
+        {
+          "id": "action_1_enemy_goblin_guerrero",
+          "actorId": "enemy_goblin_guerrero",
+          "actorName": "Goblin Guerrero",
+          "type": "ability",
+          "success": true,
+          "message": "Goblin Guerrero casts Goblin Rush on Goblin Arquero for 17 damage (0/60 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_goblin_arquero",
+          "targetName": "Goblin Arquero",
+          "abilityId": "goblin_rush",
+          "abilityName": "Goblin Rush",
+          "mpCost": 5,
+          "damage": 17
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_goblin_arquero",
+          "participantName": "Goblin Arquero",
+          "statChanges": {
+            "hp": {
+              "before": 17,
+              "after": 0,
+              "change": -17
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {
+            "isAlive": {
+              "before": true,
+              "after": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "turnNumber": 5,
+      "timestamp": 1758004675475,
+      "actions": [
+        {
+          "id": "action_1_char_kael",
+          "actorId": "char_kael",
+          "actorName": "Kael",
+          "type": "ability",
+          "success": true,
+          "message": "Kael casts Power Strike on Slime 3 for 30 damage (15/45 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_slime_3",
+          "targetName": "Slime 3",
+          "abilityId": "power_strike",
+          "abilityName": "Power Strike",
+          "mpCost": 5,
+          "damage": 30
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_slime_3",
+          "participantName": "Slime 3",
+          "statChanges": {
+            "hp": {
+              "before": 45,
+              "after": 15,
+              "change": -30
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    }
+  ],
+  "finalState": {
+    "party": [
+      {
+        "id": "char_kael",
+        "name": "Kael",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 150,
+          "maxHp": 150,
+          "mp": 15,
+          "maxMp": 20,
+          "str": 18,
+          "def": 15,
+          "mag": 5,
+          "spd": 8
+        },
+        "abilities": [
+          "Basic Attack",
+          "Power Strike",
+          "Shield Bash",
+          "Taunt"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_luna",
+        "name": "Luna",
+        "job": "WhiteMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 80,
+          "maxHp": 80,
+          "mp": 40,
+          "maxMp": 50,
+          "str": 6,
+          "def": 8,
+          "mag": 20,
+          "spd": 12
+        },
+        "abilities": [
+          "Basic Attack",
+          "Heal",
+          "Greater Heal",
+          "Blessing",
+          "Holy Light"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_zara",
+        "name": "Zara",
+        "job": "BlackMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 70,
+          "maxHp": 70,
+          "mp": 45,
+          "maxMp": 60,
+          "str": 5,
+          "def": 6,
+          "mag": 25,
+          "spd": 10
+        },
+        "abilities": [
+          "Basic Attack",
+          "Fireball",
+          "Lightning Bolt",
+          "Curse",
+          "Meteor"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_raven",
+        "name": "Raven",
+        "job": "Rogue",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 100,
+          "maxHp": 100,
+          "mp": 20,
+          "maxMp": 30,
+          "str": 14,
+          "def": 15,
+          "mag": 8,
+          "spd": 28
+        },
+        "abilities": [
+          "Basic Attack",
+          "Backstab",
+          "Poison Blade",
+          "Shadow Step",
+          "Smoke Bomb"
+        ],
+        "buffs": [
+          {
+            "name": "Shadow Step",
+            "type": "buff",
+            "duration": 3,
+            "remainingTurns": 3,
+            "statModifier": {
+              "spd": 10,
+              "def": 5
+            }
+          }
+        ]
+      }
+    ],
+    "enemies": [
+      {
+        "id": "enemy_goblin_guerrero",
+        "name": "Goblin Guerrero",
+        "job": "GoblinWarrior",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": false,
+        "stats": {
+          "hp": 24,
+          "maxHp": 60,
+          "mp": 10,
+          "maxMp": 15,
+          "str": 12,
+          "def": 8,
+          "mag": 4,
+          "spd": 10
+        },
+        "abilities": [
+          "Basic Attack",
+          "Goblin Rush"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "enemy_goblin_arquero",
+        "name": "Goblin Arquero",
+        "job": "GoblinWarrior",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": false,
+        "stats": {
+          "hp": 0,
+          "maxHp": 60,
+          "mp": 15,
+          "maxMp": 15,
+          "str": 12,
+          "def": 8,
+          "mag": 4,
+          "spd": 10
+        },
+        "abilities": [
+          "Basic Attack",
+          "Goblin Rush"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "enemy_slime_3",
+        "name": "Slime 3",
+        "job": "SlimeJob",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": false,
+        "stats": {
+          "hp": 15,
+          "maxHp": 45,
+          "mp": 10,
+          "maxMp": 10,
+          "str": 8,
+          "def": 4,
+          "mag": 2,
+          "spd": 5
+        },
+        "abilities": [
+          "Basic Attack",
+          "Slime Attack"
+        ],
+        "buffs": []
+      }
+    ],
+    "victory": false,
+    "reason": "Battle timed out after 5 turns",
+    "survivors": [
+      "char_kael",
+      "char_luna",
+      "char_zara",
+      "char_raven"
+    ],
+    "defeated": [
+      "enemy_goblin_arquero"
+    ]
+  }
+}

@@ -157,3 +157,106 @@ export type ConditionType =
   | 'ally.hp < 30%'
   | 'self.mp > 50%'
   | 'enemy.count > 1';
+
+// Combat Animation Data Export Interfaces
+export interface CombatAnimationData {
+  metadata: CombatMetadata;
+  initialState: CombatInitialState;
+  turns: CombatTurn[];
+  finalState: CombatFinalState;
+}
+
+export interface CombatMetadata {
+  dungeonId: number;
+  dungeonName: string;
+  battleId: number;
+  battleOrder: number;
+  timestamp: string;
+  duration: number;
+  victory: boolean;
+  totalTurns: number;
+  maxTurns: number;
+}
+
+export interface CombatInitialState {
+  party: CombatParticipant[];
+  enemies: CombatParticipant[];
+  turnOrder: string[]; // IDs in turn order
+}
+
+export interface CombatParticipant {
+  id: string;
+  name: string;
+  job: string;
+  level: number;
+  isEnemy: boolean;
+  isBoss: boolean;
+  stats: {
+    hp: number;
+    maxHp: number;
+    mp: number;
+    maxMp: number;
+    str: number;
+    def: number;
+    mag: number;
+    spd: number;
+  };
+  abilities: string[]; // Skill IDs
+  buffs: CombatBuff[];
+}
+
+export interface CombatBuff {
+  name: string;
+  type: 'buff' | 'debuff';
+  duration: number;
+  remainingTurns: number;
+  statModifier: Partial<Stats>;
+}
+
+export interface CombatTurn {
+  turnNumber: number;
+  timestamp: number;
+  actions: CombatAction[];
+  stateChanges: CombatStateChange[];
+}
+
+export interface CombatAction {
+  id: string;
+  actorId: string;
+  actorName: string;
+  type: 'attack' | 'ability' | 'skip';
+  targetId?: string;
+  targetName?: string;
+  abilityId?: string;
+  abilityName?: string;
+  success: boolean;
+  message: string;
+  damage?: number;
+  heal?: number;
+  mpCost?: number;
+  animationKey: string; // Key for animation system
+  duration: number; // Animation duration in ms
+}
+
+export interface CombatStateChange {
+  participantId: string;
+  participantName: string;
+  statChanges: {
+    hp?: { before: number; after: number; change: number };
+    mp?: { before: number; after: number; change: number };
+  };
+  buffsAdded: CombatBuff[];
+  buffsRemoved: string[]; // Buff names
+  statusChanged: {
+    isAlive?: { before: boolean; after: boolean };
+  };
+}
+
+export interface CombatFinalState {
+  party: CombatParticipant[];
+  enemies: CombatParticipant[];
+  victory: boolean;
+  reason: string;
+  survivors: string[]; // Participant IDs
+  defeated: string[]; // Participant IDs
+}

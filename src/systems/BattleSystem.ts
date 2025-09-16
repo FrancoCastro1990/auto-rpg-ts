@@ -1,6 +1,7 @@
 import { BattleParticipant, Character, EnemyInstance, Action, BattleResult, Ability } from '../models/types';
 import { ActionResolver, ResolvedAction } from './ActionResolver';
 import { BattleLogger } from '../utils/BattleLogger';
+import { BattleError, ValidationError, ErrorHandler } from '../utils/errors';
 
 export interface TurnOrder {
   participant: BattleParticipant;
@@ -41,12 +42,37 @@ export class BattleSystem {
   }
 
   initializeBattle(allies: Character[], enemies: EnemyInstance[]): BattleState {
-    const allParticipants = [...allies, ...enemies];
+    // Validar entrada
+    if (!Array.isArray(allies) || !Array.isArray(enemies)) {
+      throw new ValidationError('Allies and enemies must be arrays');
+    }
+
+    if (allies.length === 0) {
+      throw new BattleError('Cannot start battle with no allies');
+    }
+
+    if (enemies.length === 0) {
+      throw new BattleError('Cannot start battle with no enemies');
+    }
+
+    // Validar que los participantes estén vivos
+    const livingAllies = allies.filter(a => a.isAlive);
+    const livingEnemies = enemies.filter(e => e.isAlive);
+
+    if (livingAllies.length === 0) {
+      throw new BattleError('Cannot start battle - all allies are defeated');
+    }
+
+    if (livingEnemies.length === 0) {
+      throw new BattleError('Cannot start battle - all enemies are defeated');
+    }
+
+    const allParticipants = [...livingAllies, ...livingEnemies];
     const turnOrder = this.calculateTurnOrder(allParticipants);
 
     this.battleState = {
-      allies: [...allies],
-      enemies: [...enemies],
+      allies: [...livingAllies],
+      enemies: [...livingEnemies],
       turnNumber: 1,
       turnOrder,
       currentTurnIndex: 0,
@@ -150,10 +176,18 @@ export class BattleSystem {
   }
 
   executeTurn(): TurnResult | null {
-    if (!this.battleState || this.battleState.isComplete) return null;
+    if (!this.battleState) {
+      throw new BattleError('Battle not initialized. Call initializeBattle() first.');
+    }
+
+    if (this.battleState.isComplete) {
+      throw new BattleError('Battle is already complete');
+    }
 
     const actor = this.getCurrentActor();
-    if (!actor) return null;
+    if (!actor) {
+      throw new BattleError('No valid actor found for current turn');
+    }
 
     const allies = this.battleState.allies.filter(a => a.isAlive);
     const enemies = this.battleState.enemies.filter(e => e.isAlive);
@@ -213,13 +247,28 @@ export class BattleSystem {
   }
 
   private executeAction(actor: BattleParticipant, target: BattleParticipant | null, action: ResolvedAction): TurnResult {
+    if (!this.battleState) {
+      throw new BattleError('Battle state not initialized');
+    }
+
     if (!target) {
       return {
         actor,
         action,
         success: false,
         message: `${actor.name} cannot find target for action`,
-        turnNumber: this.battleState!.turnNumber
+        turnNumber: this.battleState.turnNumber
+      };
+    }
+
+    if (!target.isAlive) {
+      return {
+        actor,
+        target,
+        action,
+        success: false,
+        message: `${actor.name} cannot target defeated ${target.name}`,
+        turnNumber: this.battleState.turnNumber
       };
     }
 
@@ -237,7 +286,7 @@ export class BattleSystem {
           action,
           success: false,
           message: `${actor.name} does not know skill: ${action.skillId}`,
-          turnNumber: this.battleState!.turnNumber
+          turnNumber: this.battleState.turnNumber
         };
       }
 
@@ -248,7 +297,7 @@ export class BattleSystem {
           action,
           success: false,
           message: `${actor.name} not enough MP to cast ${skill.name} (need ${skill.mpCost}, have ${actor.currentStats.mp})`,
-          turnNumber: this.battleState!.turnNumber
+          turnNumber: this.battleState.turnNumber
         };
       }
 
@@ -260,8 +309,8 @@ export class BattleSystem {
       target,
       action,
       success: false,
-      message: `${actor.name} unknown action type`,
-      turnNumber: this.battleState!.turnNumber
+      message: `${actor.name} unknown action type: ${action.actionType}`,
+      turnNumber: this.battleState.turnNumber
     };
   }
 
@@ -288,6 +337,16 @@ export class BattleSystem {
   }
 
   private executeSkill(actor: BattleParticipant, target: BattleParticipant, skill: Ability, action: ResolvedAction): TurnResult {
+    if (!this.battleState) {
+      throw new BattleError('Battle state not initialized');
+    }
+
+    // Validar que el actor tenga suficiente MP
+    if (actor.currentStats.mp < skill.mpCost) {
+      throw new BattleError(`${actor.name} does not have enough MP to cast ${skill.name}`);
+    }
+
+    // Consumir MP
     actor.currentStats.mp -= skill.mpCost;
 
     switch (skill.type) {
@@ -306,7 +365,7 @@ export class BattleSystem {
           action,
           success: false,
           message: `${actor.name} unknown skill type: ${skill.type}`,
-          turnNumber: this.battleState!.turnNumber
+          turnNumber: this.battleState.turnNumber
         };
     }
   }
@@ -476,23 +535,50 @@ export class BattleSystem {
   }
 
   simulateFullBattle(maxTurns: number = 100): BattleResult {
+    if (!this.battleState) {
+      throw new BattleError('Battle not initialized. Call initializeBattle() first.');
+    }
+
+    if (this.battleState.isComplete) {
+      throw new BattleError('Battle is already complete');
+    }
+
+    if (maxTurns <= 0) {
+      throw new ValidationError('maxTurns must be a positive number');
+    }
+
     let turnCount = 0;
 
-    while (!this.isBattleComplete() && turnCount < maxTurns) {
-      this.executeTurn();
-      turnCount++;
+    try {
+      while (!this.isBattleComplete() && turnCount < maxTurns) {
+        this.executeTurn();
+        turnCount++;
+      }
+    } catch (error) {
+      // Si hay un error durante la simulación, marcar como timeout
+      const err = error instanceof Error ? error : new Error(String(error));
+      this.battleState.isComplete = true;
+      this.battleState.victor = null;
+
+      return {
+        victory: false,
+        reason: `Battle simulation failed: ${ErrorHandler.getUserFriendlyMessage(err)}`,
+        turns: this.battleState.turnNumber,
+        survivingAllies: this.battleState.allies.filter(a => a.isAlive),
+        defeatedEnemies: this.battleState.enemies.filter(e => !e.isAlive)
+      };
     }
 
     if (!this.isBattleComplete()) {
-      this.battleState!.isComplete = true;
-      this.battleState!.victor = null;
+      this.battleState.isComplete = true;
+      this.battleState.victor = null;
 
       return {
         victory: false,
         reason: `Battle timed out after ${maxTurns} turns`,
-        turns: this.battleState!.turnNumber,
-        survivingAllies: this.battleState!.allies.filter(a => a.isAlive),
-        defeatedEnemies: this.battleState!.enemies.filter(e => !e.isAlive)
+        turns: this.battleState.turnNumber,
+        survivingAllies: this.battleState.allies.filter(a => a.isAlive),
+        defeatedEnemies: this.battleState.enemies.filter(e => !e.isAlive)
       };
     }
 

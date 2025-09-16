@@ -14,7 +14,9 @@
       "basic_attack",
       "power_strike",
       "shield_bash",
-      "taunt"
+      "taunt",
+      "earthquake",
+      "barrier"
     ]
   },
   {
@@ -33,7 +35,9 @@
       "heal",
       "greater_heal",
       "blessing",
-      "holy_light"
+      "holy_light",
+      "regeneration",
+      "divine_shield"
     ]
   },
   {
@@ -52,7 +56,9 @@
       "fireball",
       "lightning_bolt",
       "curse",
-      "meteor"
+      "meteor",
+      "ice_blast",
+      "chain_lightning"
     ]
   },
   {
@@ -71,7 +77,8 @@
       "backstab",
       "poison_blade",
       "shadow_step",
-      "smoke_bomb"
+      "smoke_bomb",
+      "venom_strike"
     ]
   }
 ]
