@@ -46,6 +46,13 @@ export class ActionResolver {
     }
 
     const target = this.resolveTarget(selectedRule.target, context);
+
+    // DEBUG: Log target selection
+    console.log(`DEBUG: ${actor.name} selected rule: ${selectedRule.condition} -> ${selectedRule.target} -> ${selectedRule.action}`);
+    console.log(`DEBUG: Available allies: ${allies.map(a => `${a.name}(${a.currentStats.hp}/${a.maxStats.hp} HP)`).join(', ')}`);
+    console.log(`DEBUG: Available enemies: ${enemies.map(e => `${e.name}(${e.currentStats.hp}/${e.maxStats.hp} HP)`).join(', ')}`);
+    console.log(`DEBUG: Selected target: ${target ? `${target.name}(${target.currentStats.hp}/${target.maxStats.hp} HP, isEnemy: ${target.isEnemy})` : 'null'}`);
+
     const actionParsed = this.parseAction(selectedRule.action);
 
     if (!target) {
@@ -72,38 +79,40 @@ export class ActionResolver {
 
         if (isOnCooldown) {
           // Fall back to basic attack if skill is on cooldown
+          const fallbackTarget = selectedRule.target === 'self' ? this.resolveTarget('randomEnemy', context) : target;
           return {
             rule: {
               priority: selectedRule.priority,
               condition: 'fallback_cooldown',
-              target: selectedRule.target,
+              target: selectedRule.target === 'self' ? 'randomEnemy' : selectedRule.target,
               action: 'attack'
             },
             actionType: 'attack',
-            targetId: target.id,
-            targetName: target.name,
+            targetId: fallbackTarget?.id || target.id,
+            targetName: fallbackTarget?.name || target.name,
             priority: selectedRule.priority,
             success: true,
-            message: `${actor.name} attacks ${target.name} (${skill.name} is on cooldown)`
+            message: `${actor.name} attacks ${fallbackTarget?.name || target.name} (${skill.name} is on cooldown)`
           };
         }
 
         // Check MP cost
         if (actor.currentStats.mp < skill.mpCost) {
           // Fall back to basic attack if not enough MP
+          const fallbackTarget = selectedRule.target === 'self' ? this.resolveTarget('randomEnemy', context) : target;
           return {
             rule: {
               priority: selectedRule.priority,
               condition: 'fallback_mp',
-              target: selectedRule.target,
+              target: selectedRule.target === 'self' ? 'randomEnemy' : selectedRule.target,
               action: 'attack'
             },
             actionType: 'attack',
-            targetId: target.id,
-            targetName: target.name,
+            targetId: fallbackTarget?.id || target.id,
+            targetName: fallbackTarget?.name || target.name,
             priority: selectedRule.priority,
             success: true,
-            message: `${actor.name} attacks ${target.name} (not enough MP for ${skill.name})`
+            message: `${actor.name} attacks ${fallbackTarget?.name || target.name} (not enough MP for ${skill.name})`
           };
         }
       }

@@ -154,6 +154,43 @@ export class BattleLogger {
         }
       }
 
+      // Show buff/debuff effects even without damage/heal
+      if (turnResult.action.actionType === 'cast' && turnResult.action.skillId) {
+        const skillName = turnResult.action.skillId;
+        // Check for summon effects first - check the skill name or message content
+        if (skillName === 'summon_skeleton' || turnResult.message.includes('summons') || turnResult.message.includes('casts Summon Skeleton')) {
+          // Extract summoned creature names from the message
+          const summonMatch = turnResult.message.match(/casts Summon Skeleton on (.+)/);
+          if (summonMatch) {
+            const summonedCreatures = summonMatch[1];
+            message += ` → Summons Skeleton`;
+          } else {
+            console.log('DEBUG: Summon message detected but regex failed. Full message:', JSON.stringify(turnResult.message));
+            // Fallback: just show the original message
+            message += ` → ${turnResult.message}`;
+          }
+        }
+        // Check if this is a buff/debuff skill by looking at the message content
+        else if (turnResult.message.includes('buff applied') || turnResult.message.includes('debuff applied')) {
+          message += ` → Buff/Debuff applied`;
+        }
+      }
+
+      // Show detailed buff/debuff information
+      if (turnResult.buffApplied) {
+        const statChanges = Object.entries(turnResult.buffApplied.statModifier)
+          .map(([stat, value]) => `${stat.toUpperCase()}+${value}`)
+          .join(', ');
+        message += ` → ${turnResult.buffApplied.name}: ${statChanges} (${turnResult.buffApplied.duration} turns)`;
+      }
+
+      if (turnResult.debuffApplied) {
+        const statChanges = Object.entries(turnResult.debuffApplied.statModifier)
+          .map(([stat, value]) => `${stat.toUpperCase()}${value >= 0 ? '+' : ''}${value}`)
+          .join(', ');
+        message += ` → ${turnResult.debuffApplied.name}: ${statChanges} (${turnResult.debuffApplied.duration} turns)`;
+      }
+
       // Death notification
       if (turnResult.target.currentStats.hp <= 0) {
         const deathMsg = `💀 ${turnResult.target.name} is defeated!`;

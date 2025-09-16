@@ -215,22 +215,24 @@ export class EnemyAI {
       return 'boss';
     }
 
-    // Check for special behavior indicators in enemy type
+    // Check for special behavior indicators in enemy type or job
     const type = enemy.type.toLowerCase();
-    if (type.includes('healer') || type.includes('cleric')) {
+    const job = enemy.job.toLowerCase();
+
+    if (type.includes('healer') || type.includes('cleric') || job.includes('healer') || job.includes('cleric')) {
       return 'healing';
     }
-    if (type.includes('mage') || type.includes('wizard')) {
+    if (type.includes('mage') || type.includes('wizard') || job.includes('mage') || job.includes('wizard')) {
       return 'support';
     }
-    if (type.includes('warrior') || type.includes('fighter')) {
+    if (type.includes('warrior') || type.includes('fighter') || job.includes('warrior') || job.includes('fighter')) {
       return 'aggressive';
     }
-    if (type.includes('tank') || type.includes('guardian')) {
+    if (type.includes('tank') || type.includes('guardian') || job.includes('tank') || job.includes('guardian')) {
       return 'defensive';
     }
 
-    // Default to adaptive behavior
+    // Default to adaptive behavior for unknown types
     return 'adaptive';
   }
 

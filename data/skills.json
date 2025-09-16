@@ -134,7 +134,6 @@
     "mpCost": 25,
     "cooldown": 4,
     "level": 3,
-    "combinations": ["fireball", "earthquake"],
     "description": "Ultimate magical attack"
   },
   {
@@ -486,7 +485,7 @@
     "mpCost": 8,
     "description": "Increases attack and defense for the party"
   },
-  {
+    {
     "id": "summon_skeleton",
     "name": "Summon Skeleton",
     "type": "buff",

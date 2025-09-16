@@ -17,6 +17,16 @@ export interface TurnResult {
   action: ResolvedAction;
   damage?: number;
   heal?: number;
+  buffApplied?: {
+    name: string;
+    statModifier: Record<string, number>;
+    duration: number;
+  } | undefined;
+  debuffApplied?: {
+    name: string;
+    statModifier: Record<string, number>;
+    duration: number;
+  } | undefined;
   success: boolean;
   message: string;
   turnNumber: number;
@@ -47,6 +57,15 @@ export class BattleSystem {
     this.lootSystem = new LootSystem();
     this.logger = logger;
     this.entityFactory = entityFactory;
+
+    // Debug: Check if logger is properly initialized
+    console.log('DEBUG: BattleSystem constructor called');
+    console.log('DEBUG: Logger provided:', !!logger);
+    console.log('DEBUG: EntityFactory provided:', !!entityFactory);
+
+    if (this.logger) {
+      this.logger.logDebug('BATTLE_SYSTEM', 'BattleSystem initialized with logger');
+    }
   }
 
   initializeBattle(allies: Character[], enemies: EnemyInstance[]): BattleState {
@@ -121,8 +140,22 @@ export class BattleSystem {
     if (!this.battleState) return;
 
     const allParticipants = [...this.battleState.allies, ...this.battleState.enemies];
+    const previousTurnIndex = this.battleState.currentTurnIndex;
+    const previousActor = this.battleState.turnOrder[previousTurnIndex]?.participant;
+
     this.battleState.turnOrder = this.calculateTurnOrder(allParticipants);
-    this.battleState.currentTurnIndex = 0;
+
+    // Find the new position of the previous actor to maintain turn continuity
+    if (previousActor) {
+      const newIndex = this.battleState.turnOrder.findIndex(turn => turn.participant.id === previousActor.id);
+      if (newIndex !== -1) {
+        this.battleState.currentTurnIndex = newIndex;
+      } else {
+        this.battleState.currentTurnIndex = 0;
+      }
+    } else {
+      this.battleState.currentTurnIndex = 0;
+    }
   }
 
   getCurrentActor(): BattleParticipant | null {
@@ -544,12 +577,26 @@ export class BattleSystem {
   }
 
   private executeBuffSkill(actor: BattleParticipant, target: BattleParticipant, skill: Ability, action: ResolvedAction): TurnResult {
-    // Handle summon effects
+    // Handle summon effects - return the summon result directly
     if ((skill.effect as any).summon && this.entityFactory) {
       return this.executeSummonSkill(actor, skill, action);
     }
 
-    if (skill.effect.statModifier && skill.effect.duration) {
+    // Skip buff processing for summon skills
+    if ((skill.effect as any).summon) {
+      return {
+        actor,
+        target,
+        action,
+        success: true,
+        message: `${actor.name} casts ${skill.name} on ${target.name}`,
+        turnNumber: this.battleState!.turnNumber
+      };
+    }
+
+    let buffApplied: { name: string; statModifier: Record<string, number>; duration: number } | undefined;
+
+    if (skill.effect.statModifier && skill.effect.duration && skill.effect.duration > 0) {
       const buff = {
         name: skill.name,
         type: 'buff' as const,
@@ -564,16 +611,33 @@ export class BattleSystem {
         const statKey = stat as keyof typeof target.currentStats;
         if (typeof target.currentStats[statKey] === 'number' && typeof skill.effect.statModifier![statKey] === 'number') {
           (target.currentStats[statKey] as number) += skill.effect.statModifier![statKey]!;
+          
+          // Ensure stats don't go below 0
+          if ((target.currentStats[statKey] as number) < 0) {
+            (target.currentStats[statKey] as number) = 0;
+          }
+          
+          // Check if target died from stat modification
+          if (statKey === 'hp' && target.currentStats.hp <= 0 && target.isAlive) {
+            target.isAlive = false;
+          }
         }
       });
+
+      buffApplied = {
+        name: skill.name,
+        statModifier: skill.effect.statModifier as Record<string, number>,
+        duration: skill.effect.duration
+      };
     }
 
     return {
       actor,
       target,
       action,
+      buffApplied,
       success: true,
-      message: `${actor.name} casts ${skill.name} on ${target.name} (buff applied for ${skill.effect.duration} turns)`,
+      message: `${actor.name} casts ${skill.name} on ${target.name}${buffApplied ? ` (buff applied for ${buffApplied.duration} turns)` : ''}`,
       turnNumber: this.battleState!.turnNumber
     };
   }
@@ -582,6 +646,7 @@ export class BattleSystem {
     if (!this.battleState || !this.entityFactory) {
       return {
         actor,
+        target: actor, // Use actor as target for summons
         action,
         success: false,
         message: `${actor.name} cannot summon - battle state or entity factory not available`,
@@ -595,6 +660,7 @@ export class BattleSystem {
     if (!summonType) {
       return {
         actor,
+        target: actor, // Use actor as target for summons
         action,
         success: false,
         message: `${actor.name} cannot summon - invalid summon type`,
@@ -620,21 +686,50 @@ export class BattleSystem {
       }
     }
 
+    console.log('DEBUG: Before refreshTurnOrder');
+    console.log('DEBUG: Enemies count:', this.battleState.enemies.length);
+    console.log('DEBUG: Enemies:', this.battleState.enemies.map(e => ({ name: e.name, isAlive: e.isAlive, spd: e.currentStats.spd })));
+
     // Refresh turn order to include new minions
     this.refreshTurnOrder();
 
+    console.log('DEBUG: After refreshTurnOrder');
+    console.log('DEBUG: Turn order length:', this.battleState.turnOrder.length);
+    console.log('DEBUG: Turn order:', this.battleState.turnOrder.map(t => ({ name: t.participant.name, isAlive: t.participant.isAlive, spd: t.speed })));
+
     const minionNames = summonedMinions.map(m => m.name).join(', ');
+
+    const message = `${actor.name} summons ${minionNames} to join the battle!`;
+    console.log('DEBUG: Summon message generated:', JSON.stringify(message));
+
+    // Also log through the system's logger if available
+    if (this.logger) {
+      this.logger.logDebug('SUMMON', `Summoned minions: ${minionNames}`);
+      this.logger.logDebug('SUMMON', `Enemies after summon: ${this.battleState.enemies.map(e => e.name).join(', ')}`);
+      this.logger.logDebug('SUMMON', `Turn order after summon: ${this.battleState.turnOrder.map(t => t.participant.name).join(', ')}`);
+      this.logger.logTurn({
+        actor,
+        target: actor,
+        action,
+        success: true,
+        message: `DEBUG: Summoned minions: ${minionNames}`,
+        turnNumber: this.battleState.turnNumber
+      });
+    }
 
     return {
       actor,
+      target: actor, // Use actor as target for summons
       action,
       success: true,
-      message: `${actor.name} summons ${minionNames} to join the battle!`,
+      message,
       turnNumber: this.battleState.turnNumber
     };
   }
 
   private executeDebuffSkill(actor: BattleParticipant, target: BattleParticipant, skill: Ability, action: ResolvedAction): TurnResult {
+    let debuffApplied: { name: string; statModifier: Record<string, number>; duration: number } | undefined;
+
     if (skill.effect.statModifier && skill.effect.duration) {
       const debuff = {
         name: skill.name,
@@ -650,14 +745,31 @@ export class BattleSystem {
         const statKey = stat as keyof typeof target.currentStats;
         if (typeof target.currentStats[statKey] === 'number' && typeof skill.effect.statModifier![statKey] === 'number') {
           (target.currentStats[statKey] as number) += skill.effect.statModifier![statKey]!;
+          
+          // Ensure stats don't go below 0
+          if ((target.currentStats[statKey] as number) < 0) {
+            (target.currentStats[statKey] as number) = 0;
+          }
+          
+          // Check if target died from stat modification
+          if (statKey === 'hp' && target.currentStats.hp <= 0 && target.isAlive) {
+            target.isAlive = false;
+          }
         }
       });
+
+      debuffApplied = {
+        name: skill.name,
+        statModifier: skill.effect.statModifier as Record<string, number>,
+        duration: skill.effect.duration
+      };
     }
 
     return {
       actor,
       target,
       action,
+      debuffApplied,
       success: true,
       message: `${actor.name} casts ${skill.name} on ${target.name} (debuff applied for ${skill.effect.duration} turns)`,
       turnNumber: this.battleState!.turnNumber

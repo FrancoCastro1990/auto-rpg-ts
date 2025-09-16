@@ -2,6 +2,7 @@ import { BattleSystem } from './src/systems/BattleSystem';
 import { EntityFactory } from './src/loaders/EntityFactory';
 import { DataLoader } from './src/loaders/DataLoader';
 import { BattleLogger } from './src/utils/BattleLogger';
+import { TargetSelector } from './src/systems/TargetSelector';
 
 async function testSummonSkill() {
   console.log('=== Testing Summon Skill Functionality ===\n');
@@ -93,6 +94,35 @@ async function testSummonSkill() {
       console.log(`Turn ${turnCount}: No action taken`);
     }
   }
+
+  // Debug target selection
+  console.log('\n=== DEBUG TARGET SELECTION ===');
+  const currentState = battleSystem.getBattleState();
+  if (currentState) {
+    const livingAllies = currentState.allies.filter(a => a.isAlive);
+    const livingEnemies = currentState.enemies.filter(e => e.isAlive);
+
+    console.log(`Living Allies: ${livingAllies.map(a => a.name).join(', ')}`);
+    console.log(`Living Enemies: ${livingEnemies.map(e => e.name).join(', ')}`);
+
+    // Test target selection for necromancer
+    const necromancerInBattle = livingEnemies.find(e => e.name === 'Dark Summoner');
+    if (necromancerInBattle) {
+      console.log(`\nTesting target selection for ${necromancerInBattle.name}:`);
+      console.log(`Is Enemy: ${necromancerInBattle.isEnemy}`);
+
+      const actorAllies = necromancerInBattle.isEnemy ? livingEnemies : livingAllies;
+      const actorEnemies = necromancerInBattle.isEnemy ? livingAllies : livingEnemies;
+
+      console.log(`Actor Allies: ${actorAllies.map(a => a.name).join(', ')}`);
+      console.log(`Actor Enemies: ${actorEnemies.map(e => e.name).join(', ')}`);
+
+      // Test random enemy selection
+      const randomEnemyResult = TargetSelector.selectTarget('randomEnemy', necromancerInBattle, actorAllies, actorEnemies);
+      console.log(`Random Enemy Target: ${randomEnemyResult.target?.name || 'null'} (${randomEnemyResult.reason})`);
+    }
+  }
+  console.log('=== END DEBUG ===\n');
 
   // Final battle state
   const finalState = battleSystem.getBattleState();

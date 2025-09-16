@@ -89,7 +89,7 @@ export class DungeonManager {
 
     this.logger = new BattleLogger({
       useColors: true,
-      logLevel: 'INFO',
+      logLevel: 'DEBUG',
       compactMode: false,
       showTurnNumbers: true,
       showParticipantStats: true,
@@ -263,7 +263,7 @@ export class DungeonManager {
   ): Promise<{ result: BattleResult; turnHistory: TurnResult[] }> {
     const enemies = this.entityFactory.createEnemiesFromBattle(battleConfig.enemies);
 
-    const battleSystem = new BattleSystem(this.settings.logBattles ? this.logger : undefined);
+    const battleSystem = new BattleSystem(this.settings.logBattles ? this.logger : undefined, this.entityFactory);
     battleSystem.initializeBattle(this.currentProgress!.partyState, enemies);
 
     // Log turn order if enabled

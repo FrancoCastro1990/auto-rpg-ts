@@ -25,6 +25,7 @@ const createMockEnemy = (type: string, name: string, isBoss: boolean = false): E
     baseStats,
     abilities: [
       {
+        id: 'basic_attack',
         name: 'basic_attack',
         type: 'attack',
         effect: { damage: 15 },
@@ -33,6 +34,7 @@ const createMockEnemy = (type: string, name: string, isBoss: boolean = false): E
         description: 'Basic attack'
       },
       {
+        id: 'power_strike',
         name: 'power_strike',
         type: 'attack',
         effect: { damage: 25 },
@@ -70,6 +72,7 @@ const createMockAlly = (name: string): Character => {
     baseStats,
     abilities: [
       {
+        id: 'basic_attack',
         name: 'basic_attack',
         type: 'attack',
         effect: { damage: 20 },
