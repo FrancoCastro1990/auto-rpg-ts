@@ -242,37 +242,27 @@ Define los tipos de enemigos disponibles en el juego.
 - **`type`**: Nombre único del tipo de enemigo
 - **`job`**: Clase base (debe existir en jobs.json)
 
-#### Ejemplo Completo
+#### Sistema de Loot en enemies.json
+Los enemigos pueden tener configuraciones específicas de loot:
+
 ```json
-[
-  {
-    "type": "ShadowLord",
-    "job": "DemonKing",
-    "description": "Powerful boss demon with devastating abilities",
-    "isBoss": true,
-    "baseStats": {
-      "hp": 200,
-      "mp": 80,
-      "str": 20,
-      "def": 18,
-      "mag": 22,
-      "spd": 14
-    },
-    "rules": [
-      {
-        "priority": 100,
-        "condition": "ally.hp < 50%",
-        "target": "self",
-        "action": "cast:shadow_regeneration"
-      }
-    ],
-    "skillIds": [
-      "basic_attack",
-      "shadow_strike",
-      "soul_crusher"
+{
+  "type": "Goblin",
+  "job": "Warrior",
+  "description": "A sneaky goblin warrior",
+  "baseStats": { "hp": 80, "mp": 20, "str": 12, "def": 8, "mag": 4, "spd": 14 },
+  "rules": [...],
+  "skillIds": ["basic_attack", "goblin_strike"],
+  "lootConfig": {
+    "goldRange": { "min": 8, "max": 20 },
+    "experienceReward": 15,
+    "guaranteedDrops": [],
+    "randomDrops": [
+      { "itemId": "goblin_tooth", "dropRate": 0.6, "minQuantity": 1, "maxQuantity": 3 },
+      { "itemId": "health_potion", "dropRate": 0.4, "minQuantity": 1, "maxQuantity": 1 }
     ]
   }
-]
+}
 ```
 
 ### ⚔️ skills.json - Habilidades y Ataques
@@ -712,9 +702,24 @@ async function runCustomAdventure() {
   await game.initialize();
   await game.runAdventure();
 
-  // Obtener estadísticas
+  // Obtener estadísticas incluyendo loot
   const stats = game.getGameStatistics();
   console.log('Adventure completed:', stats);
+
+  // Procesar loot obtenido
+  if (stats.loot) {
+    displayLootSummary(stats.loot);
+  }
+}
+
+// Función para mostrar resumen de loot
+function displayLootSummary(loot: BattleLootSummary) {
+  console.log(`Total Gold: ${loot.totalGold}`);
+  console.log(`Total Experience: ${loot.totalExperience}`);
+
+  loot.allItems.forEach(itemDrop => {
+    console.log(`${itemDrop.item.name} x${itemDrop.quantity} (from ${itemDrop.source})`);
+  });
 }
 ```
 
@@ -1065,7 +1070,7 @@ data/
 ```
 
 #### Integración con Sistema de Loot
-```json
+```javascript
 // Configuración que recompensa summon exitoso
 {
   "victoryCondition": "all_enemies_defeated",
@@ -1076,6 +1081,173 @@ data/
         { "type": "gold", "amount": 50 },
         { "type": "item", "id": "summon_scroll", "chance": 0.3 }
       ]
+    }
+  }
+}
+```
+
+---
+
+## 💰 Sistema de Loot - Integración Frontend
+
+### Consumir Datos de Loot para UI
+
+Cuando el sistema genera loot, puedes acceder a los datos para mostrarlos en tu interfaz:
+
+```javascript
+// Ejemplo de integración con React/Vue
+async function loadLootData(battleId) {
+  const response = await fetch(`./loot-data/battle_${battleId}_loot.json`);
+  const lootData = await response.json();
+
+  // Estructura del archivo de loot:
+  // {
+  //   "totalGold": 156,
+  //   "totalExperience": 85,
+  //   "allItems": [...],
+  //   "lootByEnemy": [...]
+  // }
+
+  return lootData;
+}
+
+// Componente para mostrar loot
+function LootDisplay({ loot }) {
+  return (
+    <div className="loot-summary">
+      <h3>Recompensas Obtenidas</h3>
+      <div className="gold-display">
+        <span className="gold-icon">💰</span>
+        <span className="gold-amount">{loot.totalGold} oro</span>
+      </div>
+      <div className="exp-display">
+        <span className="exp-icon">⭐</span>
+        <span className="exp-amount">{loot.totalExperience} EXP</span>
+      </div>
+      <div className="items-list">
+        {loot.allItems.map((itemDrop, index) => (
+          <div key={index} className={`item ${itemDrop.item.rarity}`}>
+            <span className="item-name">{itemDrop.item.name}</span>
+            <span className="item-quantity">x{itemDrop.quantity}</span>
+            <span className="item-source">({itemDrop.source})</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+### Sistema de Items en Frontend
+
+```javascript
+// Definir tipos de items para tu UI
+const ITEM_TYPES = {
+  consumable: { icon: '🧪', color: 'blue' },
+  material: { icon: '🔧', color: 'gray' },
+  weapon: { icon: '⚔️', color: 'red' },
+  armor: { icon: '🛡️', color: 'green' }
+};
+
+const ITEM_RARITIES = {
+  common: { color: '#8B8B8B', name: 'Común' },
+  uncommon: { color: '#4CAF50', name: 'Poco Común' },
+  rare: { color: '#2196F3', name: 'Raro' },
+  epic: { color: '#9C27B0', name: 'Épico' }
+};
+
+// Función para renderizar item con estilo
+function renderItem(item, quantity = 1) {
+  const typeInfo = ITEM_TYPES[item.type];
+  const rarityInfo = ITEM_RARITIES[item.rarity];
+
+  return `
+    <div class="item-card ${item.rarity}" style="border-color: ${rarityInfo.color}">
+      <div class="item-header">
+        <span class="item-icon">${typeInfo.icon}</span>
+        <span className="item-name">${item.name}</span>
+        ${quantity > 1 ? `<span className="item-quantity">x${quantity}</span>` : ''}
+      </div>
+      <div className="item-description">${item.description}</div>
+      <div className="item-value">${item.value} oro</div>
+      <div className="item-rarity">${rarityInfo.name}</div>
+    </div>
+  `;
+}
+```
+
+### Inventario y Gestión de Items
+
+```javascript
+// Clase para manejar inventario del jugador
+class PlayerInventory {
+  constructor() {
+    this.items = new Map();
+    this.gold = 0;
+    this.experience = 0;
+  }
+
+  // Agregar loot de una batalla
+  addBattleLoot(lootSummary) {
+    this.gold += lootSummary.totalGold;
+    this.experience += lootSummary.totalExperience;
+
+    lootSummary.allItems.forEach(itemDrop => {
+      const existing = this.items.get(itemDrop.item.id) || { item: itemDrop.item, quantity: 0 };
+      existing.quantity += itemDrop.quantity;
+      this.items.set(itemDrop.item.id, existing);
+    });
+
+    this.saveToStorage();
+  }
+
+  // Usar un item consumible
+  useItem(itemId) {
+    const itemEntry = this.items.get(itemId);
+    if (!itemEntry || itemEntry.quantity <= 0) return false;
+
+    // Aplicar efecto del item
+    this.applyItemEffect(itemEntry.item);
+
+    itemEntry.quantity--;
+    if (itemEntry.quantity <= 0) {
+      this.items.delete(itemId);
+    }
+
+    this.saveToStorage();
+    return true;
+  }
+
+  // Aplicar efecto de item
+  applyItemEffect(item) {
+    if (item.effect) {
+      if (item.effect.heal) {
+        player.hp = Math.min(player.maxHp, player.hp + item.effect.heal);
+      }
+      if (item.effect.mpRestore) {
+        player.mp = Math.min(player.maxMp, player.mp + item.effect.mpRestore);
+      }
+      // Otros efectos...
+    }
+  }
+
+  // Guardar en localStorage
+  saveToStorage() {
+    localStorage.setItem('playerInventory', JSON.stringify({
+      items: Array.from(this.items.entries()),
+      gold: this.gold,
+      experience: this.experience
+    }));
+  }
+
+  // Cargar desde localStorage
+  loadFromStorage() {
+    const saved = localStorage.getItem('playerInventory');
+    if (saved) {
+      const data = JSON.parse(saved);
+      this.items = new Map(data.items);
+      this.gold = data.gold;
+      this.experience = data.experience;
     }
   }
 }
@@ -1106,3 +1278,5 @@ data/
 ---
 
 *Esta guía se mantiene actualizada con las últimas funcionalidades del sistema. Para la versión más reciente, consulta el repositorio oficial.*
+
+*Última actualización: 16 de septiembre de 2025*

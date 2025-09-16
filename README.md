@@ -5,7 +5,117 @@ Un RPG auto-battler desarrollado en TypeScript que simula combates automatizados
 ## 🚀 Estado del Proyecto
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/Nod#### Características del Sistema de Summon
+- ✅ **Minions Independientes**: Cada minion tiene estadísticas propias
+- ✅ **Participación Activa**: Minions atacan y pueden ser atacados
+- ✅ **Turn Order Integration**: Minions se integran automáticamente al orden de turnos
+- ✅ **Cooldown System**: Habilidades tienen cooldown
+- ✅ **Multiple Summons**: Posibilidad de invocar múltiples minions
+- ✅ **Strategic AI**: Minions siguen reglas de comportamiento específicas
+
+## 💰 Sistema de Loot Detallado
+
+### Tipos de Items Disponibles
+
+#### 🧪 Consumibles
+- **Health Potion**: Restaura 50 HP (Valor: 50 oro)
+- **Mana Potion**: Restaura 30 MP (Valor: 40 oro)
+- **Greater Health Potion**: Restaura 120 HP (Valor: 120 oro, Uncommon)
+
+#### 🔧 Materiales
+- **Slime Gel**: Sustancia gelatinosa de slimes (Valor: 10 oro)
+- **Goblin Tooth**: Diente afilado de goblin (Valor: 15 oro)
+- **Orc Tusk**: Colmillo grande de orc (Valor: 35 oro, Uncommon)
+- **Dark Crystal**: Cristal infundido con magia oscura (Valor: 100 oro, Rare)
+- **Dragon Scale**: Escama de dragón (Valor: 250 oro, Epic)
+
+#### ⚔️ Armas y Armaduras
+- **Rusty Sword**: Espada oxidada (+2 STR, Valor: 75 oro)
+- **Bone Staff**: Bastón de huesos (+3 MAG, Valor: 150 oro, Uncommon)
+- **Leather Armor**: Armadura de cuero (+3 DEF, Valor: 80 oro)
+- **Chain Mail**: Cota de malla pesada (+5 DEF, Valor: 200 oro, Uncommon)
+
+### Tablas de Loot por Enemigo
+
+#### 🟢 Enemigos Comunes
+- **Slime**: 5-15 oro, 10 EXP, Slime Gel (80%), Health Potion (30%)
+- **Goblin**: 8-20 oro, 15 EXP, Goblin Tooth (60%), Rusty Sword (20%)
+- **Orc**: 15-35 oro, 25 EXP, Orc Tusk (50%), Chain Mail (10%)
+
+#### 🟡 Enemigos Avanzados
+- **DarkMage**: 20-45 oro, 30 EXP, Dark Crystal (40%), Bone Staff (15%)
+- **Troll**: 12-28 oro, 20 EXP, Greater Health Potion (30%), Leather Armor (25%)
+- **FireElemental**: 18-40 oro, 28 EXP, Mana Potions (50%)
+- **IceGolem**: 16-35 oro, 22 EXP, Chain Mail (30%)
+- **Wraith**: 22-48 oro, 32 EXP, Dark Crystal (30%)
+- **Minotaur**: 20-42 oro, 35 EXP, Orc Tusk (70%), Chain Mail (20%)
+- **Necromancer**: 30-65 oro, 45 EXP, Dark Crystal (60%), Bone Staff (40%)
+- **DragonWhelp**: 25-55 oro, 40 EXP, Dragon Scale (50%)
+
+#### 🟣 Jefes (Bosses)
+- **ShadowLord**: 100-200 oro, 100 EXP, **Dark Crystal garantizado (2-3)**, Bone Staff (40%)
+
+### Sistema de Rareza
+- **Common**: Items básicos, alta probabilidad de drop
+- **Uncommon**: Items mejores, probabilidad media
+- **Rare**: Items valiosos, baja probabilidad
+- **Epic**: Items legendarios, muy rara probabilidad
+
+### Generación de Loot en Batalla
+
+```javascript
+// Ejemplo de loot generado para un Goblin derrotado
+{
+  "gold": 14,
+  "experience": 15,
+  "items": [
+    {
+      "item": {
+        "id": "goblin_tooth",
+        "name": "Goblin Tooth",
+        "type": "material",
+        "rarity": "common",
+        "value": 15,
+        "description": "Sharp tooth from a goblin"
+      },
+      "quantity": 2
+    }
+  ],
+  "source": "Goblin Warrior"
+}
+```
+
+### Estadísticas de Batalla con Loot
+
+```javascript
+// Resumen completo de loot por batalla
+{
+  "totalGold": 156,
+  "totalExperience": 85,
+  "allItems": [
+    {
+      "item": { "name": "Goblin Tooth", "rarity": "common" },
+      "quantity": 3,
+      "source": "Goblin Warrior"
+    },
+    {
+      "item": { "name": "Orc Tusk", "rarity": "uncommon" },
+      "quantity": 1,
+      "source": "Orc Berserker"
+    }
+  ],
+  "lootByEnemy": [
+    {
+      "enemy": "Goblin Warrior",
+      "loot": { "gold": 14, "experience": 15, "items": [...] }
+    },
+    {
+      "enemy": "Orc Berserker",
+      "loot": { "gold": 28, "experience": 25, "items": [...] }
+    }
+  ]
+}
+```+-green.svg)](https://nodejs.org/)
 [![Jest](https://img.shields.io/badge/Jest-29+-red.svg)](https://jestjs.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -174,17 +284,19 @@ dist/                          # Archivos compilados TypeScript
 - **Independent Combat**: Minions con estadísticas propias y participación activa
 - **Cooldown Management**: Sistema de cooldown para habilidades de summon
 
+#### 💰 Sistema de Loot (`systems/LootSystem.ts`)
+- **Loot Tables**: Tablas de loot específicas por tipo de enemigo
+- **Item System**: Sistema completo de items con rarezas y efectos
+- **Gold Calculation**: Oro variable basado en dificultad del enemigo
+- **Experience Rewards**: Puntos de experiencia por derrota
+- **Drop Rates**: Sistema de probabilidades para items
+- **Battle Summary**: Resumen completo de loot por batalla
+
 #### 🤖 Sistema de IA para Enemigos (`systems/EnemyAI.ts`)
 - **Behavior Patterns**: Patrones de comportamiento adaptativos
 - **Rule-based Override**: Enemigos con reglas personalizadas usan ActionResolver
 - **Adaptive AI**: IA que se adapta basado en composición del grupo
 - **Fallback System**: Sistema de respaldo para acciones básicas
-
-#### 💰 Sistema de Loot (`systems/LootSystem.ts`)
-- **Battle Rewards**: Generación automática de recompensas
-- **Gold Calculation**: Sistema de cálculo de oro basado en dificultad
-- **Experience Points**: Asignación de puntos de experiencia
-- **Item Drops**: Sistema de drops de items configurable
 
 ## 📊 Sistema de Reportes
 
@@ -507,4 +619,4 @@ Este proyecto está bajo la **Licencia MIT** - ver el archivo [LICENSE](LICENSE)
 
 *Desarrollado con ❤️ usando TypeScript*
 
-*Última actualización: Septiembre 2025*
+*Última actualización: 16 de septiembre de 2025*
