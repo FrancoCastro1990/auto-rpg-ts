@@ -1,0 +1,35 @@
+{
+  "name": "auto-rpg-ts",
+  "version": "1.0.0",
+  "description": "TypeScript RPG Auto-Battler with json-rules-engine",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && node dist/main.js",
+    "dev": "ts-node src/main.ts",
+    "test": "jest",
+    "clean": "rm -rf dist",
+    "play": "ts-node src/main.ts",
+    "test-logging": "ts-node src/utils/test-logging.ts"
+  },
+  "keywords": [
+    "rpg",
+    "auto-battler",
+    "typescript",
+    "rules-engine"
+  ],
+  "author": "Auto-RPG Developer",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "json-rules-engine": "^6.5.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.0.0",
+    "@types/node": "^20.19.14",
+    "jest": "^29.0.0",
+    "ts-jest": "^29.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  }
+}

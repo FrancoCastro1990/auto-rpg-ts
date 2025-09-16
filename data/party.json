@@ -1,0 +1,145 @@
+[
+  {
+    "name": "Kael",
+    "job": "Warrior",
+    "level": 1,
+    "rules": [
+      {
+        "priority": 100,
+        "condition": "enemy.isBoss",
+        "target": "bossEnemy",
+        "action": "cast:power_strike"
+      },
+      {
+        "priority": 80,
+        "condition": "ally.hp < 30%",
+        "target": "self",
+        "action": "cast:taunt"
+      },
+      {
+        "priority": 60,
+        "condition": "self.mp > 50%",
+        "target": "strongestEnemy",
+        "action": "cast:power_strike"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "weakestEnemy",
+        "action": "attack"
+      }
+    ]
+  },
+  
+  {
+    "name": "Luna",
+    "job": "WhiteMage",
+    "level": 1,
+    "rules": [
+      {
+        "priority": 100,
+        "condition": "ally.hp < 30%",
+        "target": "lowestHpAlly",
+        "action": "cast:greater_heal"
+      },
+      {
+        "priority": 80,
+        "condition": "ally.hp < 60%",
+        "target": "lowestHpAlly",
+        "action": "cast:heal"
+      },
+      {
+        "priority": 60,
+        "condition": "enemy.isBoss",
+        "target": "strongestEnemy",
+        "action": "cast:blessing"
+      },
+      {
+        "priority": 40,
+        "condition": "self.mp > 70%",
+        "target": "strongestEnemy",
+        "action": "cast:holy_light"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "weakestEnemy",
+        "action": "attack"
+      }
+    ]
+  },
+  {
+    "name": "Zara",
+    "job": "BlackMage",
+    "level": 1,
+    "rules": [
+      {
+        "priority": 100,
+        "condition": "enemy.isBoss",
+        "target": "bossEnemy",
+        "action": "cast:meteor"
+      },
+      {
+        "priority": 80,
+        "condition": "enemy.count > 2",
+        "target": "strongestEnemy",
+        "action": "cast:lightning_bolt"
+      },
+      {
+        "priority": 60,
+        "condition": "self.mp > 60%",
+        "target": "strongestEnemy",
+        "action": "cast:fireball"
+      },
+      {
+        "priority": 40,
+        "condition": "self.mp > 30%",
+        "target": "strongestEnemy",
+        "action": "cast:curse"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "weakestEnemy",
+        "action": "attack"
+      }
+    ]
+  },
+  {
+    "name": "Raven",
+    "job": "Rogue",
+    "level": 1,
+    "rules": [
+      {
+        "priority": 100,
+        "condition": "enemy.isBoss",
+        "target": "bossEnemy",
+        "action": "cast:backstab"
+      },
+      {
+        "priority": 80,
+        "condition": "enemy.count > 2",
+        "target": "self",
+        "action": "cast:shadow_step"
+      },
+      {
+        "priority": 60,
+        "condition": "self.mp > 50%",
+        "target": "strongestEnemy",
+        "action": "cast:poison_blade"
+      },
+      {
+        "priority": 40,
+        "condition": "enemy.count > 1",
+        "target": "randomEnemy",
+        "action": "cast:smoke_bomb"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "weakestEnemy",
+        "action": "attack"
+      }
+    ]
+  }
+]

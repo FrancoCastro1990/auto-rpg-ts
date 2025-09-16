@@ -1,0 +1,77 @@
+[
+  {
+    "name": "Warrior",
+    "description": "Front-line fighter with high physical damage and defense",
+    "baseStats": {
+      "hp": 150,
+      "mp": 20,
+      "str": 18,
+      "def": 15,
+      "mag": 5,
+      "spd": 8
+    },
+    "skillIds": [
+      "basic_attack",
+      "power_strike",
+      "shield_bash",
+      "taunt"
+    ]
+  },
+  {
+    "name": "WhiteMage",
+    "description": "Support class focused on healing and buffs",
+    "baseStats": {
+      "hp": 80,
+      "mp": 50,
+      "str": 6,
+      "def": 8,
+      "mag": 20,
+      "spd": 12
+    },
+    "skillIds": [
+      "basic_attack",
+      "heal",
+      "greater_heal",
+      "blessing",
+      "holy_light"
+    ]
+  },
+  {
+    "name": "BlackMage",
+    "description": "Offensive spellcaster with powerful magical attacks",
+    "baseStats": {
+      "hp": 70,
+      "mp": 60,
+      "str": 5,
+      "def": 6,
+      "mag": 25,
+      "spd": 10
+    },
+    "skillIds": [
+      "basic_attack",
+      "fireball",
+      "lightning_bolt",
+      "curse",
+      "meteor"
+    ]
+  },
+  {
+    "name": "Rogue",
+    "description": "Fast assassin with critical strikes and evasion",
+    "baseStats": {
+      "hp": 100,
+      "mp": 30,
+      "str": 14,
+      "def": 10,
+      "mag": 8,
+      "spd": 18
+    },
+    "skillIds": [
+      "basic_attack",
+      "backstab",
+      "poison_blade",
+      "shadow_step",
+      "smoke_bomb"
+    ]
+  }
+]

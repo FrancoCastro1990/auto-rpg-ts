@@ -1,0 +1,66 @@
+{
+  "id": 1,
+  "name": "Cavernas de la Sombra",
+  "description": "Una serie de cavernas infestadas de criaturas malévolas, culminando en el enfrentamiento con el temible Señor de las Sombras",
+  "defaultMaxTurns": 20,
+  "battles": [
+    {
+      "id": 1,
+      "order": 0,
+      "enemies": [
+        { "type": "Slime", "name": "Slime Verde" },
+        { "type": "Slime", "name": "Slime Azul" }
+      ]
+    },
+    {
+      "id": 2,
+      "order": 1,
+      "enemies": [
+        { "type": "Goblin", "name": "Goblin Explorador" },
+        { "type": "Slime" }
+      ]
+    },
+    {
+      "id": 3,
+      "order": 2,
+      "enemies": [
+        { "type": "Goblin", "name": "Goblin Guerrero" },
+        { "type": "Goblin", "name": "Goblin Arquero" },
+        { "type": "Slime" }
+      ]
+    },
+    {
+      "id": 4,
+      "order": 3,
+      "enemies": [
+        { "type": "Orc", "name": "Orco Brutal" },
+        { "type": "Goblin" }
+      ]
+    },
+    {
+      "id": 5,
+      "order": 4,
+      "enemies": [
+        { "type": "DarkMage", "name": "Hechicero Corrupto" },
+        { "type": "Orc" }
+      ]
+    },
+    {
+      "id": 6,
+      "order": 5,
+      "enemies": [
+        { "type": "Orc", "name": "Orco Capitán" },
+        { "type": "DarkMage", "name": "Nigromante" },
+        { "type": "Goblin" }
+      ]
+    },
+    {
+      "id": 7,
+      "order": 6,
+      "enemies": [
+        { "type": "ShadowLord", "name": "Malachar el Señor de las Sombras" }
+      ],
+      "maxTurns": 50
+    }
+  ]
+}

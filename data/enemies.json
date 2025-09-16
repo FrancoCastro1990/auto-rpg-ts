@@ -1,0 +1,183 @@
+[
+  {
+    "type": "Slime",
+    "job": "SlimeJob",
+    "description": "Basic gelatinous creature with simple attacks",
+    "baseStats": {
+      "hp": 45,
+      "mp": 10,
+      "str": 8,
+      "def": 4,
+      "mag": 2,
+      "spd": 5
+    },
+    "rules": [
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "randomEnemy",
+        "action": "attack"
+      }
+    ],
+    "skillIds": [
+      "basic_attack",
+      "slime_attack"
+    ]
+  },
+  {
+    "type": "Goblin",
+    "job": "GoblinWarrior",
+    "description": "Small but aggressive humanoid warrior",
+    "baseStats": {
+      "hp": 60,
+      "mp": 15,
+      "str": 12,
+      "def": 8,
+      "mag": 4,
+      "spd": 10
+    },
+    "rules": [
+      {
+        "priority": 20,
+        "condition": "ally.hp < 30%",
+        "target": "lowestHpAlly",
+        "action": "cast:goblin_rush"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "randomEnemy",
+        "action": "attack"
+      }
+    ],
+    "skillIds": [
+      "basic_attack",
+      "goblin_rush"
+    ]
+  },
+  {
+    "type": "Orc",
+    "job": "OrcBrute",
+    "description": "Large brutish creature with high damage output",
+    "baseStats": {
+      "hp": 90,
+      "mp": 20,
+      "str": 16,
+      "def": 12,
+      "mag": 3,
+      "spd": 6
+    },
+    "rules": [
+      {
+        "priority": 30,
+        "condition": "enemy.count > 2",
+        "target": "strongestEnemy",
+        "action": "cast:berserker_rage"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "randomAlly",
+        "action": "attack"
+      }
+    ],
+    "skillIds": [
+      "basic_attack",
+      "berserker_rage",
+      "war_cry"
+    ]
+  },
+  {
+    "type": "DarkMage",
+    "job": "DarkSorcerer",
+    "description": "Evil spellcaster with dark magic",
+    "baseStats": {
+      "hp": 75,
+      "mp": 40,
+      "str": 6,
+      "def": 7,
+      "mag": 18,
+      "spd": 12
+    },
+    "rules": [
+      {
+        "priority": 40,
+        "condition": "self.mp > 50%",
+        "target": "strongestEnemy",
+        "action": "cast:dark_bolt"
+      },
+      {
+        "priority": 30,
+        "condition": "enemy.count > 1",
+        "target": "randomAlly",
+        "action": "cast:hex"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "randomAlly",
+        "action": "attack"
+      }
+    ],
+    "skillIds": [
+      "basic_attack",
+      "dark_bolt",
+      "hex",
+      "life_drain"
+    ]
+  },
+  {
+    "type": "ShadowLord",
+    "job": "DemonKing",
+    "description": "Powerful boss demon with devastating abilities",
+    "isBoss": true,
+    "baseStats": {
+      "hp": 200,
+      "mp": 80,
+      "str": 20,
+      "def": 18,
+      "mag": 22,
+      "spd": 14
+    },
+    "rules": [
+      {
+        "priority": 100,
+        "condition": "ally.hp < 50%",
+        "target": "self",
+        "action": "cast:shadow_regeneration"
+      },
+      {
+        "priority": 80,
+        "condition": "enemy.count > 2",
+        "target": "randomEnemy",
+        "action": "cast:darkness_wave"
+      },
+      {
+        "priority": 60,
+        "condition": "self.mp > 70%",
+        "target": "strongestEnemy",
+        "action": "cast:soul_crusher"
+      },
+      {
+        "priority": 40,
+        "condition": "always",
+        "target": "lowestHpAlly",
+        "action": "cast:shadow_strike"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "randomAlly",
+        "action": "attack"
+      }
+    ],
+    "skillIds": [
+      "basic_attack",
+      "shadow_strike",
+      "soul_crusher",
+      "darkness_wave",
+      "shadow_regeneration",
+      "terror"
+    ]
+  }
+]

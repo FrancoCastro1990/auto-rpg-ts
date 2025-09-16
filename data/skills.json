@@ -1,0 +1,321 @@
+[
+  {
+    "id": "basic_attack",
+    "name": "Basic Attack",
+    "type": "attack",
+    "effect": {
+      "damage": 10
+    },
+    "mpCost": 0,
+    "description": "Standard physical attack"
+  },
+  {
+    "id": "power_strike",
+    "name": "Power Strike",
+    "type": "attack",
+    "effect": {
+      "damage": 25
+    },
+    "mpCost": 5,
+    "description": "A powerful melee attack that deals heavy damage"
+  },
+  {
+    "id": "shield_bash",
+    "name": "Shield Bash",
+    "type": "attack",
+    "effect": {
+      "damage": 15,
+      "statModifier": {
+        "spd": -3
+      },
+      "duration": 2
+    },
+    "mpCost": 3,
+    "description": "Attacks and slows the enemy"
+  },
+  {
+    "id": "taunt",
+    "name": "Taunt",
+    "type": "buff",
+    "effect": {
+      "statModifier": {
+        "def": 5
+      },
+      "duration": 3
+    },
+    "mpCost": 4,
+    "description": "Increases defense for 3 turns"
+  },
+  {
+    "id": "heal",
+    "name": "Heal",
+    "type": "heal",
+    "effect": {
+      "heal": 35
+    },
+    "mpCost": 8,
+    "description": "Restores HP to an ally"
+  },
+  {
+    "id": "greater_heal",
+    "name": "Greater Heal",
+    "type": "heal",
+    "effect": {
+      "heal": 65
+    },
+    "mpCost": 15,
+    "description": "Powerful healing spell"
+  },
+  {
+    "id": "blessing",
+    "name": "Blessing",
+    "type": "buff",
+    "effect": {
+      "statModifier": {
+        "str": 8,
+        "mag": 8
+      },
+      "duration": 4
+    },
+    "mpCost": 12,
+    "description": "Increases ally's attack power"
+  },
+  {
+    "id": "holy_light",
+    "name": "Holy Light",
+    "type": "attack",
+    "effect": {
+      "damage": 22
+    },
+    "mpCost": 10,
+    "description": "Magic attack effective against dark enemies"
+  },
+  {
+    "id": "fireball",
+    "name": "Fireball",
+    "type": "attack",
+    "effect": {
+      "damage": 30
+    },
+    "mpCost": 12,
+    "description": "Powerful fire spell"
+  },
+  {
+    "id": "lightning_bolt",
+    "name": "Lightning Bolt",
+    "type": "attack",
+    "effect": {
+      "damage": 35
+    },
+    "mpCost": 15,
+    "description": "Electric attack with high damage"
+  },
+  {
+    "id": "curse",
+    "name": "Curse",
+    "type": "debuff",
+    "effect": {
+      "statModifier": {
+        "str": -5,
+        "def": -3
+      },
+      "duration": 3
+    },
+    "mpCost": 8,
+    "description": "Weakens enemy's combat abilities"
+  },
+  {
+    "id": "meteor",
+    "name": "Meteor",
+    "type": "attack",
+    "effect": {
+      "damage": 50
+    },
+    "mpCost": 25,
+    "description": "Ultimate magical attack"
+  },
+  {
+    "id": "backstab",
+    "name": "Backstab",
+    "type": "attack",
+    "effect": {
+      "damage": 40
+    },
+    "mpCost": 6,
+    "description": "High damage sneak attack"
+  },
+  {
+    "id": "poison_blade",
+    "name": "Poison Blade",
+    "type": "attack",
+    "effect": {
+      "damage": 20,
+      "statModifier": {
+        "hp": -5
+      },
+      "duration": 4
+    },
+    "mpCost": 8,
+    "description": "Attack that causes ongoing poison damage"
+  },
+  {
+    "id": "shadow_step",
+    "name": "Shadow Step",
+    "type": "buff",
+    "effect": {
+      "statModifier": {
+        "spd": 10,
+        "def": 5
+      },
+      "duration": 3
+    },
+    "mpCost": 10,
+    "description": "Increases speed and evasion"
+  },
+  {
+    "id": "smoke_bomb",
+    "name": "Smoke Bomb",
+    "type": "debuff",
+    "effect": {
+      "statModifier": {
+        "str": -8
+      },
+      "duration": 2
+    },
+    "mpCost": 5,
+    "description": "Reduces all enemies' accuracy"
+  },
+  {
+    "id": "slime_attack",
+    "name": "Slime Attack",
+    "type": "attack",
+    "effect": {
+      "damage": 12
+    },
+    "mpCost": 0,
+    "description": "Basic slime strike"
+  },
+  {
+    "id": "goblin_rush",
+    "name": "Goblin Rush",
+    "type": "attack",
+    "effect": {
+      "damage": 18
+    },
+    "mpCost": 5,
+    "description": "Quick aggressive attack"
+  },
+  {
+    "id": "berserker_rage",
+    "name": "Berserker Rage",
+    "type": "attack",
+    "effect": {
+      "damage": 25
+    },
+    "mpCost": 8,
+    "description": "Powerful rage-fueled attack"
+  },
+  {
+    "id": "war_cry",
+    "name": "War Cry",
+    "type": "buff",
+    "effect": {
+      "statModifier": {
+        "str": 6
+      },
+      "duration": 3
+    },
+    "mpCost": 6,
+    "description": "Increases attack power"
+  },
+  {
+    "id": "dark_bolt",
+    "name": "Dark Bolt",
+    "type": "attack",
+    "effect": {
+      "damage": 28
+    },
+    "mpCost": 12,
+    "description": "Dark magic projectile"
+  },
+  {
+    "id": "hex",
+    "name": "Hex",
+    "type": "debuff",
+    "effect": {
+      "statModifier": {
+        "str": -4,
+        "spd": -4
+      },
+      "duration": 3
+    },
+    "mpCost": 10,
+    "description": "Curse that weakens enemies"
+  },
+  {
+    "id": "life_drain",
+    "name": "Life Drain",
+    "type": "attack",
+    "effect": {
+      "damage": 20,
+      "heal": 15
+    },
+    "mpCost": 15,
+    "description": "Drains life force from enemy"
+  },
+  {
+    "id": "shadow_strike",
+    "name": "Shadow Strike",
+    "type": "attack",
+    "effect": {
+      "damage": 35
+    },
+    "mpCost": 8,
+    "description": "Devastating shadow-infused attack"
+  },
+  {
+    "id": "soul_crusher",
+    "name": "Soul Crusher",
+    "type": "attack",
+    "effect": {
+      "damage": 50
+    },
+    "mpCost": 20,
+    "description": "Ultimate attack that can crush souls"
+  },
+  {
+    "id": "darkness_wave",
+    "name": "Darkness Wave",
+    "type": "attack",
+    "effect": {
+      "damage": 25
+    },
+    "mpCost": 15,
+    "description": "AoE attack hitting multiple enemies"
+  },
+  {
+    "id": "shadow_regeneration",
+    "name": "Shadow Regeneration",
+    "type": "heal",
+    "effect": {
+      "heal": 40
+    },
+    "mpCost": 18,
+    "description": "Powerful self-healing ability"
+  },
+  {
+    "id": "terror",
+    "name": "Terror",
+    "type": "debuff",
+    "effect": {
+      "statModifier": {
+        "str": -8,
+        "spd": -6,
+        "def": -4
+      },
+      "duration": 4
+    },
+    "mpCost": 12,
+    "description": "Inflicts fear, reducing all combat stats"
+  }
+]
