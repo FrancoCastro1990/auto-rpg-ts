@@ -2,7 +2,7 @@
 
 ## 📖 Introducción
 
-Esta guía proporciona una documentación completa para desarrolladores frontend que desean integrar o extender el **Auto-RPG Game**, un sistema de combate automático por turnos desarrollado en TypeScript. El sistema permite crear aventuras automatizadas con personajes configurables, reglas de combate personalizables y exportación de datos para animaciones.
+Esta guía proporciona una documentación completa para desarrolladores frontend que desean integrar o extender el **Auto-RPG Game**, un sistema de combate automático por turnos desarrollado en TypeScript. El sistema permite crear aventuras automatizadas con personajes configurables, reglas de combate personalizables, **sistema de summon con minions activos** y exportación de datos para animaciones.
 
 ### 🎯 Propósito
 Esta guía te ayudará a:
@@ -10,6 +10,7 @@ Esta guía te ayudará a:
 - Entender y modificar los archivos JSON de configuración
 - Integrar el sistema en aplicaciones frontend
 - Crear contenido personalizado (personajes, habilidades, mazmorras)
+- **Implementar y configurar el sistema de summon**
 - Solucionar problemas comunes
 - Implementar mejores prácticas
 
@@ -55,11 +56,18 @@ auto-rpg-ts/
 ├── data/                    # Archivos JSON de configuración
 │   ├── party.json          # Configuración del grupo
 │   ├── jobs.json           # Clases de personajes
-│   ├── enemies.json        # Enemigos disponibles
-│   ├── skills.json         # Habilidades y ataques
+│   ├── enemies.json        # Enemigos y minions disponibles
+│   ├── skills.json         # Habilidades, ataques y summon
 │   └── dungeon_01.json     # Primera mazmorra
 ├── src/                    # Código fuente TypeScript
+│   ├── systems/
+│   │   ├── BattleSystem.ts # Motor de combate con summon
+│   │   ├── EnemyAI.ts     # IA para enemigos sin reglas
+│   │   └── LootSystem.ts  # Sistema de recompensas
+│   └── loaders/
+│       └── EntityFactory.ts # Creación de entidades y minions
 ├── combat-animations/      # Datos exportados para animaciones
+├── test-summon.ts         # Tests del sistema de summon
 └── package.json           # Configuración del proyecto
 ```
 
@@ -335,6 +343,77 @@ Define todas las habilidades disponibles en el juego.
 ]
 ```
 
+### 👻 Sistema de Summon - Habilidades Especiales
+
+El sistema de summon permite a los personajes invocar minions que participan activamente en el combate.
+
+#### Habilidades de Summon
+```json
+{
+  "id": "summon_skeleton",
+  "name": "Summon Skeleton",
+  "type": "buff",
+  "effect": {
+    "summon": "Skeleton",
+    "count": 1
+  },
+  "mpCost": 20,
+  "cooldown": 5,
+  "description": "Summons a skeleton minion to fight alongside the caster"
+}
+```
+
+#### Campos Especiales para Summon
+- **`summon`**: Tipo de minion a invocar (debe existir en `enemies.json`)
+- **`count`**: Número de minions a invocar (opcional, por defecto 1)
+- **`cooldown`**: Turnos de cooldown antes de poder usar nuevamente
+
+#### Minions en enemies.json
+Los minions son definidos como enemigos normales pero con reglas específicas:
+
+```json
+{
+  "type": "Skeleton",
+  "job": "Warrior",
+  "description": "Undead minion summoned by necromancers",
+  "baseStats": {
+    "hp": 35,
+    "mp": 0,
+    "str": 10,
+    "def": 8,
+    "mag": 2,
+    "spd": 12
+  },
+  "rules": [
+    {
+      "priority": 10,
+      "condition": "always",
+      "target": "randomEnemy",
+      "action": "attack"
+    }
+  ],
+  "skillIds": ["basic_attack"]
+}
+```
+
+#### Reglas para Usar Summon
+```json
+{
+  "priority": 70,
+  "condition": "self.mp > 50%",
+  "target": "self",
+  "action": "cast:summon_skeleton"
+}
+```
+
+#### Características del Sistema de Summon
+- ✅ **Minions Independientes**: Cada minion tiene estadísticas propias
+- ✅ **Participación Activa**: Los minions atacan y pueden ser atacados
+- ✅ **Turn Order Integration**: Se integran automáticamente al orden de turnos
+- ✅ **Cooldown System**: Las habilidades tienen cooldown
+- ✅ **Multiple Summons**: Posibilidad de invocar múltiples minions
+- ✅ **Strategic AI**: Los minions siguen reglas de comportamiento específicas
+
 ### 🏰 dungeon_*.json - Mazmorras
 
 Define las mazmorras y secuencias de combate.
@@ -411,6 +490,15 @@ npm start -- --dungeon dungeon_02.json
 npm start -- --party my_party.json
 ```
 
+### Probar el Sistema de Summon
+```bash
+# Ejecutar test específico del sistema de summon
+npx ts-node test-summon.ts
+
+# Ejecutar con logging detallado para ver minions en acción
+npm start -- --log-level DEBUG
+```
+
 ### Modo Interactivo
 ```bash
 npm start -- --interactive
@@ -470,7 +558,7 @@ npm start -- --no-report
 
 ### Consumir Datos de Combate para Animaciones
 
-Cuando usas `--export-combat-data`, el sistema genera archivos JSON con datos detallados de cada batalla:
+Cuando usas `--export-combat-data`, el sistema genera archivos JSON con datos detallados de cada batalla, incluyendo información sobre minions summon:
 
 ```javascript
 // Ejemplo de integración con JavaScript
@@ -478,23 +566,36 @@ async function loadCombatData(battleId) {
   const response = await fetch(`./combat-animations/battle_${battleId}.json`);
   const combatData = await response.json();
 
-  // Estructura del archivo generado:
+  // Estructura del archivo generado incluye información de summon:
   // {
   //   "battleId": 1,
-  //   "participants": [...],
-  //   "turns": [...],
+  //   "participants": [...], // Incluye minions con type: "minion"
+  //   "turns": [...],       // Acciones de minions aparecen aquí
   //   "metadata": {...}
   // }
 
   return combatData;
 }
 
-// Usar los datos para animar
-function animateBattle(combatData) {
-  combatData.turns.forEach((turn, index) => {
-    setTimeout(() => {
-      animateTurn(turn);
-    }, index * 1000); // 1 segundo por turno
+// Detectar acciones de summon
+function hasSummonActions(combatData) {
+  return combatData.turns.some(turn =>
+    turn.action?.type === 'summon' ||
+    turn.message?.includes('summons')
+  );
+}
+
+// Animar minions
+function animateMinions(combatData) {
+  const minions = combatData.participants.filter(p => p.type === 'minion');
+
+  minions.forEach(minion => {
+    // Crear sprite o elemento visual para el minion
+    createMinionSprite(minion);
+
+    // Animar acciones del minion
+    const minionTurns = combatData.turns.filter(turn => turn.actor === minion.id);
+    animateMinionActions(minionTurns);
   });
 }
 ```
@@ -514,6 +615,24 @@ function animateBattle(combatData) {
       "job": "Warrior",
       "initialStats": { "hp": 150, "mp": 20, "str": 18, "def": 15 },
       "finalStats": { "hp": 120, "mp": 15, "str": 18, "def": 15 }
+    },
+    {
+      "id": "necromancer_1",
+      "name": "Dark Summoner",
+      "type": "enemy",
+      "job": "BlackMage",
+      "initialStats": { "hp": 65, "mp": 60, "str": 4, "def": 9 },
+      "finalStats": { "hp": 65, "mp": 40, "str": 4, "def": 9 }
+    },
+    {
+      "id": "skeleton_1",
+      "name": "Skeleton 1",
+      "type": "minion",
+      "job": "Warrior",
+      "summonedBy": "necromancer_1",
+      "summonedAtTurn": 2,
+      "initialStats": { "hp": 35, "mp": 0, "str": 10, "def": 8 },
+      "finalStats": { "hp": 25, "mp": 0, "str": 10, "def": 8 }
     }
   ],
   "turns": [
@@ -524,19 +643,52 @@ function animateBattle(combatData) {
       "action": {
         "type": "skill",
         "skillId": "power_strike",
-        "target": "slime_1",
+        "target": "necromancer_1",
         "damage": 25,
         "effects": []
       },
       "stateChanges": {
-        "slime_1": { "hp": -25 }
+        "necromancer_1": { "hp": -25 }
+      }
+    },
+    {
+      "turnNumber": 2,
+      "timestamp": "2025-09-16T10:00:02.000Z",
+      "actor": "necromancer_1",
+      "action": {
+        "type": "summon",
+        "skillId": "summon_skeleton",
+        "target": "necromancer_1",
+        "summonedMinions": ["skeleton_1"],
+        "effects": []
+      },
+      "stateChanges": {
+        "necromancer_1": { "mp": -20 },
+        "new_participants": ["skeleton_1"]
+      }
+    },
+    {
+      "turnNumber": 3,
+      "timestamp": "2025-09-16T10:00:03.000Z",
+      "actor": "skeleton_1",
+      "action": {
+        "type": "attack",
+        "skillId": "basic_attack",
+        "target": "kael",
+        "damage": 8,
+        "effects": []
+      },
+      "stateChanges": {
+        "kael": { "hp": -8 }
       }
     }
   ],
   "metadata": {
     "totalTurns": 15,
     "victory": true,
-    "duration": 90000
+    "duration": 90000,
+    "totalSummons": 1,
+    "activeMinions": 1
   }
 }
 ```
@@ -645,6 +797,43 @@ async function runCustomAdventure() {
 **Causa**: Error de sintaxis en archivos JSON
 **Solución**: Usar un validador JSON online o IDE con validación
 
+### Problemas Específicos del Sistema de Summon
+
+#### 6. "Minions no aparecen en combate"
+**Causa**: Habilidad de summon mal configurada o falta implementación
+**Solución**:
+- Verificar que el skill tenga `"summon": "Skeleton"` y `"count": 1`
+- Asegurar que el minion esté definido en `enemies.json`
+- Revisar que `BattleSystem.ts` tenga `executeSummonSkill` implementado
+
+#### 7. "Minions no tienen turno en combate"
+**Causa**: Integración fallida con el sistema de turnos
+**Solución**:
+- Verificar que los minions se agreguen al array de participantes
+- Asegurar que tengan estadística `spd` (speed) definida
+- Revisar que `EntityFactory` cree correctamente las entidades de minions
+
+#### 8. "Error de compilación con summon"
+**Causa**: Tipos TypeScript no actualizados para propiedades de summon
+**Solución**:
+- Verificar que la interface `Ability` incluya propiedades `summon` y `count`
+- Actualizar tipos en `types.ts` si es necesario
+- Revisar imports en archivos relacionados
+
+#### 9. "Minions no atacan"
+**Causa**: Falta configuración de reglas o skills para minions
+**Solución**:
+- Asegurar que los minions tengan `basic_attack` en `skillIds`
+- Verificar que tengan reglas de comportamiento en `enemies.json`
+- Revisar que las reglas usen `randomEnemy` como target
+
+#### 10. "Múltiples summons causan lag"
+**Causa**: Demasiados minions activos simultáneamente
+**Solución**:
+- Implementar límite de minions por summoner (máximo 2-3)
+- Agregar cooldown a habilidades de summon
+- Considerar remover minions derrotados del array de participantes
+
 ### Debugging
 
 #### Activar Logging Detallado
@@ -689,6 +878,14 @@ data/
 - **Daño**: Skills básicas 10-20, avanzadas 25-40, ultimate 50+
 - **Costos**: MP apropiados para frecuencia de uso
 - **Prioridades**: Reglas críticas > 80, normales 40-60, fallback 10
+- **Summon Balance**: Minions con 30-50% del HP del summoner, cooldown 4-6 turnos
+
+### Sistema de Summon
+- **Minion Stats**: 30-60% de las estadísticas del summoner
+- **Cooldown**: 4-6 turnos para habilidades de summon
+- **Count**: Máximo 2-3 minions por summon para evitar overpower
+- **MP Cost**: 15-25 MP para mantener el balance
+- **AI Rules**: Mantener reglas simples para minions (solo ataque básico)
 
 ### Optimización de Rendimiento
 - Limitar número de reglas por personaje (máximo 10)
@@ -776,6 +973,111 @@ data/
       ]
     }
   ]
+}
+```
+
+### Ejemplos Avanzados de Summon
+
+#### Summoner con Múltiples Tipos de Minions
+```json
+// party.json - Personaje con diferentes summons
+{
+  "name": "ArchNecromancer",
+  "job": "Necromancer",
+  "level": 5,
+  "rules": [
+    {
+      "priority": 90,
+      "condition": "enemy.count > 2",
+      "target": "self",
+      "action": "cast:summon_skeleton_horde"
+    },
+    {
+      "priority": 70,
+      "condition": "self.hp < 40%",
+      "target": "self",
+      "action": "cast:summon_bone_golem"
+    },
+    {
+      "priority": 50,
+      "condition": "always",
+      "target": "self",
+      "action": "cast:summon_skeleton"
+    }
+  ]
+}
+```
+
+#### Minion con Habilidades Avanzadas
+```json
+// enemies.json - Minion con múltiples habilidades
+{
+  "type": "BoneGolem",
+  "job": "Guardian",
+  "description": "Powerful undead construct with defensive capabilities",
+  "baseStats": {
+    "hp": 80,
+    "mp": 0,
+    "str": 15,
+    "def": 20,
+    "mag": 5,
+    "spd": 6
+  },
+  "rules": [
+    {
+      "priority": 80,
+      "condition": "summoner.hp < 50%",
+      "target": "summoner",
+      "action": "cast:protect_summoner"
+    },
+    {
+      "priority": 60,
+      "condition": "enemy.isBoss",
+      "target": "bossEnemy",
+      "action": "cast:bone_shield"
+    },
+    {
+      "priority": 10,
+      "condition": "always",
+      "target": "randomEnemy",
+      "action": "attack"
+    }
+  ],
+  "skillIds": ["basic_attack", "bone_shield", "protect_summoner"]
+}
+```
+
+#### Habilidad de Summon con Cooldown
+```json
+// skills.json - Summon con sistema de cooldown
+{
+  "id": "summon_skeleton_horde",
+  "name": "Summon Skeleton Horde",
+  "type": "buff",
+  "effect": {
+    "summon": "Skeleton",
+    "count": 3
+  },
+  "mpCost": 35,
+  "cooldown": 8,
+  "description": "Summons three skeleton minions to overwhelm enemies"
+}
+```
+
+#### Integración con Sistema de Loot
+```json
+// Configuración que recompensa summon exitoso
+{
+  "victoryCondition": "all_enemies_defeated",
+  "lootTable": {
+    "summon_bonus": {
+      "condition": "minions_used > 0",
+      "items": [
+        { "type": "gold", "amount": 50 },
+        { "type": "item", "id": "summon_scroll", "chance": 0.3 }
+      ]
+    }
+  }
 }
 ```
 
