@@ -97,6 +97,10 @@ export function validateAbility(ability: any, context: string = 'ability'): Abil
     throw new ValidationError(`Invalid ability object`, context);
   }
 
+  if (typeof ability.id !== 'string' || !ability.id.trim()) {
+    throw new ValidationError(`ID must be a non-empty string`, context);
+  }
+
   if (typeof ability.name !== 'string' || !ability.name.trim()) {
     throw new ValidationError(`Name must be a non-empty string`, context);
   }
@@ -117,10 +121,14 @@ export function validateAbility(ability: any, context: string = 'ability'): Abil
   }
 
   return {
+    id: ability.id,
     name: ability.name,
     type: ability.type,
     effect: ability.effect,
     mpCost: ability.mpCost,
+    cooldown: ability.cooldown,
+    level: ability.level,
+    combinations: ability.combinations,
     description: ability.description || ''
   };
 }

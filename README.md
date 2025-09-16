@@ -23,7 +23,8 @@ Este proyecto es un sistema de RPG completamente automatizado donde los personaj
 
 - ⚔️ **Combate Automatizado**: Sistema de batalla por turnos completamente automático
 - 🏰 **Exploración de Mazmorras**: Progresión a través de múltiples batallas conectadas
-- 📊 **Análisis Detallado**: Reportes completos de batallas y estadísticas de rendimiento
+- � **Sistema de Summon**: Invocación de minions que participan activamente en combate
+- �📊 **Análisis Detallado**: Reportes completos de batallas y estadísticas de rendimiento
 - 🎨 **Salida Colorizada**: Interfaz de consola con colores para mejor legibilidad
 - ⚙️ **Configuración Flexible**: Opciones personalizables para logging, recuperación y límites
 - 💾 **Guardado de Progreso**: Sistema de guardado y carga de estado de mazmorra
@@ -38,7 +39,10 @@ Este proyecto es un sistema de RPG completamente automatizado donde los personaj
 - **TypeScript**: Lenguaje principal para desarrollo robusto y tipado fuerte
 - **Node.js**: Entorno de ejecución
 - **Jest**: Framework de testing para pruebas unitarias e integración
-- **json-rules-engine**: Motor de reglas para lógica de combate automatizada
+- **EntityFactory**: Sistema de creación de entidades con soporte para minions
+- **BattleSystem**: Motor de combate avanzado con sistema de summon
+- **ActionResolver**: Resolución inteligente de acciones de combate
+- **ConditionEvaluator**: Evaluador de condiciones para reglas dinámicas
 - **Chalk**: Biblioteca para salida colorizada en consola
 - **fs/promises**: API de archivos asíncronos de Node.js
 
@@ -113,36 +117,39 @@ src/
 ├── main.ts                    # Punto de entrada principal con CLI
 ├── loaders/
 │   ├── DataLoader.ts          # Carga y validación de datos JSON
-│   ├── EntityFactory.ts       # Creación de entidades del juego
+│   ├── EntityFactory.ts       # Creación de entidades y minions
 │   ├── index.ts               # Exportaciones de loaders
 │   └── test-loader.ts         # Utilidades de testing para loaders
 ├── models/
 │   └── types.ts               # Definiciones de tipos TypeScript
 ├── systems/
 │   ├── ActionResolver.ts      # Resolución de acciones de combate
-│   ├── BattleSystem.ts        # Sistema principal de batalla
+│   ├── BattleSystem.ts        # Sistema principal de batalla con summon
 │   ├── ConditionEvaluator.ts  # Evaluación de condiciones
 │   ├── DungeonManager.ts      # Gestión de mazmorras
 │   ├── RulesEngine.ts         # Motor de reglas personalizado
 │   ├── TargetSelector.ts      # Selección de objetivos
+│   ├── EnemyAI.ts            # IA para enemigos sin reglas personalizadas
+│   ├── LootSystem.ts         # Sistema de loot y recompensas
 │   ├── index.ts               # Exportaciones de systems
 │   ├── test-battle.ts         # Utilidades de testing para battle
 │   ├── test-dungeon.ts        # Utilidades de testing para dungeon
 │   └── test-rules.ts          # Utilidades de testing para rules
-└── utils/
-    ├── BattleLogger.ts        # Sistema de logging configurable
-    ├── ReportGenerator.ts     # Generación de reportes múltiples formatos
-    ├── index.ts               # Exportaciones de utils
-    ├── test-logging.ts        # Utilidades de testing para logging
-    ├── errors.ts              # Sistema de errores personalizado
-    └── validators.ts          # Utilidades de validación
+├── utils/
+│   ├── BattleLogger.ts        # Sistema de logging configurable
+│   ├── ReportGenerator.ts     # Generación de reportes múltiples formatos
+│   ├── index.ts               # Exportaciones de utils
+│   ├── test-logging.ts        # Utilidades de testing para logging
+│   ├── errors.ts              # Sistema de errores personalizado
+│   └── validators.ts          # Utilidades de validación
+└── index.ts                   # Exportaciones principales
 
 data/
 ├── dungeon_01.json            # Configuración de mazmorra básica
-├── enemies.json               # Definiciones de enemigos
+├── enemies.json               # Definiciones de enemigos y minions
 ├── jobs.json                  # Definiciones de clases/profesiones
 ├── party.json                 # Configuración del grupo
-└── skills.json                # Definiciones de habilidades
+└── skills.json                # Definiciones de habilidades y summon
 
 tests/
 ├── errors.test.ts             # Pruebas unitarias del sistema de errores (32 tests)
@@ -150,30 +157,34 @@ tests/
 ├── jest.config.js             # Configuración de Jest
 └── ...
 
+test-*.ts                      # Scripts de testing específicos
+├── test-summon.ts            # Testing del sistema de summon
+├── test-enhanced-skills.ts   # Testing de habilidades avanzadas
+└── test-manual.ts            # Testing manual del sistema
+
 dist/                          # Archivos compilados TypeScript
 ```
 
 ### Componentes Principales
 
-#### 🛡️ Sistema de Errores (`utils/errors.ts`)
-- **ErrorHandler**: Gestor centralizado de errores
-- **GameError**: Clase base para errores del juego
-- **ValidationError**: Errores de validación de datos
-- **DataLoadError**: Errores de carga de archivos
-- **BattleError**: Errores durante batallas
-- Recuperación automática y logging detallado
+#### 🧙 Sistema de Summon (`systems/BattleSystem.ts`)
+- **executeSummonSkill()**: Método especializado para invocar minions
+- **EntityFactory Integration**: Creación automática de minions desde templates
+- **Turn Order Updates**: Integración automática de minions en el orden de turnos
+- **Independent Combat**: Minions con estadísticas propias y participación activa
+- **Cooldown Management**: Sistema de cooldown para habilidades de summon
 
-#### ✅ Sistema de Validación (`utils/validators.ts`)
-- Validación de esquemas JSON
-- Verificación de integridad de datos
-- Validación de reglas y condiciones
-- Mensajes de error descriptivos
+#### 🤖 Sistema de IA para Enemigos (`systems/EnemyAI.ts`)
+- **Behavior Patterns**: Patrones de comportamiento adaptativos
+- **Rule-based Override**: Enemigos con reglas personalizadas usan ActionResolver
+- **Adaptive AI**: IA que se adapta basado en composición del grupo
+- **Fallback System**: Sistema de respaldo para acciones básicas
 
-#### 🧪 Sistema de Testing
-- **42 pruebas automatizadas** (32 unitarias + 10 integración)
-- Cobertura completa de funcionalidades críticas
-- Tests de manejo de errores y edge cases
-- Configuración Jest optimizada para TypeScript
+#### 💰 Sistema de Loot (`systems/LootSystem.ts`)
+- **Battle Rewards**: Generación automática de recompensas
+- **Gold Calculation**: Sistema de cálculo de oro basado en dificultad
+- **Experience Points**: Asignación de puntos de experiencia
+- **Item Drops**: Sistema de drops de items configurable
 
 ## 📊 Sistema de Reportes
 
@@ -271,27 +282,119 @@ npm run test:coverage
 }
 ```
 
-### Sistema de Reglas
+### Sistema de Summon
 
-El motor de reglas utiliza condiciones lógicas para determinar acciones:
+El sistema de summon permite a los personajes invocar minions que participan activamente en el combate:
 
-#### Condiciones Disponibles
-- `always`: Siempre se cumple
-- `enemy.isBoss`: El enemigo es un jefe
-- `ally.hp < 30%`: Aliado con vida baja
-- `self.mp > 50%`: Suficiente mana
-- `enemy.count > 1`: Múltiples enemigos
+#### Habilidades de Summon (`skills.json`)
+```json
+{
+  "id": "summon_skeleton",
+  "name": "Summon Skeleton",
+  "type": "buff",
+  "effect": {
+    "summon": "Skeleton",
+    "count": 1
+  },
+  "mpCost": 20,
+  "cooldown": 5,
+  "description": "Summons a skeleton minion to fight"
+}
+```
 
-#### Objetivos Disponibles
-- `weakestEnemy`: Enemigo más débil
-- `strongestEnemy`: Enemigo más fuerte
-- `lowestHpAlly`: Aliado con menos vida
-- `self`: El propio personaje
+#### Minions Definidos (`enemies.json`)
+```json
+{
+  "type": "Skeleton",
+  "job": "Warrior",
+  "description": "Undead minion summoned by necromancers",
+  "baseStats": {
+    "hp": 35,
+    "mp": 0,
+    "str": 10,
+    "def": 8,
+    "mag": 2,
+    "spd": 12
+  },
+  "rules": [
+    {
+      "priority": 10,
+      "condition": "always",
+      "target": "randomEnemy",
+      "action": "attack"
+    }
+  ],
+  "skillIds": ["basic_attack"]
+}
+```
 
-#### Acciones Disponibles
-- `attack`: Ataque básico
-- `ability`: Usar habilidad específica
-- `skip`: Pasar turno
+#### Reglas de Summon
+```json
+{
+  "priority": 70,
+  "condition": "self.mp > 50%",
+  "target": "self",
+  "action": "cast:summon_skeleton"
+}
+```
+
+### Características del Sistema de Summon
+- ✅ **Minions Independientes**: Cada minion tiene estadísticas propias
+- ✅ **Participación Activa**: Minions atacan y pueden ser atacados
+- ✅ **Turn Order Integration**: Minions se integran automáticamente al orden de turnos
+- ✅ **Cooldown System**: Habilidades de summon tienen cooldown
+- ✅ **Multiple Summons**: Posibilidad de invocar múltiples minions
+- ✅ **Strategic AI**: Minions siguen reglas de comportamiento específicas
+
+## 🎮 Uso Avanzado
+
+### Sistema de Summon
+
+#### Ejemplo de Batalla con Summon
+
+```bash
+# Ejecutar test específico del sistema de summon
+npx ts-node test-summon.ts
+```
+
+#### Resultado Esperado
+```
+=== Testing Summon Skill Functionality ===
+
+Created Necromancer: Dark Summoner
+Abilities: Basic Attack, Dark Bolt, Curse, Hex, Summon Skeleton, Poison Cloud
+
+Initialized battle
+Turn 2: Dark Summoner summons Skeleton 1 to join the battle!
+🦴 SKELETON ACTION: Skeleton 1 is fighting!
+
+=== Final Battle State ===
+Allies: Hero
+Enemies: Dark Summoner, Skeleton 1
+Total Skeletons: 1
+```
+
+#### Características del Sistema de Summon
+- **Invocación Automática**: Los necromancers invocan skeletons cuando tienen suficiente MP
+- **Minions Activos**: Los skeletons participan en el combate con ataques propios
+- **Turnos Independientes**: Cada minion tiene su propio turno en el orden de batalla
+- **Estadísticas Propias**: HP: 35, STR: 10, DEF: 8, SPD: 12
+- **Cooldown System**: Las habilidades de summon tienen cooldown de 5 turnos
+
+### Testing del Sistema
+
+#### Scripts de Testing Disponibles
+
+```bash
+# Test específico del sistema de summon
+npx ts-node test-summon.ts
+
+# Test de habilidades avanzadas
+npx ts-node test-enhanced-skills.ts
+
+# Test manual del sistema completo
+npx ts-node test-manual.ts
+```
 
 ## 🚀 Desarrollo
 
@@ -337,10 +440,11 @@ npm run docs         # Generar documentación (si configurado)
 - 📊 **Eficiencia**: Procesamiento optimizado de reglas y combates
 
 ### Estadísticas del Sistema
-- 🔧 **Líneas de Código**: ~2000+ líneas TypeScript
-- 📁 **Archivos**: 25+ archivos fuente
-- 🧪 **Tests**: 42 pruebas automatizadas
+- 🔧 **Líneas de Código**: ~2500+ líneas TypeScript
+- 📁 **Archivos**: 30+ archivos fuente
+- 🧪 **Tests**: 42 pruebas automatizadas + tests específicos de summon
 - 📚 **Documentación**: README completo + documentación inline
+- 👻 **Sistema de Summon**: Completamente funcional con minions activos
 
 ## 🎯 Roadmap Completado
 
@@ -355,6 +459,9 @@ npm run docs         # Generar documentación (si configurado)
 - [x] Suite completa de pruebas (42 tests)
 - [x] Documentación completa
 - [x] CLI con opciones avanzadas
+- [x] **Sistema de Summon con minions activos**
+- [x] **IA adaptativa para enemigos**
+- [x] **Sistema de loot y recompensas**
 
 ### 🔮 Funcionalidades Futuras (Opcionales)
 - [ ] Sistema de items y equipamiento
@@ -399,3 +506,5 @@ Este proyecto está bajo la **Licencia MIT** - ver el archivo [LICENSE](LICENSE)
 **⭐ Si te gusta este proyecto, considera darle una estrella en GitHub!**
 
 *Desarrollado con ❤️ usando TypeScript*
+
+*Última actualización: Septiembre 2025*

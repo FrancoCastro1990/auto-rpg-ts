@@ -56,6 +56,9 @@ export class EntityFactory {
     const baseStats = this.calculateStatsForLevel(job.baseStats, member.level);
     const abilities = this.getSkillsForIds(job.skillIds);
 
+    // Validate that all rules reference skills available to this job
+    this.validateCharacterRules(member, job, abilities);
+
     return {
       id: `char_${member.name.toLowerCase()}`,
       name: member.name,
@@ -67,6 +70,7 @@ export class EntityFactory {
       abilities,
       rules: member.rules,
       buffs: [],
+      skillCooldowns: [], // Initialize empty cooldown array
       isAlive: true,
       isEnemy: false
     };
@@ -94,6 +98,7 @@ export class EntityFactory {
       abilities,
       rules: enemyTemplate.rules,
       buffs: [],
+      skillCooldowns: [], // Initialize empty cooldown array
       isAlive: true,
       isEnemy: true,
       isBoss: enemyTemplate.isBoss || false
@@ -147,5 +152,32 @@ export class EntityFactory {
     }
 
     return { valid, invalid };
+  }
+
+  private validateCharacterRules(member: PartyMember, job: Job, abilities: Ability[]): void {
+    const availableSkillIds = new Set(job.skillIds);
+    const availableSkillNames = new Set(abilities.map(ability =>
+      ability.name.toLowerCase().replace(/\s+/g, '_')
+    ));
+
+    for (const rule of member.rules) {
+      if (rule.action.startsWith('cast:')) {
+        const skillId = rule.action.substring(5); // Remove 'cast:' prefix
+
+        if (!availableSkillIds.has(skillId)) {
+          throw new Error(
+            `Character ${member.name} (job: ${member.job}) has rule that references skill "${skillId}" ` +
+            `which is not available for their job. Available skills: ${Array.from(availableSkillIds).join(', ')}`
+          );
+        }
+
+        if (!availableSkillNames.has(skillId)) {
+          throw new Error(
+            `Character ${member.name} has rule that references skill "${skillId}" ` +
+            `which does not exist in the skills database`
+          );
+        }
+      }
+    }
   }
 }

@@ -2,6 +2,8 @@ import { BattleParticipant, Character, EnemyInstance, Action, BattleResult, Abil
 import { ActionResolver, ResolvedAction } from './ActionResolver';
 import { BattleLogger } from '../utils/BattleLogger';
 import { BattleError, ValidationError, ErrorHandler } from '../utils/errors';
+import { EnemyAI, EnemyDecision } from './EnemyAI';
+import { LootSystem } from './LootSystem';
 
 export interface TurnOrder {
   participant: BattleParticipant;
@@ -33,12 +35,18 @@ export interface BattleState {
 
 export class BattleSystem {
   private actionResolver: ActionResolver;
+  private enemyAI: EnemyAI;
+  private lootSystem: LootSystem;
   private battleState: BattleState | null = null;
   private logger?: BattleLogger | undefined;
+  private entityFactory?: any; // Para crear minions
 
-  constructor(logger?: BattleLogger | undefined) {
+  constructor(logger?: BattleLogger | undefined, entityFactory?: any) {
     this.actionResolver = new ActionResolver();
+    this.enemyAI = new EnemyAI();
+    this.lootSystem = new LootSystem();
     this.logger = logger;
+    this.entityFactory = entityFactory;
   }
 
   initializeBattle(allies: Character[], enemies: EnemyInstance[]): BattleState {
@@ -66,6 +74,19 @@ export class BattleSystem {
     if (livingEnemies.length === 0) {
       throw new BattleError('Cannot start battle - all enemies are defeated');
     }
+
+    // Ensure all participants have skillCooldowns arrays initialized
+    livingAllies.forEach(ally => {
+      if (!ally.skillCooldowns) {
+        ally.skillCooldowns = [];
+      }
+    });
+
+    livingEnemies.forEach(enemy => {
+      if (!enemy.skillCooldowns) {
+        enemy.skillCooldowns = [];
+      }
+    });
 
     const allParticipants = [...livingAllies, ...livingEnemies];
     const turnOrder = this.calculateTurnOrder(allParticipants);
@@ -145,6 +166,7 @@ export class BattleSystem {
     for (const participant of allParticipants) {
       if (!participant.isAlive) continue;
 
+      // Process buff effects
       participant.buffs = participant.buffs.filter(buff => {
         buff.remainingTurns--;
 
@@ -155,6 +177,9 @@ export class BattleSystem {
 
         return true;
       });
+
+      // Process skill cooldowns
+      this.reduceSkillCooldowns(participant);
     }
   }
 
@@ -173,6 +198,59 @@ export class BattleSystem {
         }
       });
     }
+  }
+
+  private reduceSkillCooldowns(participant: BattleParticipant): void {
+    participant.skillCooldowns = participant.skillCooldowns.filter(cooldown => {
+      cooldown.remainingTurns--;
+
+      if (cooldown.remainingTurns <= 0) {
+        return false; // Remove expired cooldowns
+      }
+
+      return true;
+    });
+  }
+
+  private isSkillOnCooldown(participant: BattleParticipant, skillName: string): boolean {
+    return participant.skillCooldowns.some(cooldown =>
+      cooldown.skillName === skillName && cooldown.remainingTurns > 0
+    );
+  }
+
+  private applySkillCooldown(participant: BattleParticipant, skill: Ability): void {
+    if (skill.cooldown && skill.cooldown > 0) {
+      const existingCooldown = participant.skillCooldowns.find(cooldown =>
+        cooldown.skillName === skill.name
+      );
+
+      if (existingCooldown) {
+        existingCooldown.remainingTurns = skill.cooldown;
+      } else {
+        participant.skillCooldowns.push({
+          skillName: skill.name,
+          remainingTurns: skill.cooldown
+        });
+      }
+    }
+  }
+
+  private canUseSkillCombination(participant: BattleParticipant, skill: Ability): boolean {
+    if (!skill.combinations || skill.combinations.length === 0) {
+      return true; // No combinations required
+    }
+
+    // Check if participant has all required combination skills
+    return skill.combinations.every(combinationSkillId => {
+      return participant.abilities.some(ability =>
+        ability.name.toLowerCase().replace(/\s+/g, '_') === combinationSkillId
+      );
+    });
+  }
+
+  private getSkillLevel(participant: BattleParticipant, skill: Ability): number {
+    // For now, return the skill's level or 1 if not specified
+    return skill.level || 1;
   }
 
   executeTurn(): TurnResult | null {
@@ -195,12 +273,28 @@ export class BattleSystem {
     const actorAllies = actor.isEnemy ? enemies : allies;
     const actorEnemies = actor.isEnemy ? allies : enemies;
 
-    const action = this.actionResolver.resolveAction(
-      actor,
-      actorAllies,
-      actorEnemies,
-      this.battleState.turnNumber
-    );
+    let action: ResolvedAction | null = null;
+
+    // Use EnemyAI for enemy actors that don't have custom rules
+    if (actor.isEnemy && (!actor.rules || actor.rules.length === 0)) {
+      const enemyDecision = this.enemyAI.makeDecision(
+        actor as EnemyInstance,
+        actorAllies,
+        actorEnemies,
+        this.battleState.turnNumber
+      );
+
+      // Convert EnemyDecision to ResolvedAction format
+      action = this.convertEnemyDecisionToResolvedAction(enemyDecision, actor);
+    } else {
+      // Use traditional rule-based system for allies and enemies with custom rules
+      action = this.actionResolver.resolveAction(
+        actor,
+        actorAllies,
+        actorEnemies,
+        this.battleState.turnNumber
+      );
+    }
 
     if (!action) {
       const skipResult: TurnResult = {
@@ -341,13 +435,48 @@ export class BattleSystem {
       throw new BattleError('Battle state not initialized');
     }
 
+    // Check if skill is on cooldown
+    if (this.isSkillOnCooldown(actor, skill.name)) {
+      const cooldown = actor.skillCooldowns.find(c => c.skillName === skill.name);
+      return {
+        actor,
+        target,
+        action,
+        success: false,
+        message: `${actor.name} cannot use ${skill.name} - on cooldown for ${cooldown?.remainingTurns} more turns`,
+        turnNumber: this.battleState.turnNumber
+      };
+    }
+
+    // Check if skill combinations are available
+    if (!this.canUseSkillCombination(actor, skill)) {
+      return {
+        actor,
+        target,
+        action,
+        success: false,
+        message: `${actor.name} cannot use ${skill.name} - missing required combination skills`,
+        turnNumber: this.battleState.turnNumber
+      };
+    }
+
     // Validar que el actor tenga suficiente MP
     if (actor.currentStats.mp < skill.mpCost) {
-      throw new BattleError(`${actor.name} does not have enough MP to cast ${skill.name}`);
+      return {
+        actor,
+        target,
+        action,
+        success: false,
+        message: `${actor.name} not enough MP to cast ${skill.name} (need ${skill.mpCost}, have ${actor.currentStats.mp})`,
+        turnNumber: this.battleState.turnNumber
+      };
     }
 
     // Consumir MP
     actor.currentStats.mp -= skill.mpCost;
+
+    // Apply cooldown
+    this.applySkillCooldown(actor, skill);
 
     switch (skill.type) {
       case 'attack':
@@ -415,6 +544,11 @@ export class BattleSystem {
   }
 
   private executeBuffSkill(actor: BattleParticipant, target: BattleParticipant, skill: Ability, action: ResolvedAction): TurnResult {
+    // Handle summon effects
+    if ((skill.effect as any).summon && this.entityFactory) {
+      return this.executeSummonSkill(actor, skill, action);
+    }
+
     if (skill.effect.statModifier && skill.effect.duration) {
       const buff = {
         name: skill.name,
@@ -441,6 +575,62 @@ export class BattleSystem {
       success: true,
       message: `${actor.name} casts ${skill.name} on ${target.name} (buff applied for ${skill.effect.duration} turns)`,
       turnNumber: this.battleState!.turnNumber
+    };
+  }
+
+  private executeSummonSkill(actor: BattleParticipant, skill: Ability, action: ResolvedAction): TurnResult {
+    if (!this.battleState || !this.entityFactory) {
+      return {
+        actor,
+        action,
+        success: false,
+        message: `${actor.name} cannot summon - battle state or entity factory not available`,
+        turnNumber: this.battleState?.turnNumber || 0
+      };
+    }
+
+    const summonType = (skill.effect as any).summon;
+    const summonCount = (skill.effect as any).count || 1;
+
+    if (!summonType) {
+      return {
+        actor,
+        action,
+        success: false,
+        message: `${actor.name} cannot summon - invalid summon type`,
+        turnNumber: this.battleState.turnNumber
+      };
+    }
+
+    const summonedMinions: any[] = [];
+
+    for (let i = 0; i < summonCount; i++) {
+      try {
+        const minion = this.entityFactory.createEnemy(summonType, `${summonType} ${i + 1}`, 1);
+        summonedMinions.push(minion);
+
+        // Add minion to the appropriate side (same as summoner)
+        if (actor.isEnemy) {
+          this.battleState.enemies.push(minion);
+        } else {
+          this.battleState.allies.push(minion);
+        }
+      } catch (error) {
+        console.warn(`Failed to summon ${summonType}:`, error);
+      }
+    }
+
+    // Refresh turn order to include new minions
+    this.refreshTurnOrder();
+
+    const minionNames = summonedMinions.map(m => m.name).join(', ');
+
+    return {
+      actor,
+      action,
+      success: true,
+      message: `${actor.name} summons ${minionNames} to join the battle!`,
+      turnNumber: this.battleState.turnNumber
     };
   }
 
@@ -496,12 +686,20 @@ export class BattleSystem {
   getBattleResult(): BattleResult | null {
     if (!this.battleState || !this.battleState.isComplete) return null;
 
+    const defeatedEnemies = this.battleState.enemies.filter(e => !e.isAlive);
+    const battleLoot = this.lootSystem.generateBattleLoot(defeatedEnemies);
+
     return {
       victory: this.battleState.victor === 'allies',
       reason: this.battleState.victor === 'allies' ? 'All enemies defeated' : 'All allies defeated',
       turns: this.battleState.turnNumber,
       survivingAllies: this.battleState.allies.filter(a => a.isAlive),
-      defeatedEnemies: this.battleState.enemies.filter(e => !e.isAlive)
+      defeatedEnemies: defeatedEnemies,
+      loot: {
+        totalGold: battleLoot.totalGold,
+        totalExperience: battleLoot.totalExperience,
+        items: battleLoot.allItems
+      }
     };
   }
 
@@ -521,7 +719,7 @@ export class BattleSystem {
     return this.battleState?.turnNumber || 0;
   }
 
-  getParticipantStatus(): Array<{ participant: BattleParticipant; hpPercent: number; mpPercent: number; buffs: number }> {
+  getParticipantStatus(): Array<{ participant: BattleParticipant; hpPercent: number; mpPercent: number; buffs: number; activeCooldowns: number }> {
     if (!this.battleState) return [];
 
     const allParticipants = [...this.battleState.allies, ...this.battleState.enemies];
@@ -530,7 +728,8 @@ export class BattleSystem {
       participant,
       hpPercent: Math.round((participant.currentStats.hp / participant.maxStats.hp) * 100),
       mpPercent: Math.round((participant.currentStats.mp / participant.maxStats.mp) * 100),
-      buffs: participant.buffs.length
+      buffs: participant.buffs.length,
+      activeCooldowns: participant.skillCooldowns.filter(cooldown => cooldown.remainingTurns > 0).length
     }));
   }
 
@@ -565,7 +764,12 @@ export class BattleSystem {
         reason: `Battle simulation failed: ${ErrorHandler.getUserFriendlyMessage(err)}`,
         turns: this.battleState.turnNumber,
         survivingAllies: this.battleState.allies.filter(a => a.isAlive),
-        defeatedEnemies: this.battleState.enemies.filter(e => !e.isAlive)
+        defeatedEnemies: this.battleState.enemies.filter(e => !e.isAlive),
+        loot: {
+          totalGold: 0,
+          totalExperience: 0,
+          items: []
+        }
       };
     }
 
@@ -578,10 +782,40 @@ export class BattleSystem {
         reason: `Battle timed out after ${maxTurns} turns`,
         turns: this.battleState.turnNumber,
         survivingAllies: this.battleState.allies.filter(a => a.isAlive),
-        defeatedEnemies: this.battleState.enemies.filter(e => !e.isAlive)
+        defeatedEnemies: this.battleState.enemies.filter(e => !e.isAlive),
+        loot: {
+          totalGold: 0,
+          totalExperience: 0,
+          items: []
+        }
       };
     }
 
     return this.getBattleResult()!;
+  }
+
+  private convertEnemyDecisionToResolvedAction(
+    decision: EnemyDecision,
+    actor: BattleParticipant
+  ): ResolvedAction {
+    const rule = {
+      priority: decision.priority,
+      condition: 'enemy_ai',
+      target: decision.targetId ? 'specific' : 'randomEnemy',
+      action: decision.action === 'cast' && decision.skillId
+        ? `cast:${decision.skillId}`
+        : 'attack'
+    };
+
+    return {
+      rule,
+      actionType: decision.action === 'cast' ? 'cast' : 'attack',
+      skillId: decision.skillId,
+      targetId: decision.targetId,
+      targetName: decision.targetName,
+      priority: decision.priority,
+      success: true,
+      message: decision.reasoning
+    };
   }
 }

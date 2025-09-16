@@ -20,6 +20,7 @@ function createMockParticipant(
     abilities: [],
     rules: [],
     buffs: [],
+    skillCooldowns: [],
     isAlive: hp > 0,
     isEnemy,
     isBoss
@@ -77,8 +78,8 @@ async function testActionResolver() {
   ];
 
   warrior.abilities = [
-    { name: 'Power Strike', type: 'attack', effect: { damage: 25 }, mpCost: 5 },
-    { name: 'Taunt', type: 'buff', effect: { statModifier: { def: 5 }, duration: 3 }, mpCost: 4 }
+    { id: 'power_strike', name: 'Power Strike', type: 'attack', effect: { damage: 25 }, mpCost: 5 },
+    { id: 'taunt', name: 'Taunt', type: 'buff', effect: { statModifier: { def: 5 }, duration: 3 }, mpCost: 4 }
   ];
 
   const ally = createMockParticipant('mage', 'Luna', 20, 80, 40, 50);

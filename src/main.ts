@@ -83,8 +83,16 @@ class AutoRPGGame {
     try {
       console.log(chalk.yellow('🚀 Starting Adventure!\n'));
 
-      // Load default party
-      const { party } = await this.dataLoader.validateDataIntegrity();
+      // Load party from specified file or default
+      let party: any[];
+      if (this.options.partyFile && this.options.partyFile !== 'party.json') {
+        // Load custom party file
+        party = await this.dataLoader.loadPartyFile(this.options.partyFile);
+      } else {
+        // Load default party
+        const data = await this.dataLoader.validateDataIntegrity();
+        party = data.party;
+      }
 
       if (!party || party.length === 0) {
         throw new DataLoadError('No party members found in data files');
@@ -182,8 +190,14 @@ class AutoRPGGame {
 
       let party = customParty;
       if (!party) {
-        const data = await this.dataLoader.validateDataIntegrity();
-        party = data.party;
+        if (this.options.partyFile && this.options.partyFile !== 'party.json') {
+          // Load custom party file
+          party = await this.dataLoader.loadPartyFile(this.options.partyFile);
+        } else {
+          // Load default party
+          const data = await this.dataLoader.validateDataIntegrity();
+          party = data.party;
+        }
       }
 
       if (!party || party.length === 0) {

@@ -1,0 +1,228 @@
+[
+  {
+    "name": "Thorne",
+    "job": "Warrior",
+    "level": 1,
+    "rules": [
+      {
+        "priority": 100,
+        "condition": "enemy.isBoss",
+        "target": "bossEnemy",
+        "action": "cast:earthquake"
+      },
+      {
+        "priority": 95,
+        "condition": "ally.hp < 30%",
+        "target": "self",
+        "action": "cast:taunt"
+      },
+      {
+        "priority": 85,
+        "condition": "enemy.count > 2",
+        "target": "self",
+        "action": "cast:war_cry"
+      },
+      {
+        "priority": 75,
+        "condition": "self.mp > 70%",
+        "target": "strongestEnemy",
+        "action": "cast:berserker_rage"
+      },
+      {
+        "priority": 65,
+        "condition": "self.mp > 50%",
+        "target": "strongestEnemy",
+        "action": "cast:power_strike"
+      },
+      {
+        "priority": 50,
+        "condition": "self.mp > 30%",
+        "target": "strongestEnemy",
+        "action": "cast:shield_bash"
+      },
+      {
+        "priority": 30,
+        "condition": "enemy.count > 1",
+        "target": "self",
+        "action": "cast:war_cry"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "weakestEnemy",
+        "action": "attack"
+      }
+    ]
+  },
+  {
+    "name": "Sylas",
+    "job": "BlackMage",
+    "level": 1,
+    "rules": [
+      {
+        "priority": 100,
+        "condition": "enemy.isBoss",
+        "target": "bossEnemy",
+        "action": "cast:soul_crusher"
+      },
+      {
+        "priority": 95,
+        "condition": "enemy.count > 2",
+        "target": "strongestEnemy",
+        "action": "cast:chain_lightning"
+      },
+      {
+        "priority": 85,
+        "condition": "enemy.count > 1",
+        "target": "strongestEnemy",
+        "action": "cast:chain_lightning"
+      },
+      {
+        "priority": 75,
+        "condition": "self.mp > 70%",
+        "target": "strongestEnemy",
+        "action": "cast:meteor"
+      },
+      {
+        "priority": 65,
+        "condition": "self.mp > 50%",
+        "target": "strongestEnemy",
+        "action": "cast:shadow_strike"
+      },
+      {
+        "priority": 50,
+        "condition": "self.mp > 30%",
+        "target": "strongestEnemy",
+        "action": "cast:flame_burst"
+      },
+      {
+        "priority": 30,
+        "condition": "self.mp > 20%",
+        "target": "randomEnemy",
+        "action": "cast:frost_nova"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "weakestEnemy",
+        "action": "attack"
+      }
+    ]
+  },
+  {
+    "name": "Kira",
+    "job": "Rogue",
+    "level": 1,
+    "rules": [
+      {
+        "priority": 100,
+        "condition": "enemy.isBoss",
+        "target": "bossEnemy",
+        "action": "cast:backstab"
+      },
+      {
+        "priority": 95,
+        "condition": "ally.hp < 40%",
+        "target": "lowestHpAlly",
+        "action": "cast:shadow_step"
+      },
+      {
+        "priority": 85,
+        "condition": "enemy.count > 2",
+        "target": "lowestHpAlly",
+        "action": "cast:shadow_step"
+      },
+      {
+        "priority": 75,
+        "condition": "self.mp > 60%",
+        "target": "strongestEnemy",
+        "action": "cast:venom_strike"
+      },
+      {
+        "priority": 60,
+        "condition": "self.mp > 40%",
+        "target": "strongestEnemy",
+        "action": "cast:backstab"
+      },
+      {
+        "priority": 45,
+        "condition": "enemy.count > 1",
+        "target": "randomEnemy",
+        "action": "cast:smoke_bomb"
+      },
+      {
+        "priority": 30,
+        "condition": "self.mp > 20%",
+        "target": "strongestEnemy",
+        "action": "cast:poison_blade"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "weakestEnemy",
+        "action": "attack"
+      }
+    ]
+  },
+  {
+    "name": "Mira",
+    "job": "BlackMage",
+    "level": 2,
+    "rules": [
+      {
+        "priority": 100,
+        "condition": "enemy.isBoss",
+        "target": "bossEnemy",
+        "action": "cast:life_drain"
+      },
+      {
+        "priority": 95,
+        "condition": "ally.hp < 25%",
+        "target": "lowestHpAlly",
+        "action": "cast:shadow_regeneration"
+      },
+      {
+        "priority": 85,
+        "condition": "self.hp < 35%",
+        "target": "self",
+        "action": "cast:shadow_regeneration"
+      },
+      {
+        "priority": 75,
+        "condition": "self.mp > 70%",
+        "target": "strongestEnemy",
+        "action": "cast:ice_blast"
+      },
+      {
+        "priority": 65,
+        "condition": "enemy.count > 2",
+        "target": "randomEnemy",
+        "action": "cast:terror"
+      },
+      {
+        "priority": 55,
+        "condition": "self.mp > 50%",
+        "target": "strongestEnemy",
+        "action": "cast:hex"
+      },
+      {
+        "priority": 35,
+        "condition": "self.mp > 30%",
+        "target": "strongestEnemy",
+        "action": "cast:frost_nova"
+      },
+      {
+        "priority": 15,
+        "condition": "enemy.count > 1",
+        "target": "randomEnemy",
+        "action": "cast:terror"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "weakestEnemy",
+        "action": "attack"
+      }
+    ]
+  }
+]

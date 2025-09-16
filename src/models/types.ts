@@ -8,6 +8,7 @@ export interface Stats {
 }
 
 export interface Ability {
+  id: string;
   name: string;
   type: 'attack' | 'heal' | 'buff' | 'debuff';
   effect: {
@@ -17,6 +18,9 @@ export interface Ability {
     duration?: number;
   };
   mpCost: number;
+  cooldown?: number; // Turns until skill can be used again
+  level?: number; // Skill level for scaling
+  combinations?: string[]; // Skill IDs that can combine with this skill
   description?: string;
 }
 
@@ -35,6 +39,11 @@ export interface Buff {
   remainingTurns: number;
 }
 
+export interface SkillCooldown {
+  skillName: string;
+  remainingTurns: number;
+}
+
 export interface Character {
   id: string;
   name: string;
@@ -46,6 +55,7 @@ export interface Character {
   abilities: Ability[];
   rules: Rule[];
   buffs: Buff[];
+  skillCooldowns: SkillCooldown[]; // Track cooldowns for skills
   isAlive: boolean;
   isEnemy: boolean;
 }
@@ -78,6 +88,7 @@ export interface EnemyInstance {
   abilities: Ability[];
   rules: Rule[];
   buffs: Buff[];
+  skillCooldowns: SkillCooldown[]; // Track cooldowns for skills
   isAlive: boolean;
   isEnemy: boolean;
   isBoss: boolean;
@@ -91,6 +102,7 @@ export interface BattleParticipant {
   abilities: Ability[];
   rules: Rule[];
   buffs: Buff[];
+  skillCooldowns: SkillCooldown[]; // Track cooldowns for skills
   isAlive: boolean;
   isEnemy: boolean;
   isBoss?: boolean;
@@ -115,6 +127,15 @@ export interface BattleResult {
   turns: number;
   survivingAllies: Character[];
   defeatedEnemies: EnemyInstance[];
+  loot?: {
+    totalGold: number;
+    totalExperience: number;
+    items: Array<{
+      item: LootItem;
+      quantity: number;
+      source: string;
+    }>;
+  };
 }
 
 export interface Battle {
@@ -259,4 +280,47 @@ export interface CombatFinalState {
   reason: string;
   survivors: string[]; // Participant IDs
   defeated: string[]; // Participant IDs
+}
+
+// Loot System Interfaces
+export interface LootItem {
+  id: string;
+  name: string;
+  type: 'weapon' | 'armor' | 'consumable' | 'material' | 'gold';
+  rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
+  value: number; // Gold value or effect potency
+  description?: string;
+  effect?: {
+    statModifier?: Partial<Stats>;
+    heal?: number;
+    mpRestore?: number;
+  };
+}
+
+export interface LootDrop {
+  itemId: string;
+  dropRate: number; // 0.0 to 1.0 (percentage chance)
+  minQuantity?: number;
+  maxQuantity?: number;
+}
+
+export interface EnemyLootTable {
+  enemyType: string;
+  guaranteedDrops: LootDrop[];
+  randomDrops: LootDrop[];
+  goldRange: {
+    min: number;
+    max: number;
+  };
+  experienceReward: number;
+}
+
+export interface BattleLoot {
+  gold: number;
+  experience: number;
+  items: Array<{
+    item: LootItem;
+    quantity: number;
+  }>;
+  source: string; // Enemy name that dropped the loot
 }

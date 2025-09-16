@@ -58,28 +58,54 @@ export class ActionResolver {
       };
     }
 
-    // Validate MP cost for cast actions
+    // Validate MP cost and cooldown for cast actions
     if (actionParsed.type === 'cast' && actionParsed.skillId) {
       const skill = actor.abilities.find(ability =>
         ability.name.toLowerCase().replace(/\s+/g, '_') === actionParsed.skillId
       );
 
-      if (skill && actor.currentStats.mp < skill.mpCost) {
-        // Fall back to basic attack if not enough MP
-        return {
-          rule: {
+      if (skill) {
+        // Check cooldown
+        const isOnCooldown = actor.skillCooldowns.some(cooldown =>
+          cooldown.skillName === skill.name && cooldown.remainingTurns > 0
+        );
+
+        if (isOnCooldown) {
+          // Fall back to basic attack if skill is on cooldown
+          return {
+            rule: {
+              priority: selectedRule.priority,
+              condition: 'fallback_cooldown',
+              target: selectedRule.target,
+              action: 'attack'
+            },
+            actionType: 'attack',
+            targetId: target.id,
+            targetName: target.name,
             priority: selectedRule.priority,
-            condition: 'fallback_mp',
-            target: selectedRule.target,
-            action: 'attack'
-          },
-          actionType: 'attack',
-          targetId: target.id,
-          targetName: target.name,
-          priority: selectedRule.priority,
-          success: true,
-          message: `${actor.name} attacks ${target.name} (not enough MP for ${skill.name})`
-        };
+            success: true,
+            message: `${actor.name} attacks ${target.name} (${skill.name} is on cooldown)`
+          };
+        }
+
+        // Check MP cost
+        if (actor.currentStats.mp < skill.mpCost) {
+          // Fall back to basic attack if not enough MP
+          return {
+            rule: {
+              priority: selectedRule.priority,
+              condition: 'fallback_mp',
+              target: selectedRule.target,
+              action: 'attack'
+            },
+            actionType: 'attack',
+            targetId: target.id,
+            targetName: target.name,
+            priority: selectedRule.priority,
+            success: true,
+            message: `${actor.name} attacks ${target.name} (not enough MP for ${skill.name})`
+          };
+        }
       }
     }
 
@@ -153,7 +179,8 @@ export class ActionResolver {
       );
 
       if (!hasSkill) {
-        errors.push(`Actor ${actor.name} does not have skill: ${action.skillId}`);
+        const availableSkills = actor.abilities.map(a => a.name.toLowerCase().replace(/\s+/g, '_')).join(', ');
+        errors.push(`Actor ${actor.name} does not have skill: ${action.skillId}. Available skills: ${availableSkills}`);
       }
 
       if (!availableSkills.includes(action.skillId)) {
@@ -164,8 +191,20 @@ export class ActionResolver {
         ability.name.toLowerCase().replace(/\s+/g, '_') === action.skillId
       );
 
-      if (skill && actor.currentStats.mp < skill.mpCost) {
-        errors.push(`Not enough MP to cast ${action.skillId} (need ${skill.mpCost}, have ${actor.currentStats.mp})`);
+      if (skill) {
+        // Check cooldown
+        const isOnCooldown = actor.skillCooldowns.some(cooldown =>
+          cooldown.skillName === skill.name && cooldown.remainingTurns > 0
+        );
+
+        if (isOnCooldown) {
+          errors.push(`Skill ${action.skillId} is on cooldown`);
+        }
+
+        // Check MP cost
+        if (actor.currentStats.mp < skill.mpCost) {
+          errors.push(`Not enough MP to cast ${action.skillId} (need ${skill.mpCost}, have ${actor.currentStats.mp})`);
+        }
       }
     }
 

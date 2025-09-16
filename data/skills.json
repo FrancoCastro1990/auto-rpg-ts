@@ -132,6 +132,9 @@
       "damage": 50
     },
     "mpCost": 25,
+    "cooldown": 4,
+    "level": 3,
+    "combinations": ["fireball", "earthquake"],
     "description": "Ultimate magical attack"
   },
   {
@@ -418,6 +421,9 @@
       "duration": 2
     },
     "mpCost": 18,
+    "cooldown": 5,
+    "level": 2,
+    "combinations": ["blessing", "barrier"],
     "description": "Holy protection against all damage"
   },
   {
@@ -428,6 +434,320 @@
       "damage": 40
     },
     "mpCost": 18,
+    "cooldown": 3,
+    "level": 2,
     "description": "Lightning that jumps between multiple targets"
+  },
+  {
+    "id": "flame_burst",
+    "name": "Flame Burst",
+    "type": "attack",
+    "effect": {
+      "damage": 26
+    },
+    "mpCost": 11,
+    "description": "Explosive burst of flames that damages all nearby enemies"
+  },
+  {
+    "id": "frost_nova",
+    "name": "Frost Nova",
+    "type": "attack",
+    "effect": {
+      "damage": 22,
+      "statModifier": {
+        "spd": -4
+      },
+      "duration": 2
+    },
+    "mpCost": 10,
+    "description": "Freezing blast that damages and slows enemies"
+  },
+  {
+    "id": "shadow_blade",
+    "name": "Shadow Blade",
+    "type": "attack",
+    "effect": {
+      "damage": 30
+    },
+    "mpCost": 12,
+    "description": "Stealthy blade attack with high critical chance"
+  },
+  {
+    "id": "battle_cry",
+    "name": "Battle Cry",
+    "type": "buff",
+    "effect": {
+      "statModifier": {
+        "str": 8,
+        "def": 4
+      },
+      "duration": 3
+    },
+    "mpCost": 8,
+    "description": "Increases attack and defense for the party"
+  },
+  {
+    "id": "summon_skeleton",
+    "name": "Summon Skeleton",
+    "type": "buff",
+    "effect": {
+      "summon": "Skeleton",
+      "count": 1
+    },
+    "mpCost": 20,
+    "cooldown": 5,
+    "description": "Summons a skeleton minion to fight"
+  },
+  {
+    "id": "dragon_breath",
+    "name": "Dragon Breath",
+    "type": "attack",
+    "effect": {
+      "damage": 45,
+      "statModifier": {
+        "def": -5
+      },
+      "duration": 2
+    },
+    "mpCost": 18,
+    "description": "Powerful breath attack that reduces defense"
+  },
+  {
+    "id": "teleport",
+    "name": "Teleport",
+    "type": "buff",
+    "effect": {
+      "statModifier": {
+        "spd": 15
+      },
+      "duration": 1,
+      "teleport": true
+    },
+    "mpCost": 12,
+    "description": "Instantly moves to a new position, gaining speed boost"
+  },
+  {
+    "id": "mind_control",
+    "name": "Mind Control",
+    "type": "debuff",
+    "effect": {
+      "control": true,
+      "duration": 2
+    },
+    "mpCost": 25,
+    "cooldown": 4,
+    "description": "Takes control of an enemy for 2 turns"
+  },
+  {
+    "id": "acid_spray",
+    "name": "Acid Spray",
+    "type": "attack",
+    "effect": {
+      "damage": 15,
+      "statModifier": {
+        "def": -8
+      },
+      "duration": 3
+    },
+    "mpCost": 10,
+    "description": "Sprays acid that damages and corrodes armor"
+  },
+  {
+    "id": "stone_skin",
+    "name": "Stone Skin",
+    "type": "buff",
+    "effect": {
+      "statModifier": {
+        "def": 12,
+        "spd": -3
+      },
+      "duration": 4
+    },
+    "mpCost": 14,
+    "description": "Hardens skin for protection but reduces speed"
+  },
+  {
+    "id": "poison_cloud",
+    "name": "Poison Cloud",
+    "type": "debuff",
+    "effect": {
+      "statModifier": {
+        "hp": -6,
+        "spd": -4
+      },
+      "duration": 4,
+      "aoe": true
+    },
+    "mpCost": 16,
+    "description": "Creates a poisonous cloud affecting all enemies"
+  },
+  {
+    "id": "rage",
+    "name": "Rage",
+    "type": "buff",
+    "effect": {
+      "statModifier": {
+        "str": 10,
+        "def": -5
+      },
+      "duration": 3
+    },
+    "mpCost": 0,
+    "description": "Enters a rage state, increasing attack but reducing defense"
+  },
+  {
+    "id": "heal_all",
+    "name": "Heal All",
+    "type": "heal",
+    "effect": {
+      "heal": 25,
+      "aoe": true
+    },
+    "mpCost": 20,
+    "description": "Heals all allies moderately"
+  },
+  {
+    "id": "ultimate_strike",
+    "name": "Ultimate Strike",
+    "type": "attack",
+    "effect": {
+      "damage": 60,
+      "statModifier": {
+        "str": -10
+      },
+      "duration": 2
+    },
+    "mpCost": 30,
+    "cooldown": 6,
+    "level": 3,
+    "combinations": ["power_strike", "war_cry"],
+    "description": "Devastating attack that leaves the user weakened"
+  },
+  {
+    "id": "time_stop",
+    "name": "Time Stop",
+    "type": "debuff",
+    "effect": {
+      "statModifier": {
+        "spd": -20
+      },
+      "duration": 3,
+      "aoe": true
+    },
+    "mpCost": 35,
+    "cooldown": 8,
+    "level": 3,
+    "description": "Stops time for enemies, massively reducing their speed"
+  },
+  {
+    "id": "mirror_image",
+    "name": "Mirror Image",
+    "type": "buff",
+    "effect": {
+      "statModifier": {
+        "def": 15,
+        "spd": 10
+      },
+      "duration": 4,
+      "dodgeChance": 30
+    },
+    "mpCost": 18,
+    "cooldown": 5,
+    "description": "Creates illusions that increase evasion and defense"
+  },
+  {
+    "id": "chain_reaction",
+    "name": "Chain Reaction",
+    "type": "attack",
+    "effect": {
+      "damage": 35,
+      "chainDamage": 20,
+      "maxChains": 3
+    },
+    "mpCost": 22,
+    "cooldown": 4,
+    "level": 2,
+    "combinations": ["lightning_bolt", "chain_lightning"],
+    "description": "Lightning attack that chains to nearby enemies"
+  },
+  {
+    "id": "blood_magic",
+    "name": "Blood Magic",
+    "type": "attack",
+    "effect": {
+      "damage": 45,
+      "selfDamage": 15,
+      "statModifier": {
+        "mag": 12
+      },
+      "duration": 3
+    },
+    "mpCost": 0,
+    "cooldown": 7,
+    "level": 2,
+    "description": "Powerful magic that damages the caster but increases magic power"
+  },
+  {
+    "id": "resurrection",
+    "name": "Resurrection",
+    "type": "heal",
+    "effect": {
+      "revive": true,
+      "heal": 50
+    },
+    "mpCost": 40,
+    "cooldown": 10,
+    "level": 3,
+    "description": "Brings a fallen ally back to life"
+  },
+  {
+    "id": "doom",
+    "name": "Doom",
+    "type": "debuff",
+    "effect": {
+      "statModifier": {
+        "hp": -25
+      },
+      "duration": 5,
+      "doomTimer": 3
+    },
+    "mpCost": 28,
+    "cooldown": 6,
+    "level": 3,
+    "description": "Places a doom counter that will kill the target after 3 turns"
+  },
+  {
+    "id": "elemental_fusion",
+    "name": "Elemental Fusion",
+    "type": "attack",
+    "effect": {
+      "damage": 55,
+      "elementalDamage": {
+        "fire": 15,
+        "ice": 15,
+        "lightning": 15
+      }
+    },
+    "mpCost": 25,
+    "cooldown": 5,
+    "level": 3,
+    "combinations": ["fireball", "ice_blast", "lightning_bolt"],
+    "description": "Combines all elements into a devastating attack"
+  },
+  {
+    "id": "perfect_defense",
+    "name": "Perfect Defense",
+    "type": "buff",
+    "effect": {
+      "statModifier": {
+        "def": 30
+      },
+      "duration": 2,
+      "perfectBlock": true
+    },
+    "mpCost": 20,
+    "cooldown": 8,
+    "level": 2,
+    "description": "Creates an impenetrable barrier that blocks all damage"
   }
 ]

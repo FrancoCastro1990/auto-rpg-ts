@@ -1,7 +1,7 @@
 [
   {
     "type": "Slime",
-    "job": "SlimeJob",
+    "job": "Warrior",
     "description": "Basic gelatinous creature with simple attacks",
     "baseStats": {
       "hp": 45,
@@ -26,7 +26,7 @@
   },
   {
     "type": "Goblin",
-    "job": "GoblinWarrior",
+    "job": "Warrior",
     "description": "Small but aggressive humanoid warrior",
     "baseStats": {
       "hp": 60,
@@ -57,7 +57,7 @@
   },
   {
     "type": "Orc",
-    "job": "OrcBrute",
+    "job": "Warrior",
     "description": "Large brutish creature with high damage output",
     "baseStats": {
       "hp": 90,
@@ -89,7 +89,7 @@
   },
   {
     "type": "DarkMage",
-    "job": "DarkSorcerer",
+    "job": "BlackMage",
     "description": "Evil spellcaster with dark magic",
     "baseStats": {
       "hp": 75,
@@ -127,8 +127,227 @@
     ]
   },
   {
+    "type": "Troll",
+    "job": "Warrior",
+    "description": "Regenerative brute with high defense",
+    "baseStats": {
+      "hp": 120,
+      "mp": 25,
+      "str": 14,
+      "def": 20,
+      "mag": 5,
+      "spd": 4
+    },
+    "rules": [
+      {
+        "priority": 60,
+        "condition": "self.hp < 30%",
+        "target": "self",
+        "action": "cast:regeneration"
+      },
+      {
+        "priority": 40,
+        "condition": "self.hp < 60%",
+        "target": "self",
+        "action": "cast:stone_skin"
+      },
+      {
+        "priority": 20,
+        "condition": "always",
+        "target": "weakestEnemy",
+        "action": "attack"
+      }
+    ],
+    "skillIds": [
+      "basic_attack",
+      "regeneration",
+      "power_strike",
+      "stone_skin"
+    ]
+  },
+  {
+    "type": "SkeletonArcher",
+    "job": "Ranger",
+    "description": "Undead ranged attacker with poison arrows",
+    "baseStats": {
+      "hp": 55,
+      "mp": 20,
+      "str": 10,
+      "def": 6,
+      "mag": 8,
+      "spd": 15
+    },
+    "rules": [
+      {
+        "priority": 35,
+        "condition": "always",
+        "target": "lowestHpEnemy",
+        "action": "cast:venom_strike"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "randomEnemy",
+        "action": "attack"
+      }
+    ],
+    "skillIds": [
+      "basic_attack",
+      "venom_strike",
+      "wind_slash"
+    ]
+  },
+  {
+    "type": "FireElemental",
+    "job": "BlackMage",
+    "description": "Living flame that deals fire damage",
+    "baseStats": {
+      "hp": 80,
+      "mp": 35,
+      "str": 8,
+      "def": 10,
+      "mag": 20,
+      "spd": 8
+    },
+    "rules": [
+      {
+        "priority": 45,
+        "condition": "self.mp > 30%",
+        "target": "randomEnemy",
+        "action": "cast:fireball"
+      },
+      {
+        "priority": 35,
+        "condition": "enemy.count > 1",
+        "target": "randomEnemy",
+        "action": "cast:flame_burst"
+      },
+      {
+        "priority": 25,
+        "condition": "self.hp < 50%",
+        "target": "self",
+        "action": "cast:stone_skin"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "randomEnemy",
+        "action": "attack"
+      }
+    ],
+    "skillIds": [
+      "basic_attack",
+      "fireball",
+      "flame_burst",
+      "stone_skin"
+    ]
+  },
+  {
+    "type": "IceGolem",
+    "job": "Warrior",
+    "description": "Frozen construct with ice attacks",
+    "baseStats": {
+      "hp": 100,
+      "mp": 30,
+      "str": 15,
+      "def": 18,
+      "mag": 12,
+      "spd": 3
+    },
+    "rules": [
+      {
+        "priority": 40,
+        "condition": "self.mp > 40%",
+        "target": "strongestEnemy",
+        "action": "cast:ice_blast"
+      },
+      {
+        "priority": 15,
+        "condition": "always",
+        "target": "randomEnemy",
+        "action": "attack"
+      }
+    ],
+    "skillIds": [
+      "basic_attack",
+      "ice_blast",
+      "barrier"
+    ]
+  },
+  {
+    "type": "Wraith",
+    "job": "BlackMage",
+    "description": "Ghostly entity that drains life",
+    "baseStats": {
+      "hp": 70,
+      "mp": 45,
+      "str": 5,
+      "def": 8,
+      "mag": 22,
+      "spd": 18
+    },
+    "rules": [
+      {
+        "priority": 50,
+        "condition": "self.hp < 60%",
+        "target": "randomEnemy",
+        "action": "cast:life_drain"
+      },
+      {
+        "priority": 30,
+        "condition": "always",
+        "target": "lowestHpEnemy",
+        "action": "cast:dark_bolt"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "randomEnemy",
+        "action": "attack"
+      }
+    ],
+    "skillIds": [
+      "basic_attack",
+      "life_drain",
+      "dark_bolt",
+      "terror"
+    ]
+  },
+  {
+    "type": "Minotaur",
+    "job": "Warrior",
+    "description": "Ferocious beast with charging attacks",
+    "baseStats": {
+      "hp": 110,
+      "mp": 15,
+      "str": 20,
+      "def": 15,
+      "mag": 4,
+      "spd": 9
+    },
+    "rules": [
+      {
+        "priority": 35,
+        "condition": "always",
+        "target": "weakestEnemy",
+        "action": "cast:power_strike"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "randomEnemy",
+        "action": "attack"
+      }
+    ],
+    "skillIds": [
+      "basic_attack",
+      "power_strike",
+      "war_cry"
+    ]
+  },
+  {
     "type": "ShadowLord",
-    "job": "DemonKing",
+    "job": "BlackMage",
     "description": "Powerful boss demon with devastating abilities",
     "isBoss": true,
     "baseStats": {
@@ -178,6 +397,115 @@
       "darkness_wave",
       "shadow_regeneration",
       "terror"
+    ]
+  },
+  {
+    "type": "DragonWhelp",
+    "job": "BlackMage",
+    "description": "Young dragon with breath attacks",
+    "baseStats": {
+      "hp": 85,
+      "mp": 50,
+      "str": 12,
+      "def": 14,
+      "mag": 16,
+      "spd": 11
+    },
+    "rules": [
+      {
+        "priority": 45,
+        "condition": "self.mp > 35%",
+        "target": "randomEnemy",
+        "action": "cast:fireball"
+      },
+      {
+        "priority": 20,
+        "condition": "always",
+        "target": "randomEnemy",
+        "action": "attack"
+      }
+    ],
+    "skillIds": [
+      "basic_attack",
+      "fireball",
+      "wind_slash"
+    ]
+  },
+  {
+    "type": "Necromancer",
+    "job": "BlackMage",
+    "description": "Undead summoner who raises minions",
+    "baseStats": {
+      "hp": 65,
+      "mp": 60,
+      "str": 4,
+      "def": 9,
+      "mag": 25,
+      "spd": 7
+    },
+    "rules": [
+      {
+        "priority": 70,
+        "condition": "self.mp > 50%",
+        "target": "self",
+        "action": "cast:summon_skeleton"
+      },
+      {
+        "priority": 55,
+        "condition": "self.mp > 40%",
+        "target": "self",
+        "action": "cast:curse"
+      },
+      {
+        "priority": 40,
+        "condition": "enemy.count > 1",
+        "target": "randomEnemy",
+        "action": "cast:poison_cloud"
+      },
+      {
+        "priority": 35,
+        "condition": "always",
+        "target": "randomEnemy",
+        "action": "cast:dark_bolt"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "randomEnemy",
+        "action": "attack"
+      }
+    ],
+    "skillIds": [
+      "basic_attack",
+      "dark_bolt",
+      "curse",
+      "hex",
+      "summon_skeleton",
+      "poison_cloud"
+    ]
+  },
+  {
+    "type": "Skeleton",
+    "job": "Warrior",
+    "description": "Undead minion summoned by necromancers",
+    "baseStats": {
+      "hp": 35,
+      "mp": 0,
+      "str": 10,
+      "def": 8,
+      "mag": 2,
+      "spd": 12
+    },
+    "rules": [
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "randomEnemy",
+        "action": "attack"
+      }
+    ],
+    "skillIds": [
+      "basic_attack"
     ]
   }
 ]

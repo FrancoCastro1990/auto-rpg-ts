@@ -1,0 +1,218 @@
+[
+  {
+    "name": "Aria",
+    "job": "WhiteMage",
+    "level": 5,
+    "rules": [
+      {
+        "priority": 100,
+        "condition": "ally.hp < 30%",
+        "target": "lowestHpAlly",
+        "action": "cast:greater_heal"
+      },
+      {
+        "priority": 90,
+        "condition": "self.mp > 60%",
+        "target": "randomAlly",
+        "action": "cast:heal_all"
+      },
+      {
+        "priority": 80,
+        "condition": "enemy.count > 2",
+        "target": "strongestEnemy",
+        "action": "cast:holy_light"
+      },
+      {
+        "priority": 70,
+        "condition": "turn > 5",
+        "target": "self",
+        "action": "cast:divine_shield"
+      },
+      {
+        "priority": 50,
+        "condition": "self.mp > 40%",
+        "target": "randomEnemy",
+        "action": "cast:blessing"
+      },
+      {
+        "priority": 10,
+        "condition": "always",
+        "target": "lowestHpAlly",
+        "action": "cast:heal"
+      }
+    ]
+  },
+  {
+    "name": "Draven",
+    "job": "Warrior",
+    "level": 5,
+    "rules": [
+      {
+        "priority": 100,
+        "condition": "self.hp > 70%",
+        "target": "strongestEnemy",
+        "action": "cast:ultimate_strike"
+      },
+      {
+        "priority": 90,
+        "condition": "enemy.count > 2",
+        "target": "randomEnemy",
+        "action": "cast:taunt"
+      },
+      {
+        "priority": 80,
+        "condition": "self.hp < 50%",
+        "target": "self",
+        "action": "cast:perfect_defense"
+      },
+      {
+        "priority": 60,
+        "condition": "always",
+        "target": "weakestEnemy",
+        "action": "cast:power_strike"
+      }
+    ]
+  },
+  {
+    "name": "Lyra",
+    "job": "BlackMage",
+    "level": 5,
+    "rules": [
+      {
+        "priority": 100,
+        "condition": "self.mp > 70%",
+        "target": "randomEnemy",
+        "action": "cast:chain_reaction"
+      },
+      {
+        "priority": 90,
+        "condition": "enemy.count > 1",
+        "target": "randomEnemy",
+        "action": "cast:time_stop"
+      },
+      {
+        "priority": 80,
+        "condition": "self.hp < 40%",
+        "target": "self",
+        "action": "cast:blood_magic"
+      },
+      {
+        "priority": 70,
+        "condition": "turn > 3",
+        "target": "strongestEnemy",
+        "action": "cast:meteor"
+      },
+      {
+        "priority": 50,
+        "condition": "always",
+        "target": "randomEnemy",
+        "action": "cast:lightning_bolt"
+      }
+    ]
+  },
+  {
+    "name": " Thorne",
+    "job": "Rogue",
+    "level": 5,
+    "rules": [
+      {
+        "priority": 100,
+        "condition": "self.hp > 60%",
+        "target": "strongestEnemy",
+        "action": "cast:backstab"
+      },
+      {
+        "priority": 90,
+        "condition": "enemy.count > 2",
+        "target": "randomEnemy",
+        "action": "cast:smoke_bomb"
+      },
+      {
+        "priority": 80,
+        "condition": "self.mp > 50%",
+        "target": "self",
+        "action": "cast:shadow_step"
+      },
+      {
+        "priority": 70,
+        "condition": "turn > 4",
+        "target": "randomEnemy",
+        "action": "cast:poison_blade"
+      },
+      {
+        "priority": 50,
+        "condition": "always",
+        "target": "lowestHpEnemy",
+        "action": "cast:venom_strike"
+      }
+    ]
+  },
+  {
+    "name": "Sylvana",
+    "job": "Ranger",
+    "level": 5,
+    "rules": [
+      {
+        "priority": 100,
+        "condition": "enemy.hp > 70%",
+        "target": "strongestEnemy",
+        "action": "cast:wind_slash"
+      },
+      {
+        "priority": 90,
+        "condition": "self.mp > 60%",
+        "target": "randomEnemy",
+        "action": "cast:haste"
+      },
+      {
+        "priority": 80,
+        "condition": "enemy.count > 1",
+        "target": "randomEnemy",
+        "action": "cast:chain_lightning"
+      },
+      {
+        "priority": 60,
+        "condition": "always",
+        "target": "weakestEnemy",
+        "action": "attack"
+      }
+    ]
+  },
+  {
+    "name": "Eldrin",
+    "job": "BlackMage",
+    "level": 5,
+    "rules": [
+      {
+        "priority": 100,
+        "condition": "self.mp > 80%",
+        "target": "randomEnemy",
+        "action": "cast:elemental_fusion"
+      },
+      {
+        "priority": 90,
+        "condition": "enemy.isBoss",
+        "target": "randomEnemy",
+        "action": "cast:doom"
+      },
+      {
+        "priority": 80,
+        "condition": "turn > 6",
+        "target": "self",
+        "action": "cast:mirror_image"
+      },
+      {
+        "priority": 70,
+        "condition": "self.hp < 50%",
+        "target": "self",
+        "action": "cast:mirror_image"
+      },
+      {
+        "priority": 50,
+        "condition": "always",
+        "target": "randomEnemy",
+        "action": "cast:fireball"
+      }
+    ]
+  }
+]

@@ -22,9 +22,9 @@ function createMockCharacter(
     maxStats: { ...stats },
     baseStats: { ...stats },
     abilities: [
-      { name: 'Basic Attack', type: 'attack', effect: { damage: 10 }, mpCost: 0 },
-      { name: 'Heal', type: 'heal', effect: { heal: 30 }, mpCost: 8 },
-      { name: 'Power Strike', type: 'attack', effect: { damage: 25 }, mpCost: 5 }
+      { id: 'basic_attack', name: 'Basic Attack', type: 'attack', effect: { damage: 10 }, mpCost: 0 },
+      { id: 'heal', name: 'Heal', type: 'heal', effect: { heal: 30 }, mpCost: 8 },
+      { id: 'power_strike', name: 'Power Strike', type: 'attack', effect: { damage: 25 }, mpCost: 5 }
     ],
     rules: [
       { priority: 100, condition: 'ally.hp < 30%', target: 'lowestHpAlly', action: 'cast:heal' },
@@ -32,6 +32,7 @@ function createMockCharacter(
       { priority: 10, condition: 'always', target: 'weakestEnemy', action: 'attack' }
     ],
     buffs: [],
+    skillCooldowns: [],
     isAlive: true,
     isEnemy: false
   };
@@ -58,12 +59,13 @@ function createMockEnemy(
     maxStats: { ...stats },
     baseStats: { ...stats },
     abilities: [
-      { name: 'Basic Attack', type: 'attack', effect: { damage: 8 }, mpCost: 0 }
+      { id: 'basic_attack', name: 'Basic Attack', type: 'attack', effect: { damage: 8 }, mpCost: 0 }
     ],
     rules: [
       { priority: 10, condition: 'always', target: 'randomAlly', action: 'attack' }
     ],
     buffs: [],
+    skillCooldowns: [],
     isAlive: true,
     isEnemy: true,
     isBoss

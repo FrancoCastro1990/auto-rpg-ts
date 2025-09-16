@@ -113,10 +113,14 @@ export class DataLoader {
     }
 
     return {
+      id: ability.id,
       name: ability.name,
       type: ability.type,
       effect: ability.effect,
       mpCost: ability.mpCost,
+      cooldown: ability.cooldown,
+      level: ability.level,
+      combinations: ability.combinations,
       description: ability.description || ''
     };
   }
@@ -231,6 +235,43 @@ export class DataLoader {
     });
   }
 
+  async loadPartyFile(partyFile: string): Promise<PartyMember[]> {
+    const partyData = await this.loadJSONFile<any[]>(partyFile);
+
+    if (!Array.isArray(partyData)) {
+      throw new DataLoadError(`${partyFile} must contain an array`);
+    }
+
+    return partyData.map((member, index) => {
+      if (!member.name || typeof member.name !== 'string') {
+        throw new DataLoadError(`Invalid party member name at index ${index} in ${partyFile}`);
+      }
+
+      if (!member.job || typeof member.job !== 'string') {
+        throw new DataLoadError(`Invalid job for party member ${member.name} in ${partyFile}`);
+      }
+
+      if (typeof member.level !== 'number' || member.level < 1) {
+        throw new DataLoadError(`Invalid level for party member ${member.name} in ${partyFile}`);
+      }
+
+      if (!Array.isArray(member.rules)) {
+        throw new DataLoadError(`Invalid rules array for party member ${member.name} in ${partyFile}`);
+      }
+
+      const rules = member.rules.map((rule: any, ruleIndex: number) =>
+        this.validateRule(rule, `party member ${member.name} rule[${ruleIndex}]`)
+      );
+
+      return {
+        name: member.name,
+        job: member.job,
+        level: member.level,
+        rules
+      };
+    });
+  }
+
   async loadDungeon(dungeonFile: string): Promise<Dungeon> {
     const dungeonData = await this.loadJSONFile<any>(dungeonFile);
 
@@ -298,7 +339,7 @@ export class DataLoader {
       this.loadParty()
     ]);
 
-    const skillIds = new Set(skills.map(skill => skill.name.toLowerCase().replace(/\s+/g, '_')));
+    const skillIds = new Set(skills.map(skill => skill.id));
 
     for (const job of jobs) {
       for (const skillId of job.skillIds) {
@@ -323,6 +364,44 @@ export class DataLoader {
       }
     }
 
+    // Validate party member rules against their job skills
+    await this.validatePartyRulesConsistency(party, jobs, skills);
+
     return { skills, jobs, enemies, party };
+  }
+
+  private async validatePartyRulesConsistency(
+    party: PartyMember[],
+    jobs: Job[],
+    skills: Ability[]
+  ): Promise<void> {
+    const jobMap = new Map(jobs.map(job => [job.name, job]));
+    const skillMap = new Map(skills.map(skill => [skill.id, skill]));
+
+    for (const member of party) {
+      const job = jobMap.get(member.job);
+      if (!job) continue;
+
+      const availableSkillIds = new Set(job.skillIds);
+
+      for (const rule of member.rules) {
+        if (rule.action.startsWith('cast:')) {
+          const skillId = rule.action.substring(5); // Remove 'cast:' prefix
+          if (!availableSkillIds.has(skillId)) {
+            throw new DataLoadError(
+              `Party member ${member.name} (job: ${member.job}) has rule that references skill "${skillId}" ` +
+              `which is not available for their job. Available skills: ${Array.from(availableSkillIds).join(', ')}`
+            );
+          }
+
+          // Additional validation: check if skill exists in skills.json
+          if (!skillMap.has(skillId)) {
+            throw new DataLoadError(
+              `Party member ${member.name} references skill "${skillId}" which does not exist in skills.json`
+            );
+          }
+        }
+      }
+    }
   }
 }

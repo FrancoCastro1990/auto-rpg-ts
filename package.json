@@ -10,7 +10,8 @@
     "test": "jest",
     "clean": "rm -rf dist",
     "play": "ts-node src/main.ts",
-    "test-logging": "ts-node src/utils/test-logging.ts"
+    "test-logging": "ts-node src/utils/test-logging.ts",
+    "validate-data": "ts-node scripts/validate-data-consistency.ts"
   },
   "keywords": [
     "rpg",

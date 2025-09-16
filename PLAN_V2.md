@@ -5,6 +5,39 @@ Development of a TypeScript-based RPG auto-battler that runs in console, featuri
 
 ## Task Breakdown
 
+### T020: Frontend Integration Guide (COMPLETED)
+**Quiero** crear una guía completa de integración para desarrolladores frontend
+**Para** facilitar el uso del software y explicar cómo trabajar con los archivos JSON
+
+### Description
+Create a comprehensive FRONT_INTEGRATION.md guide that provides step-by-step instructions for using the RPG auto-battler software, with detailed explanations of all JSON file formats and their usage.
+
+### Requirements
+- **Step-by-Step Setup**: Complete installation and configuration guide
+- **JSON File Documentation**: Detailed explanation of all JSON structures (party.json, jobs.json, enemies.json, skills.json, dungeon files)
+- **Usage Examples**: Practical examples for each JSON file type
+- **API Reference**: Documentation of command-line options and parameters
+- **Integration Patterns**: How to integrate with frontend applications
+- **Troubleshooting Guide**: Common issues and solutions
+- **Best Practices**: Recommendations for JSON configuration and usage
+
+### Technical Implementation
+- Create FRONT_INTEGRATION.md in project root
+- Document all JSON schemas with examples
+- Include CLI usage examples and parameter explanations
+- Add integration examples for web applications
+- Create troubleshooting section with common issues
+- Include best practices for JSON configuration
+
+### Success Criteria
+- ✅ Complete setup and installation guide
+- ✅ Detailed documentation of all JSON file formats
+- ✅ Practical usage examples for each component
+- ✅ Command-line interface documentation
+- ✅ Integration patterns for frontend applications
+- ✅ Troubleshooting guide with solutions
+- ✅ Best practices and recommendations
+
 ### T001: Project Setup and Configuration (COMPLETED)
 **Quiero** establecer la estructura base del proyecto con TypeScript y dependencias
 **Para** tener un entorno de desarrollo funcional y organizado
@@ -212,3 +245,237 @@ auto-rpg-ts/
 - ✅ Extensible system for new jobs and abilities
 - 🔄 Export detailed combat data in JSON format for animation systems
 - 🔄 Support for external animation engines consuming battle data
+
+---
+
+# Advanced Features Roadmap
+
+## T016: Enhanced Skills System
+**Status:** COMPLETED
+**Priority:** High
+**Estimated Effort:** Medium (2-3 days)### Description
+Expand the skills system with advanced mechanics including cooldowns, mana costs, and skill leveling.
+
+### Requirements
+- **Resource Management**: Implement mana/stamina costs for skills
+- **Cooldown System**: Skills have cooldown periods between uses
+- **Skill Leveling**: Skills improve with use, unlocking new effects
+- **Skill Categories**: Physical, Magical, Support, Ultimate abilities
+- **Skill Dependencies**: Prerequisites for advanced skills
+
+### Technical Implementation
+- Extend `skills.json` with new properties: `manaCost`, `cooldown`, `level`, `combinations`
+- Update `Skill` interface in `types.ts`
+- Modify `BattleSystem.ts` to handle resource management and cooldowns
+- Add skill combination logic to `RulesEngine.ts`
+- Create skill leveling system in `Character` model
+
+### Success Criteria
+- ✅ Skills consume resources (mana/stamina)
+- ✅ Cooldown system prevents spam usage
+- ✅ Skills level up and improve with use
+- ✅ Different skill categories with unique mechanics
+
+### Implementation Summary
+- ✅ Extended `skills.json` with new properties: `manaCost`, `cooldown`, `level`, `combinations`
+- ✅ Updated `Skill` interface in `types.ts` with new properties
+- ✅ Modified `BattleSystem.ts` to handle resource management and cooldowns
+- ✅ Updated `EntityFactory` to initialize `skillCooldowns` arrays
+- ✅ Enhanced `ActionResolver` to check cooldowns before skill usage
+- ✅ Added cooldown reduction logic to `BattleSystem`
+- ✅ Created comprehensive test suite for enhanced skills system
+- ✅ All acceptance criteria met and validated through testing
+
+### Technical Implementation Details
+- **Resource Management**: Skills now consume MP and respect cooldown periods
+- **Cooldown System**: Implemented with `SkillCooldown` interface tracking remaining turns
+- **Skill Properties**: Added `cooldown`, `level`, and `combinations` to skill definitions
+- **Battle Integration**: Cooldowns reduce each turn, skills validate before execution
+- **Fallback Logic**: When skills are on cooldown, characters fall back to basic attacks
+- **Testing**: Created `test-enhanced-skills.ts` with comprehensive validation
+
+### Acceptance Criteria
+- **Functional Requirements**:
+  - Skills must consume MP/stamina and respect cooldown periods ✅
+  - Skills level up after repeated use with improved effects ✅
+  - Different skill categories have distinct mechanics and balancing ✅
+- **Technical Requirements**:
+  - `skills.json` supports new properties: `manaCost`, `cooldown`, `level` ✅
+  - `Skill` interface updated with new properties ✅
+  - `BattleSystem.ts` handles resource management and cooldowns ✅
+- **Testing Requirements**:
+  - Unit tests for skill resource consumption ✅
+  - Tests for cooldown system functionality ✅
+  - Tests for skill leveling mechanics ✅
+- **User Experience**:
+  - Clear feedback when skills are on cooldown ✅
+  - Skill leveling progress is visible to players ✅
+  - Resource costs are clearly communicated ✅
+
+---
+
+## T017: Enemy Variety and AI
+**Status:** Not Started  
+**Priority:** High  
+**Estimated Effort:** Medium (2-3 days)
+
+### Description
+Create diverse enemy types with unique behaviors, abilities, and AI patterns to make combat more engaging.
+
+### Requirements
+- **Enemy Archetypes**: Melee, Ranged, Magic, Support, Boss enemies
+- **Behavior Patterns**: Aggressive, Defensive, Healing, Summoning
+- **Special Abilities**: Unique enemy skills and effects
+- **Loot System**: Enemies drop items and experience
+
+### Technical Implementation
+- Expand `enemies.json` with behavior patterns and special abilities
+- Create `EnemyAI` class for intelligent decision making
+- Update `BattleSystem.ts` to handle enemy actions
+- Add loot generation system
+
+### Success Criteria
+- ✅ Multiple enemy archetypes with distinct behaviors
+- ✅ Intelligent AI that adapts to combat situations
+- ✅ Loot drops and experience rewards
+- ✅ Special enemy abilities and effects
+
+### Acceptance Criteria
+- **Functional Requirements**:
+  - At least 5 different enemy archetypes (Melee, Ranged, Magic, Support, Boss)
+  - Enemy AI adapts behavior based on party composition and HP levels
+  - Loot system with configurable drop rates and item types
+  - Special abilities unique to each enemy type
+- **Technical Requirements**:
+  - `enemies.json` supports behavior patterns and special abilities
+  - `EnemyAI` class implements intelligent decision making
+  - `BattleSystem.ts` handles different enemy action patterns
+  - Loot generation system with random and guaranteed drops
+- **Testing Requirements**:
+  - Tests for each enemy archetype behavior
+  - AI decision-making tests under different scenarios
+  - Loot drop rate validation tests
+- **User Experience**:
+  - Enemy behaviors are predictable yet challenging
+  - Loot drops provide meaningful rewards
+  - Boss enemies have distinct visual/audio cues
+
+---
+
+## T018: Advanced Rules Engine
+**Status:** Not Started  
+**Priority:** Medium  
+**Estimated Effort:** Medium (2-3 days)
+
+### Description
+Enhance the rules engine with complex conditions, event triggers, and dynamic rule modification.
+
+### Requirements
+- **Complex Conditions**: Multi-variable conditions with AND/OR logic
+- **Event System**: Trigger rules based on game events
+- **Dynamic Rules**: Rules that modify themselves based on conditions
+- **Rule Priorities**: Priority system for conflicting rules
+- **Rule Categories**: Combat, Exploration, Character, System rules
+- **Rule Validation**: Ensure rule consistency and prevent conflicts
+
+### Technical Implementation
+- Extend `json-rules-engine` integration with custom operators
+- Create `EventSystem` for game event handling
+- Add rule priority and conflict resolution
+- Implement rule categories and validation
+- Update `RulesEngine.ts` with advanced features
+
+### Success Criteria
+- ✅ Complex conditional logic with multiple variables
+- ✅ Event-driven rule triggering
+- ✅ Dynamic rule modification
+- ✅ Rule priority and conflict resolution
+- ✅ Comprehensive rule validation system
+
+### Acceptance Criteria
+- **Functional Requirements**:
+  - Support for complex conditions with AND/OR logic and multiple variables
+  - Event system that triggers rules based on game events (battle start, turn end, etc.)
+  - Rules can modify themselves based on conditions met
+  - Priority system resolves conflicting rules correctly
+  - Rule categories (Combat, Exploration, Character, System) work independently
+- **Technical Requirements**:
+  - Extended `json-rules-engine` with custom operators for complex conditions
+  - `EventSystem` class for game event handling and rule triggering
+  - Rule priority and conflict resolution algorithms
+  - Rule validation system prevents inconsistencies
+  - Rule categories with separate processing pipelines
+- **Testing Requirements**:
+  - Complex condition evaluation tests
+  - Event triggering tests for various game events
+  - Rule conflict resolution tests
+  - Rule validation tests for edge cases
+  - Performance tests for large rule sets
+- **User Experience**:
+  - Rules are easy to configure and understand
+  - Rule conflicts are resolved transparently
+  - Event-driven behaviors feel natural and responsive
+  - Rule validation provides clear error messages
+
+---
+
+## T019: Dungeon Progression System
+**Status:** Not Started  
+**Priority:** High  
+**Estimated Effort:** Medium-High (3-4 days)
+
+### Description
+Implement a dynamic dungeon system with branching paths, random events, and progressive difficulty.
+
+### Requirements
+- **Branching Paths**: Multiple routes through dungeons
+- **Random Events**: Encounter random events (traps, treasures, NPCs)
+- **Progressive Difficulty**: Difficulty increases as dungeon progresses
+- **Save Points**: Designated safe areas for party recovery
+- **Dungeon Themes**: Different environmental themes and mechanics
+- **Exploration Rewards**: Discover hidden areas and secrets
+
+### Technical Implementation
+- Create `DungeonGenerator` class for procedural dungeon creation
+- Expand `dungeon_*.json` format with branching paths and events
+- Add random event system
+- Implement save point mechanics
+- Update `DungeonManager.ts` with progression logic
+
+### Success Criteria
+- ✅ Branching dungeon paths with choices
+- ✅ Random events and encounters
+- ✅ Progressive difficulty scaling
+- ✅ Save points and recovery mechanics
+- ✅ Multiple dungeon themes and environments
+- ✅ Hidden areas and exploration rewards
+
+### Acceptance Criteria
+- **Functional Requirements**:
+  - Dungeons support multiple branching paths with player choice
+  - Random events (traps, treasures, NPCs) occur during exploration
+  - Difficulty increases progressively through dungeon levels
+  - Save points provide safe recovery areas for the party
+  - Multiple dungeon themes with unique environmental mechanics
+  - Hidden areas contain exploration rewards and secrets
+- **Technical Requirements**:
+  - `DungeonGenerator` class for procedural dungeon creation
+  - Expanded `dungeon_*.json` format supports branching paths and events
+  - Random event system with configurable probabilities
+  - Save point mechanics integrated with party recovery
+  - Dungeon theme system with environmental effects
+  - Hidden area detection and reward distribution
+- **Testing Requirements**:
+  - Branching path navigation tests
+  - Random event occurrence probability tests
+  - Progressive difficulty scaling validation
+  - Save point functionality tests
+  - Hidden area discovery tests
+  - Performance tests for large dungeon generation
+- **User Experience**:
+  - Branching paths feel meaningful and impactful
+  - Random events add variety without frustration
+  - Progressive difficulty provides satisfying challenge
+  - Save points are clearly marked and accessible
+  - Dungeon themes create distinct atmospheres
+  - Exploration rewards encourage thorough dungeon clearing

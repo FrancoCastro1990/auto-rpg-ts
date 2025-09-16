@@ -21,13 +21,22 @@ export class ConditionEvaluator {
       case 'enemy.isboss':
         return context.livingEnemies.some(enemy => enemy.isBoss);
 
+      case 'party.hashealer':
+        return this.hasHealerInParty(context);
+
+      case 'party.hastank':
+        return this.hasTankInParty(context);
+
+      case 'party.hasdps':
+        return this.hasDpsInParty(context);
+
       default:
         return this.evaluateComplexCondition(trimmed, context);
     }
   }
 
   private evaluateComplexCondition(condition: string, context: ConditionContext): boolean {
-    const hpConditionMatch = condition.match(/^(ally|self)\.hp\s*<\s*(\d+)%$/);
+    const hpConditionMatch = condition.match(/^(ally|self|enemy)\.hp\s*<\s*(\d+)%$/);
     if (hpConditionMatch) {
       const [, target, percentageStr] = hpConditionMatch;
       const percentage = parseInt(percentageStr || '0');
@@ -39,6 +48,32 @@ export class ConditionEvaluator {
         return context.livingAllies.some(ally => {
           const allyHpPercentage = (ally.currentStats.hp / ally.maxStats.hp) * 100;
           return allyHpPercentage < percentage;
+        });
+      } else if (target === 'enemy') {
+        return context.livingEnemies.some(enemy => {
+          const enemyHpPercentage = (enemy.currentStats.hp / enemy.maxStats.hp) * 100;
+          return enemyHpPercentage < percentage;
+        });
+      }
+    }
+
+    const hpGreaterConditionMatch = condition.match(/^(ally|self|enemy)\.hp\s*>\s*(\d+)%$/);
+    if (hpGreaterConditionMatch) {
+      const [, target, percentageStr] = hpGreaterConditionMatch;
+      const percentage = parseInt(percentageStr || '0');
+
+      if (target === 'self') {
+        const actorHpPercentage = (context.actor.currentStats.hp / context.actor.maxStats.hp) * 100;
+        return actorHpPercentage > percentage;
+      } else if (target === 'ally') {
+        return context.livingAllies.some(ally => {
+          const allyHpPercentage = (ally.currentStats.hp / ally.maxStats.hp) * 100;
+          return allyHpPercentage > percentage;
+        });
+      } else if (target === 'enemy') {
+        return context.livingEnemies.some(enemy => {
+          const enemyHpPercentage = (enemy.currentStats.hp / enemy.maxStats.hp) * 100;
+          return enemyHpPercentage > percentage;
         });
       }
     }
@@ -106,13 +141,14 @@ export class ConditionEvaluator {
   validateConditionSyntax(condition: string): { valid: boolean; error?: string } {
     const trimmed = condition.trim().toLowerCase();
 
-    const validSimpleConditions = ['always', 'enemy.isboss'];
+    const validSimpleConditions = ['always', 'enemy.isboss', 'party.hashealer', 'party.hastank', 'party.hasdps'];
     if (validSimpleConditions.includes(trimmed)) {
       return { valid: true };
     }
 
     const validPatterns = [
-      /^(ally|self)\.hp\s*<\s*\d+%$/,
+      /^(ally|self|enemy)\.hp\s*<\s*\d+%$/,
+      /^(ally|self|enemy)\.hp\s*>\s*\d+%$/,
       /^self\.mp\s*>\s*\d+%$/,
       /^(enemy|ally)\.count\s*>\s*\d+$/,
       /^turn\s*>\s*\d+$/,
@@ -128,7 +164,7 @@ export class ConditionEvaluator {
 
     return {
       valid: false,
-      error: `Invalid condition syntax: ${condition}. Valid patterns: always, enemy.isBoss, ally/self.hp < X%, self.mp > X%, enemy/ally.count > X, turn > X`
+      error: `Invalid condition syntax: ${condition}. Valid patterns: always, enemy.isBoss, party.hasHealer, party.hasTank, party.hasDps, ally/self/enemy.hp < X%, ally/self/enemy.hp > X%, self.mp > X%, enemy/ally.count > X, turn > X`
     };
   }
 
@@ -138,12 +174,19 @@ export class ConditionEvaluator {
       'enemy.isBoss',
       'ally.hp < X%',
       'self.hp < X%',
+      'enemy.hp < X%',
+      'ally.hp > X%',
+      'self.hp > X%',
+      'enemy.hp > X%',
       'self.mp > X%',
       'enemy.count > X',
       'ally.count > X',
       'turn > X',
       'self.hp < X',
-      'self.mp > X'
+      'self.mp > X',
+      'party.hasHealer',
+      'party.hasTank',
+      'party.hasDps'
     ];
   }
 
@@ -189,5 +232,39 @@ export class ConditionEvaluator {
         turn: context.turnNumber
       }
     };
+  }
+
+  // Helper methods for party composition conditions
+  private hasHealerInParty(context: ConditionContext): boolean {
+    return context.livingAllies.some(ally => {
+      // Check if ally has healing abilities
+      return ally.abilities.some(ability =>
+        ability.type === 'heal' ||
+        ability.name.toLowerCase().includes('heal') ||
+        ability.name.toLowerCase().includes('cure') ||
+        ability.name.toLowerCase().includes('regeneration')
+      );
+    });
+  }
+
+  private hasTankInParty(context: ConditionContext): boolean {
+    return context.livingAllies.some(ally => {
+      // Check if ally has tank-like stats (high defense relative to strength)
+      const defToStrRatio = ally.currentStats.def / ally.currentStats.str;
+      return defToStrRatio > 1.2; // Defense is 20% higher than strength
+    });
+  }
+
+  private hasDpsInParty(context: ConditionContext): boolean {
+    return context.livingAllies.some(ally => {
+      // Check if ally has damage-dealing abilities
+      return ally.abilities.some(ability =>
+        ability.type === 'attack' ||
+        ability.name.toLowerCase().includes('strike') ||
+        ability.name.toLowerCase().includes('blast') ||
+        ability.name.toLowerCase().includes('bolt') ||
+        ability.name.toLowerCase().includes('slash')
+      );
+    });
   }
 }

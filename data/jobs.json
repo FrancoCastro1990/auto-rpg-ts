@@ -16,7 +16,13 @@
       "shield_bash",
       "taunt",
       "earthquake",
-      "barrier"
+      "barrier",
+      "goblin_rush",
+      "berserker_rage",
+      "war_cry",
+      "ultimate_strike",
+      "perfect_defense",
+      "rage"
     ]
   },
   {
@@ -37,7 +43,9 @@
       "blessing",
       "holy_light",
       "regeneration",
-      "divine_shield"
+      "divine_shield",
+      "heal_all",
+      "resurrection"
     ]
   },
   {
@@ -58,7 +66,21 @@
       "curse",
       "meteor",
       "ice_blast",
-      "chain_lightning"
+      "chain_lightning",
+      "dark_bolt",
+      "hex",
+      "life_drain",
+      "shadow_strike",
+      "soul_crusher",
+      "darkness_wave",
+      "shadow_regeneration",
+      "terror",
+      "chain_reaction",
+      "blood_magic",
+      "doom",
+      "elemental_fusion",
+      "time_stop",
+      "mirror_image"
     ]
   },
   {
@@ -78,7 +100,29 @@
       "poison_blade",
       "shadow_step",
       "smoke_bomb",
-      "venom_strike"
+      "venom_strike",
+      "teleport",
+      "acid_spray"
+    ]
+  },
+  {
+    "name": "Ranger",
+    "description": "Agile ranged fighter with nature-based abilities",
+    "baseStats": {
+      "hp": 110,
+      "mp": 35,
+      "str": 12,
+      "def": 9,
+      "mag": 10,
+      "spd": 16
+    },
+    "skillIds": [
+      "basic_attack",
+      "wind_slash",
+      "venom_strike",
+      "haste",
+      "chain_lightning",
+      "smoke_bomb"
     ]
   }
 ]
