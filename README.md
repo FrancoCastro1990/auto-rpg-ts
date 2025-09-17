@@ -1,6 +1,420 @@
-# Auto-RPG TypeScript
+# RPG Auto-Battler REST API
 
-Un RPG auto-battler desarrollado en TypeScript que simula combates automatizados en mazmorras usando un motor de reglas basado en JSON.
+Una API REST moderna para un RPG auto-battler construida con **Clean Architecture**, **TypeScript**, **Express.js**, **MongoDB** y **Docker**. Transforma el sistema de combate automatizado original en una API escalable y mantenible.
+
+## 🚀 Características Principales
+
+- **🏗️ Clean Architecture**: Separación clara de responsabilidades con capas bien definidas
+- **🔧 TypeScript**: Tipado fuerte y desarrollo moderno
+- **🌐 REST API**: Endpoints bien diseñados siguiendo mejores prácticas
+- **💾 MongoDB**: Base de datos NoSQL con Mongoose ODM
+- **🐳 Docker**: Contenedorización completa para desarrollo y despliegue
+- **✅ Zod**: Validación robusta de esquemas para requests y responses
+- **🎯 Combate Automatizado**: Sistema de batalla por turnos con reglas configurables
+- **🏰 Gestión de Dungeons**: Exploración de mazmorras con múltiples batallas
+- **👥 Gestión de Party**: Sistema completo de personajes y grupos
+
+## 📁 Estructura del Proyecto
+
+```
+auto-rpg-ts/
+├── src/
+│   ├── entities/              # 📋 Reglas de negocio puras
+│   ├── use-cases/            # 🎯 Casos de uso y lógica de negocio
+│   ├── controllers/          # 🌐 Controladores HTTP y DTOs
+│   ├── repositories/         # 💾 Interfaces y implementaciones de datos
+│   ├── infrastructure/       # 🔧 Configuración externa (DB, middlewares)
+│   └── index.ts              # Punto de entrada de la aplicación
+├── data/                     # 📄 Archivos JSON originales (legacy)
+├── tests/                    # 🧪 Tests unitarios e integración
+├── docker-compose.yml        # 🐳 Configuración de Docker
+├── CLEAN_ARCHITECTURE.md     # 📚 Documentación de arquitectura
+├── PLAN.md                   # 📋 Plan de desarrollo detallado
+├── package.json
+├── tsconfig.json
+└── README.md
+```
+
+## 🛠️ Tecnologías Utilizadas
+
+### Backend
+- **Express.js**: Framework web rápido y minimalista
+- **TypeScript**: JavaScript con tipado fuerte
+- **MongoDB**: Base de datos NoSQL
+- **Mongoose**: ODM para MongoDB con validaciones
+
+### Validación y Seguridad
+- **Zod**: Validación de esquemas TypeScript-first
+- **Helmet**: Headers de seguridad HTTP
+- **CORS**: Configuración de Cross-Origin Resource Sharing
+
+### Desarrollo
+- **Docker**: Contenedorización completa
+- **Docker Compose**: Orquestación de servicios
+- **Nodemon**: Recarga automática en desarrollo
+
+## 🚀 Inicio Rápido
+
+### Prerrequisitos
+- Docker y Docker Compose instalados
+- Node.js 18+ (para desarrollo local)
+- npm o yarn
+
+### Instalación y Ejecución
+
+1. **Clonar el repositorio**
+   ```bash
+   git clone <repository-url>
+   cd auto-rpg-ts
+   ```
+
+2. **Instalar dependencias**
+   ```bash
+   npm install
+   ```
+
+3. **Iniciar servicios con Docker**
+   ```bash
+   docker-compose up -d
+   ```
+
+4. **Ejecutar la aplicación**
+   ```bash
+   # Desarrollo con recarga automática
+   npm run dev
+
+   # Producción
+   npm run build
+   npm start
+   ```
+
+5. **Verificar funcionamiento**
+   ```bash
+   curl http://localhost:3000/health
+   ```
+
+## 📡 API Endpoints
+
+### Health Check
+- `GET /health` - Verificar estado del servicio
+
+### Characters (Personajes)
+- `POST /api/v1/characters` - Crear personaje
+- `GET /api/v1/characters` - Listar personajes
+- `GET /api/v1/characters/:id` - Obtener personaje específico
+- `PUT /api/v1/characters/:id` - Actualizar personaje
+- `DELETE /api/v1/characters/:id` - Eliminar personaje
+
+### Parties (Grupos)
+- `POST /api/v1/parties` - Crear grupo
+- `GET /api/v1/parties` - Listar grupos
+- `GET /api/v1/parties/:id` - Obtener grupo específico
+- `PUT /api/v1/parties/:id` - Actualizar grupo
+- `POST /api/v1/parties/:id/members` - Agregar miembro al grupo
+
+### Dungeons (Mazmorras)
+- `POST /api/v1/dungeons` - Crear mazmorra
+- `GET /api/v1/dungeons` - Listar mazmorras
+- `GET /api/v1/dungeons/:id` - Obtener mazmorra específica
+- `POST /api/v1/dungeons/:id/execute` - Ejecutar exploración de mazmorra
+
+### Battles (Batallas)
+- `POST /api/v1/battles` - Ejecutar batalla
+- `GET /api/v1/battles/:id` - Obtener resultado de batalla
+- `GET /api/v1/battles` - Listar batallas recientes
+
+## 📋 Ejemplos de Uso
+
+### Crear un Personaje
+```bash
+curl -X POST http://localhost:3000/api/v1/characters \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Aragorn",
+    "job": "warrior",
+    "level": 1
+  }'
+```
+
+### Ejecutar una Batalla
+```bash
+curl -X POST http://localhost:3000/api/v1/battles \
+  -H "Content-Type: application/json" \
+  -d '{
+    "partyId": "party-123",
+    "enemyIds": ["enemy-456", "enemy-789"]
+  }'
+```
+
+### Explorar una Mazmorra
+```bash
+curl -X POST http://localhost:3000/api/v1/dungeons/dungeon-001/execute \
+  -H "Content-Type: application/json" \
+  -d '{
+    "partyId": "party-123"
+  }'
+```
+
+## 🏗️ Arquitectura
+
+Este proyecto sigue los principios de **Clean Architecture**:
+
+1. **Entities**: Reglas de negocio puras e independientes
+2. **Use Cases**: Lógica de aplicación y casos de uso
+3. **Controllers**: Capa de presentación y adaptadores web
+4. **Repositories**: Abstracción de acceso a datos
+5. **Infrastructure**: Detalles de implementación externos
+
+Para más detalles, consulta [`CLEAN_ARCHITECTURE.md`](./CLEAN_ARCHITECTURE.md).
+
+## 🧪 Testing
+
+```bash
+# Ejecutar todos los tests
+npm test
+
+# Tests con cobertura
+npm run test:coverage
+
+# Tests de integración
+npm run test:integration
+```
+
+## 🌱 Database Seeding
+
+El proyecto incluye scripts para poblar la base de datos MongoDB con los datos originales:
+
+```bash
+# Seeding completo (todas las colecciones)
+npm run seed
+
+# Seeding individual por colección
+npm run seed:jobs      # Migrar jobs.json (5 registros)
+npm run seed:skills    # Migrar skills.json (59 registros)
+npm run seed:enemies   # Migrar enemies.json (14 registros)
+npm run seed:dungeons  # Migrar dungeon_01.json (1 registro)
+
+# Limpiar todas las colecciones
+npm run seed:clear
+```
+
+### Datos Migrados
+- **Jobs**: 5 clases de personaje (Warrior, WhiteMage, BlackMage, Rogue, Ranger)
+- **Skills**: 59 habilidades con efectos complejos (ataques, heals, buffs, debuffs)
+- **Enemies**: 14 tipos de enemigos con reglas de IA personalizadas
+- **Dungeons**: 1 mazmorra completa con 7 batallas progresivas
+
+## 📚 Documentación Adicional
+
+- **[CLEAN_ARCHITECTURE.md](./CLEAN_ARCHITECTURE.md)**: Documentación detallada de la arquitectura
+- **[PLAN.md](./PLAN.md)**: Plan de desarrollo completo con tareas pendientes
+- **API Documentation**: Próximamente con Swagger/OpenAPI
+
+## 🤝 Contribución
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## 📝 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+
+## 🙏 Agradecimientos
+
+- Inspirado en sistemas de RPG clásicos
+- Arquitectura basada en "Clean Architecture" de Robert C. Martin
+- Comunidad de TypeScript y Node.js
+
+---
+
+**Estado del Proyecto**: 🏗️ En Desarrollo Activo
+
+- ✅ Express.js base setup
+- ✅ Clean Architecture structure
+- ✅ Docker Compose con MongoDB
+- ✅ Legacy Logic Migration & Data Seeding
+- 🔄 Implementando modelos de dominio
+- 🔄 Desarrollo de endpoints REST
+- 🔄 Sistema de validación con Zod
+
+### Cálculo de Experiencia
+
+```typescript
+// Experiencia por completar dungeon
+experience = baseExperience * difficultyMultiplier * levelBonus
+
+// Subida de nivel cuando se alcanza el umbral
+levelUpThreshold = currentLevel * 1000 + (currentLevel - 1) * 500
+```
+
+## 🧪 Testing
+
+### Ejecutar Tests
+
+```bash
+# Todos los tests
+npm test
+
+# Tests con cobertura
+npm run test:coverage
+
+# Tests en modo watch
+npm run test:watch
+```
+
+### Estructura de Tests
+
+```
+tests/
+├── unit/                 # Tests unitarios
+│   ├── entities/
+│   ├── use-cases/
+│   └── repositories/
+├── integration/         # Tests de integración
+│   ├── api/
+│   └── database/
+└── e2e/                 # Tests end-to-end
+```
+
+## 📚 Documentación API
+
+### Swagger/OpenAPI
+
+La documentación completa estará disponible en:
+```
+GET /api-docs
+```
+
+### Ejemplo de Response
+
+```json
+{
+  "success": true,
+  "data": {
+    "party": {
+      "id": "party_123",
+      "playerId": "player_456",
+      "characters": [...],
+      "createdAt": "2025-09-16T10:00:00Z"
+    }
+  },
+  "timestamp": "2025-09-16T10:00:00Z"
+}
+```
+
+## 🚀 Desarrollo
+
+### Scripts Disponibles
+
+```bash
+# Desarrollo
+npm run dev          # Servidor con hot-reload
+npm run build        # Compilar TypeScript
+npm start           # Servidor de producción
+
+# Testing
+npm test            # Ejecutar tests
+npm run test:coverage # Tests con cobertura
+
+# Calidad
+npm run lint        # Ejecutar linter
+npm run lint:fix    # Corregir problemas de linting
+
+# Docker
+npm run docker:up   # Iniciar MongoDB
+npm run docker:down # Detener MongoDB
+```
+
+### Configuración de Desarrollo
+
+#### TypeScript (tsconfig.json)
+- ✅ Configuración estricta de tipos
+- ✅ Decoradores experimentales
+- ✅ Generación de mapas de fuente
+- ✅ Rutas de módulos configuradas
+
+#### ESLint (Próximamente)
+- ✅ Reglas de TypeScript
+- ✅ Reglas de Node.js
+- ✅ Formato consistente
+
+## 🎯 Roadmap de Desarrollo
+
+### ✅ Fase 1: Configuración Base (Completada)
+- [x] R001 - Configurar Proyecto Base con Express.js
+- [x] R002 - Implementar Clean Architecture Structure
+- [x] R003 - Configurar MongoDB y Modelos
+- [x] R004 - Crear Docker Compose para MongoDB
+
+### 🔄 Fase 2: Modelos de Dominio (En Progreso)
+- [ ] R005 - Implementar Modelos de Dominio
+- [ ] R006 - Crear Repositorios de Datos
+
+### 🎯 Fase 3: Casos de Uso
+- [ ] R007 - Implementar Casos de Uso Party CRUD
+- [ ] R008 - Implementar Casos de Uso Dungeon CRUD
+- [ ] R009 - Implementar Caso de Uso GenerateCombat
+
+### 📈 Fase 4: Sistema de Progresión
+- [ ] R010 - Sistema de Experiencia y Niveles
+- [ ] R011 - Restricciones por Nivel
+
+### 🌐 Fase 5: API REST
+- [ ] R012 - Controladores REST Party
+- [ ] R013 - Controladores REST Dungeon
+- [ ] R014 - Controlador GenerateCombat
+- [ ] R015 - Configurar Rutas Express
+
+### 🛡️ Fase 6: Calidad y Seguridad
+- [ ] R016 - Middleware de Validación y Errores
+- [ ] R017 - Sistema de Autenticación
+
+### 🔄 Fase 7: Migración y Testing
+- [ ] R018 - Migrar Lógica de Combate
+- [ ] R019 - Tests Unitarios
+- [ ] R020 - Tests de Integración
+
+### 📚 Fase 8: Documentación y Despliegue
+- [ ] R021 - Documentación API
+- [ ] R022 - Scripts de Despliegue
+
+## 🤝 Contribución
+
+¡Las contribuciones son bienvenidas! Para contribuir:
+
+1. **Fork** el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. **Commit** tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un **Pull Request**
+
+### Guías de Contribución
+- ✅ Seguir la estructura de Clean Architecture
+- ✅ Agregar tests para nuevas funcionalidades
+- ✅ Actualizar documentación según corresponda
+- ✅ Usar commits descriptivos
+- ✅ Mantener compatibilidad con versiones anteriores
+
+## 📄 Licencia
+
+Este proyecto está bajo la **Licencia MIT** - ver el archivo [LICENSE](LICENSE) para más detalles.
+
+## 📞 Soporte y Contacto
+
+- 🐛 **Issues**: [GitHub Issues](https://github.com/FrancoCastro1990/auto-rpg-ts/issues)
+- 📧 **Email**: Para consultas específicas
+- 📖 **Documentación**: Este README y PLAN_V3.md
+
+---
+
+**⭐ Si te gusta este proyecto, considera darle una estrella en GitHub!**
+
+*Desarrollado con ❤️ usando TypeScript y Clean Architecture*
+
+*Última actualización: 16 de septiembre de 2025*
 
 ## 🚀 Estado del Proyecto
 

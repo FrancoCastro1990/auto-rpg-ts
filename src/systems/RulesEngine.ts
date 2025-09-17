@@ -465,3 +465,5 @@ export class RulesEngineWrapper {
     }
   }
 }
+
+export { RulesEngineWrapper as RulesEngine };

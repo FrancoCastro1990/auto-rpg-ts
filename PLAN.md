@@ -1,190 +1,281 @@
 # RPG Auto-Battler Development Plan
 
 ## Project Overview
-Development of a TypeScript-based RPG auto-battler that runs in console, featuring automated combat with configurable rules, dungeon exploration, and party management.
+Transformación del RPG auto-battler de consola a una **REST API moderna** usando Clean Architecture, MongoDB, Docker y TypeScript. El proyecto mantiene la lógica de combate automatizada pero expone funcionalidades vía API REST.
 
 ## Task Breakdown
 
-### T001: Project Setup and Configuration (OK)
-**Quiero** establecer la estructura base del proyecto con TypeScript y dependencias
-**Para** tener un entorno de desarrollo funcional y organizdo
+### R001: Express.js Base Setup ✅ COMPLETADO
+**Quiero** establecer la base de Express.js con TypeScript
+**Para** tener un servidor REST API funcional
 
-- Initialize npm project with TypeScript configuration
-- Install dependencies: json-rules-engine, chalk, @types/node
-- Configure tsconfig.json and build scripts
-- Create basic folder structure (/src, /data, /dist)
+- ✅ Configurar Express.js con TypeScript y estructura modular
+- ✅ Instalar dependencias: express, @types/express, cors, helmet, dotenv
+- ✅ Crear estructura básica de servidor con configuración centralizada
+- ✅ Configurar middlewares básicos (CORS, JSON parsing, security headers)
+- ✅ Crear endpoint de health check con información del sistema
+- ✅ Configurar variables de entorno y validación
+- ✅ Implementar logging básico del servidor
+- ✅ Crear estructura de respuesta API consistente
 
-### T002: Core Data Models (OK)
-**Quiero** definir las interfaces y tipos TypeScript para el sistema
-**Para** tener una base sólida de tipado y estructura de datos
+### R002: Clean Architecture Structure ✅ COMPLETADO
+**Quiero** implementar la estructura de Clean Architecture
+**Para** tener una base sólida y mantenible
 
-- Define Character, Stats, Ability, Rule interfaces
-- Create Job, Enemy, Battle, Dungeon types
-- Implement Buff/Debuff system interfaces
-- Define Action and BattleResult types
+- ✅ Crear interfaces de dominio (entities/interfaces.ts)
+- ✅ Implementar interfaces de repositorio (repositories/interfaces.ts)
+- ✅ Definir contratos de casos de uso (use-cases/interfaces.ts)
+- ✅ Configurar contenedor de inyección de dependencias
+- ✅ Crear archivos index.ts para exportaciones limpias
+- ✅ Documentar arquitectura (CLEAN_ARCHITECTURE.md)
 
-### T003: JSON Data Loaders (OK)
-**Quiero** crear loaders para leer y validar archivos JSON
-**Para** poder cargar la configuración del juego de manera robusta
+### R003: MongoDB Models (PENDIENTE)
+**Quiero** crear los modelos de MongoDB con Mongoose
+**Para** tener persistencia de datos estructurada
 
-- Implement DataLoader class for JSON files
-- Add validation for party.json structure
-- Add validation for jobs.json structure
-- Add validation for skills.json structure
-- Add validation for enemies.json and dungeon files
-- Error handling for missing or malformed files
+- Crear esquemas de Mongoose para entidades principales
+- Implementar validaciones de esquema
+- Crear índices para consultas frecuentes
+- Configurar conexión a MongoDB
+- Implementar modelos concretos (Player, Party, Dungeon, etc.)
 
-### T004: Rules Engine Integration (OK)
-**Quiero** integrar json-rules-engine para el sistema de combate
-**Para** permitir comportamientos configurables y complejos
+### R004: Docker Compose Setup ✅ COMPLETADO
+**Quiero** configurar Docker para MongoDB
+**Para** tener un entorno de desarrollo consistente
 
-- Create RulesEngine wrapper class
-- Implement condition evaluators (hp%, enemy.isBoss, etc.)
-- Create facts builder for battle context
-- Add rule priority handling system
+- ✅ Crear docker-compose.yml con MongoDB
+- ✅ Configurar volúmenes persistentes
+- ✅ Exponer puerto 27018 para evitar conflictos
+- ✅ Agregar scripts de inicialización
+- ✅ Verificar conexión desde la aplicación
 
-### T005: Target Selection System (OK)
-**Quiero** implementar el sistema de selección de objetivos
-**Para** que las reglas puedan elegir targets apropiados
+### R005: Domain Models Implementation (PENDIENTE)
+**Quiero** implementar las entidades de dominio concretas
+**Para** tener objetos de negocio funcionales
 
-- Implement TargetSelector class
-- Add weakestEnemy, strongestEnemy selectors
-- Add lowestHpAlly, randomAlly selectors
-- Add bossEnemy, self targeting
-- Handle edge cases (no valid targets)
+- Crear clases concretas de entidades (Player, Party, etc.)
+- Implementar value objects (Stats, Experience, etc.)
+- Agregar validaciones de dominio con Zod
+- Crear factories para construcción de objetos
+- Implementar métodos de negocio en entidades
 
-### T006: Combat System Core (OK)
-**Quiero** crear el sistema central de combate por turnos
-**Para** ejecutar batallas automáticas según las reglas
+### R006: Repository Implementations (PENDIENTE)
+**Quiero** implementar repositorios concretos con MongoDB
+**Para** tener acceso a datos funcional
 
-- Implement BattleSystem class
-- Create turn order calculation (by speed)
-- Add action execution pipeline
-- Implement battle state management
-- Add victory/defeat conditions
+- Crear MongoPlayerRepository implementando IPlayerRepository
+- Crear MongoPartyRepository implementando IPartyRepository
+- Crear MongoDungeonRepository implementando IDungeonRepository
+- Implementar consultas complejas y filtros
+- Agregar manejo de errores de base de datos
 
-### T007: Ability and Damage System (OK)
-**Quiero** implementar el sistema de habilidades y cálculo de daño
-**Para** que los personajes puedan usar ataques y habilidades especiales
+### R007: Battle System Use Cases (PENDIENTE)
+**Quiero** implementar casos de uso del sistema de combate
+**Para** tener lógica de negocio encapsulada
 
-- Create AbilitySystem class
-- Implement damage calculation formulas
-- Add healing and buff/debuff effects
-- Handle MP consumption and validation
-- Add ability type handlers (attack, heal, buff, debuff)
+- Crear ExecuteBattleUseCase
+- Crear CalculateTurnOrderUseCase
+- Crear ProcessBattleActionUseCase
+- Implementar validaciones de reglas de combate
+- Agregar logging de batalla
 
-### T008: Character Management (OK)
-**Quiero** crear el sistema de gestión de personajes
-**Para** manejar stats, buffs y estado entre batallas
+### R008: Dungeon Management Use Cases (PENDIENTE)
+**Quiero** implementar casos de uso de gestión de dungeons
+**Para** coordinar secuencias de batalla
 
-- Implement Character class with stats management
-- Add buff/debuff application and duration
-- Create character factory from job data
-- Add level scaling and stat calculation
-- Implement state persistence between battles
+- Crear ExecuteDungeonUseCase
+- Crear ManagePartyStateUseCase
+- Crear GenerateDungeonReportUseCase
+- Implementar lógica de progresión
+- Agregar validaciones de dungeon
 
-## T008_ESPECIAL
-**Quiero** corregir los errores
-**Para** poder avanzar con el resto de tareas.
+### R009: Character Management Use Cases (PENDIENTE)
+**Quiero** implementar casos de uso de gestión de personajes
+**Para** manejar stats, buffs y leveling
 
-- tenemos un error. No tenemos alguna validacion de MP de los skills, por ende los actores intentan ocupar skills sin tener MP.
-- Falta el 'lowestHpEnemy'.
-- Los enemigos deben atacar a sus enemigos (nosotros).
-- La cantidad de turno debe venir dada en el json de dungeon_XX.json.
+- Crear CreateCharacterUseCase
+- Crear UpdateCharacterStatsUseCase
+- Crear ApplyBuffDebuffUseCase
+- Implementar sistema de experiencia
+- Agregar validaciones de personaje
 
-### T009: Dungeon Management
-**Quiero** crear el sistema de gestión de dungeons
-**Para** coordinar múltiples batallas y progresión
+### R010: Zod Validation Schemas (PENDIENTE)
+**Quiero** crear esquemas de validación con Zod
+**Para** validar requests y responses de API
 
-- Implement DungeonManager class
-- Add battle sequence management
-- Handle party state between battles
-- Implement save/load functionality
-- Add dungeon completion detection
+- Crear esquemas para entidades principales
+- Implementar validación de requests HTTP
+- Crear esquemas para responses
+- Agregar validación de parámetros de ruta
+- Implementar manejo de errores de validación
 
-### T010: Battle Logging System
-**Quiero** implementar un sistema de logging detallado
-**Para** que el usuario pueda seguir el progreso de las batallas
+### R011: Error Handling Middleware (PENDIENTE)
+**Quiero** implementar middleware de manejo de errores
+**Para** tener respuestas de error consistentes
 
-- Create BattleLogger class
-- Add turn-by-turn action logging
-- Implement colored console output
-- Add battle summary reports
-- Create dungeon completion reports
+- Crear middleware de errores global
+- Implementar formateo de errores consistente
+- Agregar logging de errores
+- Crear tipos de error personalizados
+- Implementar recuperación de errores
 
-### T011: Sample Data Creation
-**Quiero** crear archivos JSON de ejemplo
-**Para** poder probar y demostrar el sistema
+### R012: Battle Controller (PENDIENTE)
+**Quiero** crear controlador para endpoints de batalla
+**Para** exponer funcionalidad de combate vía API
 
-- Create sample party.json with 2-3 characters
-- Create jobs.json with Warrior, Mage, Healer classes
-- Create enemies.json with basic enemy types
-- Create dungeon_01.json with progressive difficulty
-- Add boss enemy with special abilities
+- Crear POST /api/battles - Ejecutar batalla
+- Crear GET /api/battles/:id - Obtener resultado de batalla
+- Implementar validación de requests
+- Agregar documentación de endpoints
+- Crear DTOs para requests/responses
 
-### T012: Main Game Entry Point
-**Quiero** crear el punto de entrada principal del juego
-**Para** que se pueda ejecutar desde línea de comandos
+### R013: Dungeon Controller (PENDIENTE)
+**Quiero** crear controlador para endpoints de dungeon
+**Para** exponer gestión de dungeons vía API
 
-- Implement main.ts with CLI argument handling
-- Add game initialization sequence
-- Create game loop for dungeon execution
-- Add proper error handling and user feedback
-- Implement graceful shutdown
+- Crear POST /api/dungeons - Crear dungeon
+- Crear GET /api/dungeons/:id - Obtener dungeon
+- Crear POST /api/dungeons/:id/execute - Ejecutar dungeon
+- Implementar validación de requests
+- Agregar documentación de endpoints
 
-### T013: Error Handling and Validation
-**Quiero** agregar manejo robusto de errores
-**Para** que el juego sea estable y dé feedback útil
+### R014: Character Controller (PENDIENTE)
+**Quiero** crear controlador para endpoints de personajes
+**Para** exponer gestión de personajes vía API
 
-- Add comprehensive error handling
-- Implement data validation layers
-- Add user-friendly error messages
-- Handle edge cases in combat
-- Add logging for debugging
+- Crear POST /api/characters - Crear personaje
+- Crear GET /api/characters/:id - Obtener personaje
+- Crear PUT /api/characters/:id - Actualizar personaje
+- Crear GET /api/characters - Listar personajes
+- Implementar validación de requests
 
-### T014: Testing and Documentation
-**Quiero** crear tests y documentación
-**Para** asegurar calidad y facilitar mantenimiento
+### R015: Route Configuration (PENDIENTE)
+**Quiero** configurar las rutas de la aplicación
+**Para** tener una estructura de endpoints organizada
 
-- Create unit tests for core systems
-- Add integration tests for battle scenarios
-- Write README with setup and usage instructions
-- Document JSON file formats
-- Add code comments and JSDoc
+- Crear archivos de rutas separados por dominio
+- Configurar middleware de rutas
+- Implementar versionado de API (v1)
+- Agregar documentación de rutas
+- Crear middleware de autenticación (futuro)
+
+### R016: API Documentation (PENDIENTE)
+**Quiero** documentar la API
+**Para** facilitar el uso y desarrollo
+
+- Crear documentación con OpenAPI/Swagger
+- Documentar todos los endpoints
+- Agregar ejemplos de requests/responses
+- Crear guía de uso de la API
+- Documentar esquemas de datos
+
+### R017: Testing Setup (PENDIENTE)
+**Quiero** configurar el entorno de testing
+**Para** asegurar calidad del código
+
+- Instalar Jest y dependencias de testing
+- Configurar tests unitarios para casos de uso
+- Crear tests de integración para controladores
+- Implementar tests de repositorio
+- Agregar tests de validación
+
+### R018: Docker for Application (PENDIENTE)
+**Quiero** dockerizar la aplicación
+**Para** tener despliegue consistente
+
+- Crear Dockerfile para la aplicación
+- Actualizar docker-compose.yml
+- Configurar variables de entorno
+- Agregar health checks
+- Crear script de despliegue
+
+### R019: Legacy Logic Migration & Data Seeding ✅ COMPLETADO
+**Quiero** transformar la lógica existente del sistema de combate en servicios y migrar datos JSON a MongoDB
+**Para** preservar la funcionalidad existente mientras integramos con la nueva arquitectura
+
+- ✅ Analizar lógica existente en sistemas originales (BattleSystem, RulesEngine, etc.)
+- ✅ Crear servicios de dominio para encapsular lógica de combate
+- ✅ Migrar datos de jobs.json a colección Jobs en MongoDB (5 registros)
+- ✅ Migrar datos de skills.json a colección Skills en MongoDB (59 registros)
+- ✅ Migrar datos de enemies.json a colección Enemies en MongoDB (14 registros)
+- ✅ Migrar datos de dungeon_01.json a colección Dungeons en MongoDB (1 registro)
+- ✅ Crear scripts de seeding para poblar base de datos con datos iniciales
+- 🔄 Adaptar EntityFactory para trabajar con datos de base de datos
+- 🔄 Crear servicios para RulesEngine y TargetSelector
+- 🔄 Implementar servicio de BattleSystem como caso de uso
+- 🔄 Crear servicio de DungeonManager para exploración
+- 🔄 Integrar servicios con contenedor de dependencias
+- 🔄 Crear tests de integración para servicios migrados
+- 🔄 Documentar cambios y compatibilidad con lógica original
 
 ## Dependencies Required
-- `json-rules-engine`: Rules engine for combat logic
-- `chalk`: Console output coloring
-- `@types/node`: TypeScript definitions for Node.js
-- `typescript`: TypeScript compiler
-- `ts-node`: Development execution
-- `jest`: Testing framework (optional)
+### Core Dependencies
+- `express`: Framework web para Node.js
+- `@types/express`: Tipos TypeScript para Express
+- `mongoose`: ODM para MongoDB
+- `@types/mongoose`: Tipos TypeScript para Mongoose
+- `zod`: Validación de esquemas
+- `cors`: Middleware CORS
+- `helmet`: Seguridad básica
+- `dotenv`: Variables de entorno
+
+### Development Dependencies
+- `typescript`: Compilador TypeScript
+- `ts-node`: Ejecución directa de TypeScript
+- `@types/node`: Tipos Node.js
+- `@types/cors`: Tipos para CORS
+- `nodemon`: Recarga automática en desarrollo
+- `jest`: Framework de testing
+- `@types/jest`: Tipos para Jest
 
 ## File Structure
 ```
 auto-rpg-ts/
 ├── src/
-│   ├── models/          # Interfaces and types
-│   ├── systems/         # Core game systems
-│   ├── loaders/         # Data loading utilities
-│   ├── utils/           # Helper functions
-│   └── main.ts          # Entry point
-├── data/
-│   ├── party.json
-│   ├── jobs.json
-│   ├── enemies.json
-│   └── dungeon_01.json
-├── tests/
-├── dist/                # Compiled JavaScript
+│   ├── entities/              # 📋 Reglas de negocio puras
+│   │   ├── interfaces.ts     # Interfaces de dominio
+│   │   └── index.ts
+│   ├── use-cases/            # 🎯 Casos de uso
+│   │   ├── interfaces.ts     # Contratos de casos de uso
+│   │   └── index.ts
+│   ├── controllers/          # 🌐 Controladores HTTP
+│   │   └── index.ts
+│   ├── repositories/         # 💾 Repositorios
+│   │   ├── IBaseRepository.ts # Interfaz base
+│   │   ├── interfaces.ts     # Interfaces específicas
+│   │   └── index.ts
+│   ├── infrastructure/       # 🔧 Infraestructura
+│   │   ├── database.ts       # Conexión MongoDB
+│   │   ├── dependencyContainer.ts # DI Container
+│   │   ├── middleware/       # Middlewares Express
+│   │   └── index.ts
+│   └── index.ts              # Exportaciones principales
+├── data/                     # Archivos JSON originales
+├── tests/                    # Tests
+├── docker-compose.yml        # Docker configuration
+├── Dockerfile               # Container definition
 ├── package.json
 ├── tsconfig.json
+├── CLEAN_ARCHITECTURE.md    # 📚 Documentación de arquitectura
 └── README.md
 ```
 
 ## Success Criteria
-- ✅ Game runs from command line with dungeon file parameter
-- ✅ Automated combat follows configured rules
-- ✅ Detailed battle logging to console
-- ✅ Party state persistence between battles
-- ✅ Configurable characters, enemies, and dungeons via JSON
-- ✅ Extensible system for new jobs and abilities
+- ✅ API REST funcional con Express.js
+- ✅ Arquitectura limpia implementada
+- ✅ MongoDB con Docker funcionando
+- 🔄 Endpoints CRUD para entidades principales
+- 🔄 Sistema de combate automatizado vía API
+- 🔄 Gestión de dungeons y progresión
+- 🔄 Validación robusta con Zod
+- 🔄 Documentación completa de API
+- 🔄 Tests unitarios e integración
+- 🔄 Docker containerizado completamente
+
+## Current Status
+- **R001**: ✅ Completado - Express.js base setup
+- **R002**: ✅ Completado - Clean Architecture structure
+- **R003**: 🔄 Pendiente - MongoDB models
+- **R004**: ✅ Completado - Docker Compose setup
+- **R005-R018**: 🔄 Pendientes - Implementación incremental
+- **R019**: ✅ Completado - Legacy Logic Migration & Data Seeding
