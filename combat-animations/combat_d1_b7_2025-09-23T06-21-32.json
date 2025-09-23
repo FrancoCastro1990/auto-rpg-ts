@@ -1,0 +1,4005 @@
+{
+  "metadata": {
+    "dungeonId": 1,
+    "dungeonName": "Cavernas de la Sombra",
+    "battleId": 7,
+    "battleOrder": 7,
+    "timestamp": "2025-09-23T06:21:32.708Z",
+    "duration": 0,
+    "victory": false,
+    "totalTurns": 12,
+    "maxTurns": 100
+  },
+  "initialState": {
+    "party": [
+      {
+        "id": "char_kael",
+        "name": "Kael",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 141,
+          "maxHp": 150,
+          "mp": 20,
+          "maxMp": 20,
+          "str": 18,
+          "def": 15,
+          "mag": 5,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "power_strike",
+          "shield_bash",
+          "taunt",
+          "earthquake",
+          "barrier",
+          "goblin_rush",
+          "berserker_rage",
+          "war_cry",
+          "ultimate_strike",
+          "perfect_defense",
+          "rage"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_luna",
+        "name": "Luna",
+        "job": "WhiteMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 80,
+          "maxHp": 80,
+          "mp": 50,
+          "maxMp": 50,
+          "str": 6,
+          "def": 8,
+          "mag": 20,
+          "spd": 12
+        },
+        "abilities": [
+          "basic_attack",
+          "heal",
+          "greater_heal",
+          "blessing",
+          "holy_light",
+          "regeneration",
+          "divine_shield",
+          "heal_all",
+          "resurrection"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_zara",
+        "name": "Zara",
+        "job": "BlackMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 70,
+          "maxHp": 70,
+          "mp": 52,
+          "maxMp": 60,
+          "str": 5,
+          "def": 6,
+          "mag": 25,
+          "spd": 10
+        },
+        "abilities": [
+          "basic_attack",
+          "fireball",
+          "lightning_bolt",
+          "curse",
+          "meteor",
+          "ice_blast",
+          "chain_lightning",
+          "dark_bolt",
+          "hex",
+          "life_drain",
+          "shadow_strike",
+          "soul_crusher",
+          "darkness_wave",
+          "shadow_regeneration",
+          "terror",
+          "chain_reaction",
+          "blood_magic",
+          "doom",
+          "elemental_fusion",
+          "time_stop",
+          "mirror_image"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_raven",
+        "name": "Raven",
+        "job": "Rogue",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 100,
+          "maxHp": 100,
+          "mp": 18,
+          "maxMp": 30,
+          "str": 14,
+          "def": 25,
+          "mag": 8,
+          "spd": 38
+        },
+        "abilities": [
+          "basic_attack",
+          "backstab",
+          "poison_blade",
+          "shadow_step",
+          "smoke_bomb",
+          "venom_strike",
+          "teleport",
+          "acid_spray"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_thrain",
+        "name": "Thrain",
+        "job": "Warrior",
+        "level": 2,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 145,
+          "maxHp": 165,
+          "mp": 22,
+          "maxMp": 22,
+          "str": 19,
+          "def": 16,
+          "mag": 5,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "power_strike",
+          "shield_bash",
+          "taunt",
+          "earthquake",
+          "barrier",
+          "goblin_rush",
+          "berserker_rage",
+          "war_cry",
+          "ultimate_strike",
+          "perfect_defense",
+          "rage"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_elara",
+        "name": "Elara",
+        "job": "WhiteMage",
+        "level": 2,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 88,
+          "maxHp": 88,
+          "mp": 55,
+          "maxMp": 55,
+          "str": 6,
+          "def": 8,
+          "mag": 22,
+          "spd": 13
+        },
+        "abilities": [
+          "basic_attack",
+          "heal",
+          "greater_heal",
+          "blessing",
+          "holy_light",
+          "regeneration",
+          "divine_shield",
+          "heal_all",
+          "resurrection"
+        ],
+        "buffs": []
+      }
+    ],
+    "enemies": [
+      {
+        "id": "enemy_malachar_el_señor_de_las_sombras",
+        "name": "Malachar el Señor de las Sombras",
+        "job": "BlackMage",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": true,
+        "stats": {
+          "hp": 500,
+          "maxHp": 500,
+          "mp": 80,
+          "maxMp": 80,
+          "str": 20,
+          "def": 18,
+          "mag": 22,
+          "spd": 25
+        },
+        "abilities": [
+          "basic_attack",
+          "shadow_strike",
+          "soul_crusher",
+          "darkness_wave",
+          "shadow_regeneration",
+          "terror",
+          "summon_skeleton"
+        ],
+        "buffs": []
+      }
+    ],
+    "turnOrder": [
+      "char_raven",
+      "enemy_malachar_el_señor_de_las_sombras",
+      "char_luna",
+      "enemy_skeleton_1",
+      "char_zara",
+      "char_elara",
+      "char_thrain",
+      "char_kael"
+    ]
+  },
+  "turns": [
+    {
+      "turnNumber": 1,
+      "timestamp": 1758608493708,
+      "actions": [
+        {
+          "id": "action_1_char_raven",
+          "actorId": "char_raven",
+          "actorName": "Raven",
+          "type": "ability",
+          "success": true,
+          "message": "Raven casts Backstab on Malachar el Señor de las Sombras for 30 damage (470/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "backstab",
+          "abilityName": "Backstab",
+          "mpCost": 6,
+          "damage": 30
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 500,
+              "after": 470,
+              "change": -30
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 2,
+      "timestamp": 1758608494708,
+      "actions": [
+        {
+          "id": "action_1_enemy_malachar_el_señor_de_las_sombras",
+          "actorId": "enemy_malachar_el_señor_de_las_sombras",
+          "actorName": "Malachar el Señor de las Sombras",
+          "type": "ability",
+          "success": true,
+          "message": "Malachar el Señor de las Sombras summons Skeleton 1 to join the battle!",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "summon_skeleton",
+          "abilityName": "Summon Skeleton",
+          "mpCost": 20
+        }
+      ],
+      "stateChanges": []
+    },
+    {
+      "turnNumber": 3,
+      "timestamp": 1758608495708,
+      "actions": [
+        {
+          "id": "action_1_char_luna",
+          "actorId": "char_luna",
+          "actorName": "Luna",
+          "type": "ability",
+          "success": true,
+          "message": "Luna casts Blessing on Malachar el Señor de las Sombras (buff applied for 4 turns)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "blessing",
+          "abilityName": "Blessing",
+          "mpCost": 12
+        }
+      ],
+      "stateChanges": []
+    },
+    {
+      "turnNumber": 4,
+      "timestamp": 1758608496708,
+      "actions": [
+        {
+          "id": "action_1_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Elara for 5 damage (83/88 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_elara",
+          "targetName": "Elara",
+          "damage": 5
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_elara",
+          "participantName": "Elara",
+          "statChanges": {
+            "hp": {
+              "before": 88,
+              "after": 83,
+              "change": -5
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 5,
+      "timestamp": 1758608497708,
+      "actions": [
+        {
+          "id": "action_1_char_zara",
+          "actorId": "char_zara",
+          "actorName": "Zara",
+          "type": "ability",
+          "success": true,
+          "message": "Zara casts Meteor on Malachar el Señor de las Sombras for 57 damage (413/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "meteor",
+          "abilityName": "Meteor",
+          "mpCost": 25,
+          "damage": 57
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 470,
+              "after": 413,
+              "change": -57
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 6,
+      "timestamp": 1758608498708,
+      "actions": [
+        {
+          "id": "action_1_char_elara",
+          "actorId": "char_elara",
+          "actorName": "Elara",
+          "type": "ability",
+          "success": true,
+          "message": "Elara casts Holy Light on Malachar el Señor de las Sombras for 27 damage (386/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "holy_light",
+          "abilityName": "Holy Light",
+          "mpCost": 10,
+          "damage": 27
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 413,
+              "after": 386,
+              "change": -27
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 7,
+      "timestamp": 1758608499708,
+      "actions": [
+        {
+          "id": "action_1_char_thrain",
+          "actorId": "char_thrain",
+          "actorName": "Thrain",
+          "type": "ability",
+          "success": true,
+          "message": "Thrain casts Shield Bash on Malachar el Señor de las Sombras for 6 damage (380/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "shield_bash",
+          "abilityName": "Shield Bash",
+          "mpCost": 3,
+          "damage": 6
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 386,
+              "after": 380,
+              "change": -6
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 8,
+      "timestamp": 1758608500708,
+      "actions": [
+        {
+          "id": "action_1_char_kael",
+          "actorId": "char_kael",
+          "actorName": "Kael",
+          "type": "ability",
+          "success": true,
+          "message": "Kael casts Power Strike on Malachar el Señor de las Sombras for 16 damage (364/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "power_strike",
+          "abilityName": "Power Strike",
+          "mpCost": 5,
+          "damage": 16
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 380,
+              "after": 364,
+              "change": -16
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 9,
+      "timestamp": 1758608501708,
+      "actions": [
+        {
+          "id": "action_2_char_raven",
+          "actorId": "char_raven",
+          "actorName": "Raven",
+          "type": "ability",
+          "success": true,
+          "message": "Raven casts Backstab on Malachar el Señor de las Sombras for 33 damage (331/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "backstab",
+          "abilityName": "Backstab",
+          "mpCost": 6,
+          "damage": 33
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 364,
+              "after": 331,
+              "change": -33
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 10,
+      "timestamp": 1758608502708,
+      "actions": [
+        {
+          "id": "action_2_enemy_malachar_el_señor_de_las_sombras",
+          "actorId": "enemy_malachar_el_señor_de_las_sombras",
+          "actorName": "Malachar el Señor de las Sombras",
+          "type": "attack",
+          "success": true,
+          "message": "Malachar el Señor de las Sombras attacks Elara for 23 damage (60/88 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_elara",
+          "targetName": "Elara",
+          "damage": 23
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_elara",
+          "participantName": "Elara",
+          "statChanges": {
+            "hp": {
+              "before": 83,
+              "after": 60,
+              "change": -23
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 11,
+      "timestamp": 1758608503708,
+      "actions": [
+        {
+          "id": "action_2_char_zara",
+          "actorId": "char_zara",
+          "actorName": "Zara",
+          "type": "attack",
+          "success": true,
+          "message": "Zara attacks Malachar el Señor de las Sombras for 1 damage (330/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 331,
+              "after": 330,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 12,
+      "timestamp": 1758608504708,
+      "actions": [
+        {
+          "id": "action_2_char_luna",
+          "actorId": "char_luna",
+          "actorName": "Luna",
+          "type": "ability",
+          "success": true,
+          "message": "Luna casts Blessing on Malachar el Señor de las Sombras (buff applied for 4 turns)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "blessing",
+          "abilityName": "Blessing",
+          "mpCost": 12
+        }
+      ],
+      "stateChanges": []
+    },
+    {
+      "turnNumber": 13,
+      "timestamp": 1758608505708,
+      "actions": [
+        {
+          "id": "action_2_char_elara",
+          "actorId": "char_elara",
+          "actorName": "Elara",
+          "type": "ability",
+          "success": true,
+          "message": "Elara casts Holy Light on Malachar el Señor de las Sombras for 30 damage (300/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "holy_light",
+          "abilityName": "Holy Light",
+          "mpCost": 10,
+          "damage": 30
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 330,
+              "after": 300,
+              "change": -30
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 14,
+      "timestamp": 1758608506708,
+      "actions": [
+        {
+          "id": "action_2_char_kael",
+          "actorId": "char_kael",
+          "actorName": "Kael",
+          "type": "ability",
+          "success": true,
+          "message": "Kael casts Power Strike on Malachar el Señor de las Sombras for 14 damage (286/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "power_strike",
+          "abilityName": "Power Strike",
+          "mpCost": 5,
+          "damage": 14
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 300,
+              "after": 286,
+              "change": -14
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 15,
+      "timestamp": 1758608507708,
+      "actions": [
+        {
+          "id": "action_2_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Luna for 4 damage (76/80 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_luna",
+          "targetName": "Luna",
+          "damage": 4
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_luna",
+          "participantName": "Luna",
+          "statChanges": {
+            "hp": {
+              "before": 80,
+              "after": 76,
+              "change": -4
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 16,
+      "timestamp": 1758608508708,
+      "actions": [
+        {
+          "id": "action_2_char_thrain",
+          "actorId": "char_thrain",
+          "actorName": "Thrain",
+          "type": "ability",
+          "success": true,
+          "message": "Thrain casts Shield Bash on Malachar el Señor de las Sombras for 3 damage (283/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "shield_bash",
+          "abilityName": "Shield Bash",
+          "mpCost": 3,
+          "damage": 3
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 286,
+              "after": 283,
+              "change": -3
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 17,
+      "timestamp": 1758608509708,
+      "actions": [
+        {
+          "id": "action_3_char_raven",
+          "actorId": "char_raven",
+          "actorName": "Raven",
+          "type": "ability",
+          "success": true,
+          "message": "Raven casts Backstab on Malachar el Señor de las Sombras for 32 damage (251/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "backstab",
+          "abilityName": "Backstab",
+          "mpCost": 6,
+          "damage": 32
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 283,
+              "after": 251,
+              "change": -32
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 18,
+      "timestamp": 1758608510708,
+      "actions": [
+        {
+          "id": "action_3_enemy_malachar_el_señor_de_las_sombras",
+          "actorId": "enemy_malachar_el_señor_de_las_sombras",
+          "actorName": "Malachar el Señor de las Sombras",
+          "type": "attack",
+          "success": true,
+          "message": "Malachar el Señor de las Sombras attacks Luna for 30 damage (46/80 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_luna",
+          "targetName": "Luna",
+          "damage": 30
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_luna",
+          "participantName": "Luna",
+          "statChanges": {
+            "hp": {
+              "before": 76,
+              "after": 46,
+              "change": -30
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 19,
+      "timestamp": 1758608511708,
+      "actions": [
+        {
+          "id": "action_3_char_luna",
+          "actorId": "char_luna",
+          "actorName": "Luna",
+          "type": "ability",
+          "success": true,
+          "message": "Luna casts Heal on Luna healing 34 HP (80/80 HP)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "char_luna",
+          "targetName": "Luna",
+          "abilityId": "heal",
+          "abilityName": "Heal",
+          "mpCost": 8,
+          "heal": 34
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_luna",
+          "participantName": "Luna",
+          "statChanges": {
+            "hp": {
+              "before": 46,
+              "after": 80,
+              "change": 34
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 20,
+      "timestamp": 1758608512708,
+      "actions": [
+        {
+          "id": "action_3_char_thrain",
+          "actorId": "char_thrain",
+          "actorName": "Thrain",
+          "type": "ability",
+          "success": true,
+          "message": "Thrain casts Shield Bash on Malachar el Señor de las Sombras for 2 damage (249/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "shield_bash",
+          "abilityName": "Shield Bash",
+          "mpCost": 3,
+          "damage": 2
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 251,
+              "after": 249,
+              "change": -2
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 21,
+      "timestamp": 1758608513708,
+      "actions": [
+        {
+          "id": "action_3_char_zara",
+          "actorId": "char_zara",
+          "actorName": "Zara",
+          "type": "attack",
+          "success": true,
+          "message": "Zara attacks Malachar el Señor de las Sombras for 1 damage (248/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 249,
+              "after": 248,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 22,
+      "timestamp": 1758608514708,
+      "actions": [
+        {
+          "id": "action_3_char_kael",
+          "actorId": "char_kael",
+          "actorName": "Kael",
+          "type": "ability",
+          "success": true,
+          "message": "Kael casts Power Strike on Malachar el Señor de las Sombras for 14 damage (234/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "power_strike",
+          "abilityName": "Power Strike",
+          "mpCost": 5,
+          "damage": 14
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 248,
+              "after": 234,
+              "change": -14
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 23,
+      "timestamp": 1758608515708,
+      "actions": [
+        {
+          "id": "action_3_char_elara",
+          "actorId": "char_elara",
+          "actorName": "Elara",
+          "type": "ability",
+          "success": true,
+          "message": "Elara casts Holy Light on Malachar el Señor de las Sombras for 28 damage (206/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "holy_light",
+          "abilityName": "Holy Light",
+          "mpCost": 10,
+          "damage": 28
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 234,
+              "after": 206,
+              "change": -28
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 24,
+      "timestamp": 1758608516708,
+      "actions": [
+        {
+          "id": "action_3_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Raven for 1 damage (99/100 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_raven",
+          "targetName": "Raven",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_raven",
+          "participantName": "Raven",
+          "statChanges": {
+            "hp": {
+              "before": 100,
+              "after": 99,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 25,
+      "timestamp": 1758608517708,
+      "actions": [
+        {
+          "id": "action_4_char_raven",
+          "actorId": "char_raven",
+          "actorName": "Raven",
+          "type": "attack",
+          "success": true,
+          "message": "Raven attacks Malachar el Señor de las Sombras for 1 damage (205/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 206,
+              "after": 205,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 26,
+      "timestamp": 1758608518708,
+      "actions": [
+        {
+          "id": "action_4_enemy_malachar_el_señor_de_las_sombras",
+          "actorId": "enemy_malachar_el_señor_de_las_sombras",
+          "actorName": "Malachar el Señor de las Sombras",
+          "type": "attack",
+          "success": true,
+          "message": "Malachar el Señor de las Sombras attacks Raven for 15 damage (84/100 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_raven",
+          "targetName": "Raven",
+          "damage": 15
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_raven",
+          "participantName": "Raven",
+          "statChanges": {
+            "hp": {
+              "before": 99,
+              "after": 84,
+              "change": -15
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 27,
+      "timestamp": 1758608519708,
+      "actions": [
+        {
+          "id": "action_4_char_luna",
+          "actorId": "char_luna",
+          "actorName": "Luna",
+          "type": "ability",
+          "success": true,
+          "message": "Luna casts Blessing on Malachar el Señor de las Sombras (buff applied for 4 turns)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "blessing",
+          "abilityName": "Blessing",
+          "mpCost": 12
+        }
+      ],
+      "stateChanges": []
+    },
+    {
+      "turnNumber": 28,
+      "timestamp": 1758608520708,
+      "actions": [
+        {
+          "id": "action_4_char_elara",
+          "actorId": "char_elara",
+          "actorName": "Elara",
+          "type": "ability",
+          "success": true,
+          "message": "Elara casts Holy Light on Malachar el Señor de las Sombras for 26 damage (179/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "holy_light",
+          "abilityName": "Holy Light",
+          "mpCost": 10,
+          "damage": 26
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 205,
+              "after": 179,
+              "change": -26
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 29,
+      "timestamp": 1758608521708,
+      "actions": [
+        {
+          "id": "action_4_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Luna for 4 damage (76/80 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_luna",
+          "targetName": "Luna",
+          "damage": 4
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_luna",
+          "participantName": "Luna",
+          "statChanges": {
+            "hp": {
+              "before": 80,
+              "after": 76,
+              "change": -4
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 30,
+      "timestamp": 1758608522708,
+      "actions": [
+        {
+          "id": "action_4_char_zara",
+          "actorId": "char_zara",
+          "actorName": "Zara",
+          "type": "attack",
+          "success": true,
+          "message": "Zara attacks Malachar el Señor de las Sombras for 1 damage (178/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 179,
+              "after": 178,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 31,
+      "timestamp": 1758608523708,
+      "actions": [
+        {
+          "id": "action_4_char_kael",
+          "actorId": "char_kael",
+          "actorName": "Kael",
+          "type": "ability",
+          "success": true,
+          "message": "Kael casts Power Strike on Malachar el Señor de las Sombras for 12 damage (166/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "power_strike",
+          "abilityName": "Power Strike",
+          "mpCost": 5,
+          "damage": 12
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 178,
+              "after": 166,
+              "change": -12
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 32,
+      "timestamp": 1758608524708,
+      "actions": [
+        {
+          "id": "action_4_char_thrain",
+          "actorId": "char_thrain",
+          "actorName": "Thrain",
+          "type": "ability",
+          "success": true,
+          "message": "Thrain casts Shield Bash on Malachar el Señor de las Sombras for 2 damage (164/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "shield_bash",
+          "abilityName": "Shield Bash",
+          "mpCost": 3,
+          "damage": 2
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 166,
+              "after": 164,
+              "change": -2
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 33,
+      "timestamp": 1758608525708,
+      "actions": [
+        {
+          "id": "action_5_char_raven",
+          "actorId": "char_raven",
+          "actorName": "Raven",
+          "type": "attack",
+          "success": true,
+          "message": "Raven attacks Malachar el Señor de las Sombras for 1 damage (163/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 164,
+              "after": 163,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 34,
+      "timestamp": 1758608526708,
+      "actions": [
+        {
+          "id": "action_5_enemy_malachar_el_señor_de_las_sombras",
+          "actorId": "enemy_malachar_el_señor_de_las_sombras",
+          "actorName": "Malachar el Señor de las Sombras",
+          "type": "attack",
+          "success": true,
+          "message": "Malachar el Señor de las Sombras attacks Zara for 33 damage (37/70 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_zara",
+          "targetName": "Zara",
+          "damage": 33
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_zara",
+          "participantName": "Zara",
+          "statChanges": {
+            "hp": {
+              "before": 70,
+              "after": 37,
+              "change": -33
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 35,
+      "timestamp": 1758608527708,
+      "actions": [
+        {
+          "id": "action_5_char_luna",
+          "actorId": "char_luna",
+          "actorName": "Luna",
+          "type": "attack",
+          "success": true,
+          "message": "Luna attacks Zara for 3 damage (34/70 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_zara",
+          "targetName": "Zara",
+          "damage": 3
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_zara",
+          "participantName": "Zara",
+          "statChanges": {
+            "hp": {
+              "before": 37,
+              "after": 34,
+              "change": -3
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 36,
+      "timestamp": 1758608528708,
+      "actions": [
+        {
+          "id": "action_5_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Elara for 4 damage (56/88 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_elara",
+          "targetName": "Elara",
+          "damage": 4
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_elara",
+          "participantName": "Elara",
+          "statChanges": {
+            "hp": {
+              "before": 60,
+              "after": 56,
+              "change": -4
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 37,
+      "timestamp": 1758608529708,
+      "actions": [
+        {
+          "id": "action_5_char_elara",
+          "actorId": "char_elara",
+          "actorName": "Elara",
+          "type": "ability",
+          "success": true,
+          "message": "Elara casts Heal on Zara healing 36 HP (70/70 HP)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "char_zara",
+          "targetName": "Zara",
+          "abilityId": "heal",
+          "abilityName": "Heal",
+          "mpCost": 8,
+          "heal": 36
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_zara",
+          "participantName": "Zara",
+          "statChanges": {
+            "hp": {
+              "before": 34,
+              "after": 70,
+              "change": 36
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 38,
+      "timestamp": 1758608530708,
+      "actions": [
+        {
+          "id": "action_5_char_kael",
+          "actorId": "char_kael",
+          "actorName": "Kael",
+          "type": "attack",
+          "success": true,
+          "message": "Kael attacks Malachar el Señor de las Sombras for 4 damage (159/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 4
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 163,
+              "after": 159,
+              "change": -4
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 39,
+      "timestamp": 1758608531708,
+      "actions": [
+        {
+          "id": "action_5_char_thrain",
+          "actorId": "char_thrain",
+          "actorName": "Thrain",
+          "type": "ability",
+          "success": true,
+          "message": "Thrain casts Shield Bash on Malachar el Señor de las Sombras for 2 damage (157/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "shield_bash",
+          "abilityName": "Shield Bash",
+          "mpCost": 3,
+          "damage": 2
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 159,
+              "after": 157,
+              "change": -2
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 40,
+      "timestamp": 1758608532708,
+      "actions": [
+        {
+          "id": "action_5_char_zara",
+          "actorId": "char_zara",
+          "actorName": "Zara",
+          "type": "ability",
+          "success": true,
+          "message": "Zara casts Meteor on Malachar el Señor de las Sombras for 59 damage (98/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "meteor",
+          "abilityName": "Meteor",
+          "mpCost": 25,
+          "damage": 59
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 157,
+              "after": 98,
+              "change": -59
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 41,
+      "timestamp": 1758608533708,
+      "actions": [
+        {
+          "id": "action_6_char_raven",
+          "actorId": "char_raven",
+          "actorName": "Raven",
+          "type": "attack",
+          "success": true,
+          "message": "Raven attacks Malachar el Señor de las Sombras for 1 damage (97/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 98,
+              "after": 97,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 42,
+      "timestamp": 1758608534708,
+      "actions": [
+        {
+          "id": "action_6_enemy_malachar_el_señor_de_las_sombras",
+          "actorId": "enemy_malachar_el_señor_de_las_sombras",
+          "actorName": "Malachar el Señor de las Sombras",
+          "type": "ability",
+          "success": true,
+          "message": "Malachar el Señor de las Sombras summons Skeleton 1 to join the battle!",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "summon_skeleton",
+          "abilityName": "Summon Skeleton",
+          "mpCost": 20
+        }
+      ],
+      "stateChanges": []
+    },
+    {
+      "turnNumber": 43,
+      "timestamp": 1758608535708,
+      "actions": [
+        {
+          "id": "action_6_char_elara",
+          "actorId": "char_elara",
+          "actorName": "Elara",
+          "type": "attack",
+          "success": true,
+          "message": "Elara attacks Malachar el Señor de las Sombras for 1 damage (96/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 97,
+              "after": 96,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 44,
+      "timestamp": 1758608536708,
+      "actions": [
+        {
+          "id": "action_6_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Luna for 4 damage (72/80 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_luna",
+          "targetName": "Luna",
+          "damage": 4
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_luna",
+          "participantName": "Luna",
+          "statChanges": {
+            "hp": {
+              "before": 76,
+              "after": 72,
+              "change": -4
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 45,
+      "timestamp": 1758608537708,
+      "actions": [
+        {
+          "id": "action_6_char_luna",
+          "actorId": "char_luna",
+          "actorName": "Luna",
+          "type": "attack",
+          "success": true,
+          "message": "Luna attacks Malachar el Señor de las Sombras for 1 damage (95/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 96,
+              "after": 95,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 46,
+      "timestamp": 1758608538708,
+      "actions": [
+        {
+          "id": "action_6_char_zara",
+          "actorId": "char_zara",
+          "actorName": "Zara",
+          "type": "attack",
+          "success": true,
+          "message": "Zara attacks Malachar el Señor de las Sombras for 1 damage (94/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 95,
+              "after": 94,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 47,
+      "timestamp": 1758608539708,
+      "actions": [
+        {
+          "id": "action_6_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Raven for 1 damage (83/100 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_raven",
+          "targetName": "Raven",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_raven",
+          "participantName": "Raven",
+          "statChanges": {
+            "hp": {
+              "before": 84,
+              "after": 83,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 48,
+      "timestamp": 1758608540708,
+      "actions": [
+        {
+          "id": "action_6_char_kael",
+          "actorId": "char_kael",
+          "actorName": "Kael",
+          "type": "attack",
+          "success": true,
+          "message": "Kael attacks Malachar el Señor de las Sombras for 3 damage (91/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 3
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 94,
+              "after": 91,
+              "change": -3
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 49,
+      "timestamp": 1758608541708,
+      "actions": [
+        {
+          "id": "action_6_char_thrain",
+          "actorId": "char_thrain",
+          "actorName": "Thrain",
+          "type": "ability",
+          "success": true,
+          "message": "Thrain casts Shield Bash on Malachar el Señor de las Sombras for 4 damage (87/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "shield_bash",
+          "abilityName": "Shield Bash",
+          "mpCost": 3,
+          "damage": 4
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 91,
+              "after": 87,
+              "change": -4
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 50,
+      "timestamp": 1758608542708,
+      "actions": [
+        {
+          "id": "action_7_char_raven",
+          "actorId": "char_raven",
+          "actorName": "Raven",
+          "type": "attack",
+          "success": true,
+          "message": "Raven attacks Malachar el Señor de las Sombras for 1 damage (86/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 87,
+              "after": 86,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 51,
+      "timestamp": 1758608543708,
+      "actions": [
+        {
+          "id": "action_7_enemy_malachar_el_señor_de_las_sombras",
+          "actorId": "enemy_malachar_el_señor_de_las_sombras",
+          "actorName": "Malachar el Señor de las Sombras",
+          "type": "ability",
+          "success": true,
+          "message": "Malachar el Señor de las Sombras casts Shadow Regeneration on Malachar el Señor de las Sombras healing 56 HP (142/500 HP)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "shadow_regeneration",
+          "abilityName": "Shadow Regeneration",
+          "mpCost": 18,
+          "heal": 56
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 86,
+              "after": 142,
+              "change": 56
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 52,
+      "timestamp": 1758608544708,
+      "actions": [
+        {
+          "id": "action_7_char_elara",
+          "actorId": "char_elara",
+          "actorName": "Elara",
+          "type": "attack",
+          "success": true,
+          "message": "Elara attacks Malachar el Señor de las Sombras for 1 damage (141/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 142,
+              "after": 141,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 53,
+      "timestamp": 1758608545708,
+      "actions": [
+        {
+          "id": "action_7_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Zara for 4 damage (66/70 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_zara",
+          "targetName": "Zara",
+          "damage": 4
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_zara",
+          "participantName": "Zara",
+          "statChanges": {
+            "hp": {
+              "before": 70,
+              "after": 66,
+              "change": -4
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 54,
+      "timestamp": 1758608546708,
+      "actions": [
+        {
+          "id": "action_7_char_zara",
+          "actorId": "char_zara",
+          "actorName": "Zara",
+          "type": "attack",
+          "success": true,
+          "message": "Zara attacks Malachar el Señor de las Sombras for 1 damage (140/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 141,
+              "after": 140,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 55,
+      "timestamp": 1758608547708,
+      "actions": [
+        {
+          "id": "action_7_char_thrain",
+          "actorId": "char_thrain",
+          "actorName": "Thrain",
+          "type": "ability",
+          "success": true,
+          "message": "Thrain casts Shield Bash on Malachar el Señor de las Sombras for 6 damage (134/500 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "shield_bash",
+          "abilityName": "Shield Bash",
+          "mpCost": 3,
+          "damage": 6
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 140,
+              "after": 134,
+              "change": -6
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 56,
+      "timestamp": 1758608548708,
+      "actions": [
+        {
+          "id": "action_7_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Elara for 5 damage (51/88 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_elara",
+          "targetName": "Elara",
+          "damage": 5
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_elara",
+          "participantName": "Elara",
+          "statChanges": {
+            "hp": {
+              "before": 56,
+              "after": 51,
+              "change": -5
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 57,
+      "timestamp": 1758608549708,
+      "actions": [
+        {
+          "id": "action_7_char_kael",
+          "actorId": "char_kael",
+          "actorName": "Kael",
+          "type": "attack",
+          "success": true,
+          "message": "Kael attacks Malachar el Señor de las Sombras for 2 damage (132/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 2
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 134,
+              "after": 132,
+              "change": -2
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 58,
+      "timestamp": 1758608550708,
+      "actions": [
+        {
+          "id": "action_7_char_luna",
+          "actorId": "char_luna",
+          "actorName": "Luna",
+          "type": "attack",
+          "success": true,
+          "message": "Luna attacks Elara for 1 damage (50/88 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_elara",
+          "targetName": "Elara",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_elara",
+          "participantName": "Elara",
+          "statChanges": {
+            "hp": {
+              "before": 51,
+              "after": 50,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 59,
+      "timestamp": 1758608551708,
+      "actions": [
+        {
+          "id": "action_8_char_raven",
+          "actorId": "char_raven",
+          "actorName": "Raven",
+          "type": "attack",
+          "success": true,
+          "message": "Raven attacks Malachar el Señor de las Sombras for 1 damage (131/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 132,
+              "after": 131,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 60,
+      "timestamp": 1758608552708,
+      "actions": [
+        {
+          "id": "action_8_enemy_malachar_el_señor_de_las_sombras",
+          "actorId": "enemy_malachar_el_señor_de_las_sombras",
+          "actorName": "Malachar el Señor de las Sombras",
+          "type": "ability",
+          "success": true,
+          "message": "Malachar el Señor de las Sombras casts Shadow Regeneration on Malachar el Señor de las Sombras healing 55 HP (186/500 HP)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "abilityId": "shadow_regeneration",
+          "abilityName": "Shadow Regeneration",
+          "mpCost": 18,
+          "heal": 55
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 131,
+              "after": 186,
+              "change": 55
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 61,
+      "timestamp": 1758608553708,
+      "actions": [
+        {
+          "id": "action_8_char_luna",
+          "actorId": "char_luna",
+          "actorName": "Luna",
+          "type": "attack",
+          "success": true,
+          "message": "Luna attacks Elara for 2 damage (48/88 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_elara",
+          "targetName": "Elara",
+          "damage": 2
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_elara",
+          "participantName": "Elara",
+          "statChanges": {
+            "hp": {
+              "before": 50,
+              "after": 48,
+              "change": -2
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 62,
+      "timestamp": 1758608554708,
+      "actions": [
+        {
+          "id": "action_8_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Zara for 4 damage (62/70 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_zara",
+          "targetName": "Zara",
+          "damage": 4
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_zara",
+          "participantName": "Zara",
+          "statChanges": {
+            "hp": {
+              "before": 66,
+              "after": 62,
+              "change": -4
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 63,
+      "timestamp": 1758608555708,
+      "actions": [
+        {
+          "id": "action_8_char_elara",
+          "actorId": "char_elara",
+          "actorName": "Elara",
+          "type": "attack",
+          "success": true,
+          "message": "Elara attacks Malachar el Señor de las Sombras for 1 damage (185/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 186,
+              "after": 185,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 64,
+      "timestamp": 1758608556708,
+      "actions": [
+        {
+          "id": "action_8_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Elara for 6 damage (42/88 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_elara",
+          "targetName": "Elara",
+          "damage": 6
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_elara",
+          "participantName": "Elara",
+          "statChanges": {
+            "hp": {
+              "before": 48,
+              "after": 42,
+              "change": -6
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 65,
+      "timestamp": 1758608557708,
+      "actions": [
+        {
+          "id": "action_8_char_thrain",
+          "actorId": "char_thrain",
+          "actorName": "Thrain",
+          "type": "attack",
+          "success": true,
+          "message": "Thrain attacks Malachar el Señor de las Sombras for 4 damage (181/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 4
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 185,
+              "after": 181,
+              "change": -4
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 66,
+      "timestamp": 1758608558708,
+      "actions": [
+        {
+          "id": "action_8_char_zara",
+          "actorId": "char_zara",
+          "actorName": "Zara",
+          "type": "attack",
+          "success": true,
+          "message": "Zara attacks Malachar el Señor de las Sombras for 1 damage (180/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 181,
+              "after": 180,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 67,
+      "timestamp": 1758608559708,
+      "actions": [
+        {
+          "id": "action_8_char_kael",
+          "actorId": "char_kael",
+          "actorName": "Kael",
+          "type": "attack",
+          "success": true,
+          "message": "Kael attacks Malachar el Señor de las Sombras for 1 damage (179/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 180,
+              "after": 179,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 68,
+      "timestamp": 1758608560708,
+      "actions": [
+        {
+          "id": "action_9_char_raven",
+          "actorId": "char_raven",
+          "actorName": "Raven",
+          "type": "attack",
+          "success": true,
+          "message": "Raven attacks Malachar el Señor de las Sombras for 1 damage (178/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 179,
+              "after": 178,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 69,
+      "timestamp": 1758608561708,
+      "actions": [
+        {
+          "id": "action_9_enemy_malachar_el_señor_de_las_sombras",
+          "actorId": "enemy_malachar_el_señor_de_las_sombras",
+          "actorName": "Malachar el Señor de las Sombras",
+          "type": "attack",
+          "success": true,
+          "message": "Malachar el Señor de las Sombras attacks Kael for 8 damage (133/150 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_kael",
+          "targetName": "Kael",
+          "damage": 8
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_kael",
+          "participantName": "Kael",
+          "statChanges": {
+            "hp": {
+              "before": 141,
+              "after": 133,
+              "change": -8
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 70,
+      "timestamp": 1758608562708,
+      "actions": [
+        {
+          "id": "action_9_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Luna for 4 damage (68/80 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_luna",
+          "targetName": "Luna",
+          "damage": 4
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_luna",
+          "participantName": "Luna",
+          "statChanges": {
+            "hp": {
+              "before": 72,
+              "after": 68,
+              "change": -4
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 71,
+      "timestamp": 1758608563708,
+      "actions": [
+        {
+          "id": "action_9_char_elara",
+          "actorId": "char_elara",
+          "actorName": "Elara",
+          "type": "attack",
+          "success": true,
+          "message": "Elara attacks Elara for 1 damage (41/88 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_elara",
+          "targetName": "Elara",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_elara",
+          "participantName": "Elara",
+          "statChanges": {
+            "hp": {
+              "before": 42,
+              "after": 41,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 72,
+      "timestamp": 1758608564708,
+      "actions": [
+        {
+          "id": "action_9_char_zara",
+          "actorId": "char_zara",
+          "actorName": "Zara",
+          "type": "attack",
+          "success": true,
+          "message": "Zara attacks Malachar el Señor de las Sombras for 1 damage (177/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 178,
+              "after": 177,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 73,
+      "timestamp": 1758608565708,
+      "actions": [
+        {
+          "id": "action_9_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Thrain for 1 damage (144/165 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_thrain",
+          "targetName": "Thrain",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_thrain",
+          "participantName": "Thrain",
+          "statChanges": {
+            "hp": {
+              "before": 145,
+              "after": 144,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 74,
+      "timestamp": 1758608566708,
+      "actions": [
+        {
+          "id": "action_9_char_luna",
+          "actorId": "char_luna",
+          "actorName": "Luna",
+          "type": "attack",
+          "success": true,
+          "message": "Luna attacks Elara for 1 damage (40/88 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_elara",
+          "targetName": "Elara",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_elara",
+          "participantName": "Elara",
+          "statChanges": {
+            "hp": {
+              "before": 41,
+              "after": 40,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 75,
+      "timestamp": 1758608567708,
+      "actions": [
+        {
+          "id": "action_9_char_kael",
+          "actorId": "char_kael",
+          "actorName": "Kael",
+          "type": "attack",
+          "success": true,
+          "message": "Kael attacks Malachar el Señor de las Sombras for 1 damage (176/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 177,
+              "after": 176,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 76,
+      "timestamp": 1758608568708,
+      "actions": [
+        {
+          "id": "action_9_char_thrain",
+          "actorId": "char_thrain",
+          "actorName": "Thrain",
+          "type": "attack",
+          "success": true,
+          "message": "Thrain attacks Malachar el Señor de las Sombras for 1 damage (175/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 176,
+              "after": 175,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 77,
+      "timestamp": 1758608569708,
+      "actions": [
+        {
+          "id": "action_10_char_raven",
+          "actorId": "char_raven",
+          "actorName": "Raven",
+          "type": "attack",
+          "success": true,
+          "message": "Raven attacks Malachar el Señor de las Sombras for 1 damage (174/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 175,
+              "after": 174,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 78,
+      "timestamp": 1758608570708,
+      "actions": [
+        {
+          "id": "action_10_enemy_malachar_el_señor_de_las_sombras",
+          "actorId": "enemy_malachar_el_señor_de_las_sombras",
+          "actorName": "Malachar el Señor de las Sombras",
+          "type": "attack",
+          "success": true,
+          "message": "Malachar el Señor de las Sombras attacks Luna for 12 damage (56/80 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_luna",
+          "targetName": "Luna",
+          "damage": 12
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_luna",
+          "participantName": "Luna",
+          "statChanges": {
+            "hp": {
+              "before": 68,
+              "after": 56,
+              "change": -12
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 79,
+      "timestamp": 1758608571708,
+      "actions": [
+        {
+          "id": "action_10_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Luna for 6 damage (50/80 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_luna",
+          "targetName": "Luna",
+          "damage": 6
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_luna",
+          "participantName": "Luna",
+          "statChanges": {
+            "hp": {
+              "before": 56,
+              "after": 50,
+              "change": -6
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 80,
+      "timestamp": 1758608572708,
+      "actions": [
+        {
+          "id": "action_10_char_elara",
+          "actorId": "char_elara",
+          "actorName": "Elara",
+          "type": "attack",
+          "success": true,
+          "message": "Elara attacks Elara for 1 damage (39/88 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_elara",
+          "targetName": "Elara",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_elara",
+          "participantName": "Elara",
+          "statChanges": {
+            "hp": {
+              "before": 40,
+              "after": 39,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 81,
+      "timestamp": 1758608573708,
+      "actions": [
+        {
+          "id": "action_10_char_zara",
+          "actorId": "char_zara",
+          "actorName": "Zara",
+          "type": "attack",
+          "success": true,
+          "message": "Zara attacks Malachar el Señor de las Sombras for 1 damage (173/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 174,
+              "after": 173,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 82,
+      "timestamp": 1758608574708,
+      "actions": [
+        {
+          "id": "action_10_char_luna",
+          "actorId": "char_luna",
+          "actorName": "Luna",
+          "type": "attack",
+          "success": true,
+          "message": "Luna attacks Elara for 1 damage (38/88 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_elara",
+          "targetName": "Elara",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_elara",
+          "participantName": "Elara",
+          "statChanges": {
+            "hp": {
+              "before": 39,
+              "after": 38,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 83,
+      "timestamp": 1758608575708,
+      "actions": [
+        {
+          "id": "action_10_char_thrain",
+          "actorId": "char_thrain",
+          "actorName": "Thrain",
+          "type": "attack",
+          "success": true,
+          "message": "Thrain attacks Malachar el Señor de las Sombras for 4 damage (169/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 4
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 173,
+              "after": 169,
+              "change": -4
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 84,
+      "timestamp": 1758608576708,
+      "actions": [
+        {
+          "id": "action_10_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Raven for 1 damage (82/100 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_raven",
+          "targetName": "Raven",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_raven",
+          "participantName": "Raven",
+          "statChanges": {
+            "hp": {
+              "before": 83,
+              "after": 82,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 85,
+      "timestamp": 1758608577708,
+      "actions": [
+        {
+          "id": "action_10_char_kael",
+          "actorId": "char_kael",
+          "actorName": "Kael",
+          "type": "attack",
+          "success": true,
+          "message": "Kael attacks Malachar el Señor de las Sombras for 1 damage (168/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 169,
+              "after": 168,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 86,
+      "timestamp": 1758608578708,
+      "actions": [
+        {
+          "id": "action_11_char_raven",
+          "actorId": "char_raven",
+          "actorName": "Raven",
+          "type": "attack",
+          "success": true,
+          "message": "Raven attacks Malachar el Señor de las Sombras for 1 damage (167/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 168,
+              "after": 167,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 87,
+      "timestamp": 1758608579708,
+      "actions": [
+        {
+          "id": "action_11_enemy_malachar_el_señor_de_las_sombras",
+          "actorId": "enemy_malachar_el_señor_de_las_sombras",
+          "actorName": "Malachar el Señor de las Sombras",
+          "type": "attack",
+          "success": true,
+          "message": "Malachar el Señor de las Sombras attacks Elara for 16 damage (22/88 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_elara",
+          "targetName": "Elara",
+          "damage": 16
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_elara",
+          "participantName": "Elara",
+          "statChanges": {
+            "hp": {
+              "before": 38,
+              "after": 22,
+              "change": -16
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 88,
+      "timestamp": 1758608580708,
+      "actions": [
+        {
+          "id": "action_11_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Zara for 6 damage (56/70 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_zara",
+          "targetName": "Zara",
+          "damage": 6
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_zara",
+          "participantName": "Zara",
+          "statChanges": {
+            "hp": {
+              "before": 62,
+              "after": 56,
+              "change": -6
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 89,
+      "timestamp": 1758608581708,
+      "actions": [
+        {
+          "id": "action_11_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Zara for 4 damage (52/70 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_zara",
+          "targetName": "Zara",
+          "damage": 4
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_zara",
+          "participantName": "Zara",
+          "statChanges": {
+            "hp": {
+              "before": 56,
+              "after": 52,
+              "change": -4
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 90,
+      "timestamp": 1758608582708,
+      "actions": [
+        {
+          "id": "action_11_char_elara",
+          "actorId": "char_elara",
+          "actorName": "Elara",
+          "type": "attack",
+          "success": true,
+          "message": "Elara attacks Elara for 1 damage (21/88 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_elara",
+          "targetName": "Elara",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_elara",
+          "participantName": "Elara",
+          "statChanges": {
+            "hp": {
+              "before": 22,
+              "after": 21,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 91,
+      "timestamp": 1758608583708,
+      "actions": [
+        {
+          "id": "action_11_char_thrain",
+          "actorId": "char_thrain",
+          "actorName": "Thrain",
+          "type": "attack",
+          "success": true,
+          "message": "Thrain attacks Malachar el Señor de las Sombras for 1 damage (166/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 167,
+              "after": 166,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 92,
+      "timestamp": 1758608584708,
+      "actions": [
+        {
+          "id": "action_11_char_zara",
+          "actorId": "char_zara",
+          "actorName": "Zara",
+          "type": "attack",
+          "success": true,
+          "message": "Zara attacks Malachar el Señor de las Sombras for 1 damage (165/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 166,
+              "after": 165,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 93,
+      "timestamp": 1758608585708,
+      "actions": [
+        {
+          "id": "action_11_char_luna",
+          "actorId": "char_luna",
+          "actorName": "Luna",
+          "type": "attack",
+          "success": true,
+          "message": "Luna attacks Elara for 1 damage (20/88 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_elara",
+          "targetName": "Elara",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_elara",
+          "participantName": "Elara",
+          "statChanges": {
+            "hp": {
+              "before": 21,
+              "after": 20,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 94,
+      "timestamp": 1758608586708,
+      "actions": [
+        {
+          "id": "action_11_char_kael",
+          "actorId": "char_kael",
+          "actorName": "Kael",
+          "type": "attack",
+          "success": true,
+          "message": "Kael attacks Malachar el Señor de las Sombras for 4 damage (161/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 4
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 165,
+              "after": 161,
+              "change": -4
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 95,
+      "timestamp": 1758608587708,
+      "actions": [
+        {
+          "id": "action_12_char_raven",
+          "actorId": "char_raven",
+          "actorName": "Raven",
+          "type": "attack",
+          "success": true,
+          "message": "Raven attacks Malachar el Señor de las Sombras for 1 damage (160/500 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "enemy_malachar_el_señor_de_las_sombras",
+          "targetName": "Malachar el Señor de las Sombras",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_malachar_el_señor_de_las_sombras",
+          "participantName": "Malachar el Señor de las Sombras",
+          "statChanges": {
+            "hp": {
+              "before": 161,
+              "after": 160,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 96,
+      "timestamp": 1758608588708,
+      "actions": [
+        {
+          "id": "action_12_enemy_malachar_el_señor_de_las_sombras",
+          "actorId": "enemy_malachar_el_señor_de_las_sombras",
+          "actorName": "Malachar el Señor de las Sombras",
+          "type": "attack",
+          "success": true,
+          "message": "Malachar el Señor de las Sombras attacks Raven for 1 damage (81/100 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_raven",
+          "targetName": "Raven",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_raven",
+          "participantName": "Raven",
+          "statChanges": {
+            "hp": {
+              "before": 82,
+              "after": 81,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 97,
+      "timestamp": 1758608589708,
+      "actions": [
+        {
+          "id": "action_12_char_luna",
+          "actorId": "char_luna",
+          "actorName": "Luna",
+          "type": "attack",
+          "success": true,
+          "message": "Luna attacks Elara for 2 damage (18/88 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_elara",
+          "targetName": "Elara",
+          "damage": 2
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_elara",
+          "participantName": "Elara",
+          "statChanges": {
+            "hp": {
+              "before": 20,
+              "after": 18,
+              "change": -2
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 98,
+      "timestamp": 1758608590708,
+      "actions": [
+        {
+          "id": "action_12_char_elara",
+          "actorId": "char_elara",
+          "actorName": "Elara",
+          "type": "attack",
+          "success": true,
+          "message": "Elara attacks Elara for 1 damage (17/88 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_elara",
+          "targetName": "Elara",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_elara",
+          "participantName": "Elara",
+          "statChanges": {
+            "hp": {
+              "before": 18,
+              "after": 17,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 99,
+      "timestamp": 1758608591708,
+      "actions": [
+        {
+          "id": "action_12_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Luna for 6 damage (44/80 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_luna",
+          "targetName": "Luna",
+          "damage": 6
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_luna",
+          "participantName": "Luna",
+          "statChanges": {
+            "hp": {
+              "before": 50,
+              "after": 44,
+              "change": -6
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 100,
+      "timestamp": 1758608592708,
+      "actions": [
+        {
+          "id": "action_12_enemy_skeleton_1",
+          "actorId": "enemy_skeleton_1",
+          "actorName": "Skeleton 1",
+          "type": "attack",
+          "success": true,
+          "message": "Skeleton 1 attacks Kael for 1 damage (132/150 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_kael",
+          "targetName": "Kael",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_kael",
+          "participantName": "Kael",
+          "statChanges": {
+            "hp": {
+              "before": 133,
+              "after": 132,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    }
+  ],
+  "finalState": {
+    "party": [
+      {
+        "id": "char_kael",
+        "name": "Kael",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 132,
+          "maxHp": 150,
+          "mp": 0,
+          "maxMp": 20,
+          "str": 18,
+          "def": 15,
+          "mag": 5,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "power_strike",
+          "shield_bash",
+          "taunt",
+          "earthquake",
+          "barrier",
+          "goblin_rush",
+          "berserker_rage",
+          "war_cry",
+          "ultimate_strike",
+          "perfect_defense",
+          "rage"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_luna",
+        "name": "Luna",
+        "job": "WhiteMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 44,
+          "maxHp": 80,
+          "mp": 6,
+          "maxMp": 50,
+          "str": 6,
+          "def": 8,
+          "mag": 20,
+          "spd": 12
+        },
+        "abilities": [
+          "basic_attack",
+          "heal",
+          "greater_heal",
+          "blessing",
+          "holy_light",
+          "regeneration",
+          "divine_shield",
+          "heal_all",
+          "resurrection"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_zara",
+        "name": "Zara",
+        "job": "BlackMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 52,
+          "maxHp": 70,
+          "mp": 2,
+          "maxMp": 60,
+          "str": 5,
+          "def": 6,
+          "mag": 25,
+          "spd": 10
+        },
+        "abilities": [
+          "basic_attack",
+          "fireball",
+          "lightning_bolt",
+          "curse",
+          "meteor",
+          "ice_blast",
+          "chain_lightning",
+          "dark_bolt",
+          "hex",
+          "life_drain",
+          "shadow_strike",
+          "soul_crusher",
+          "darkness_wave",
+          "shadow_regeneration",
+          "terror",
+          "chain_reaction",
+          "blood_magic",
+          "doom",
+          "elemental_fusion",
+          "time_stop",
+          "mirror_image"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_raven",
+        "name": "Raven",
+        "job": "Rogue",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 81,
+          "maxHp": 100,
+          "mp": 0,
+          "maxMp": 30,
+          "str": 14,
+          "def": 25,
+          "mag": 8,
+          "spd": 38
+        },
+        "abilities": [
+          "basic_attack",
+          "backstab",
+          "poison_blade",
+          "shadow_step",
+          "smoke_bomb",
+          "venom_strike",
+          "teleport",
+          "acid_spray"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_thrain",
+        "name": "Thrain",
+        "job": "Warrior",
+        "level": 2,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 144,
+          "maxHp": 165,
+          "mp": 1,
+          "maxMp": 22,
+          "str": 19,
+          "def": 16,
+          "mag": 5,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "power_strike",
+          "shield_bash",
+          "taunt",
+          "earthquake",
+          "barrier",
+          "goblin_rush",
+          "berserker_rage",
+          "war_cry",
+          "ultimate_strike",
+          "perfect_defense",
+          "rage"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_elara",
+        "name": "Elara",
+        "job": "WhiteMage",
+        "level": 2,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 17,
+          "maxHp": 88,
+          "mp": 7,
+          "maxMp": 55,
+          "str": 6,
+          "def": 8,
+          "mag": 22,
+          "spd": 13
+        },
+        "abilities": [
+          "basic_attack",
+          "heal",
+          "greater_heal",
+          "blessing",
+          "holy_light",
+          "regeneration",
+          "divine_shield",
+          "heal_all",
+          "resurrection"
+        ],
+        "buffs": []
+      }
+    ],
+    "enemies": [
+      {
+        "id": "enemy_malachar_el_señor_de_las_sombras",
+        "name": "Malachar el Señor de las Sombras",
+        "job": "BlackMage",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": true,
+        "stats": {
+          "hp": 160,
+          "maxHp": 500,
+          "mp": 4,
+          "maxMp": 80,
+          "str": 20,
+          "def": 18,
+          "mag": 22,
+          "spd": 25
+        },
+        "abilities": [
+          "basic_attack",
+          "shadow_strike",
+          "soul_crusher",
+          "darkness_wave",
+          "shadow_regeneration",
+          "terror",
+          "summon_skeleton"
+        ],
+        "buffs": []
+      }
+    ],
+    "victory": false,
+    "reason": "Battle timed out after 100 turns",
+    "survivors": [
+      "char_kael",
+      "char_luna",
+      "char_zara",
+      "char_raven",
+      "char_thrain",
+      "char_elara"
+    ],
+    "defeated": []
+  }
+}

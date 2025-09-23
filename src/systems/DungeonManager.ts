@@ -292,6 +292,9 @@ export class DungeonManager {
     // Calculate max turns: battle-specific, then dungeon default, then system default
     const maxTurns = battleConfig.maxTurns ?? dungeon.defaultMaxTurns ?? this.settings.maxTurnsPerBattle;
 
+    const initialParty = JSON.parse(JSON.stringify(this.currentProgress!.partyState));
+    const initialEnemies = JSON.parse(JSON.stringify(enemies));
+
     const result = battleSystem.simulateFullBattle(maxTurns);
     const turnHistory = battleSystem.getTurnHistory();
 
@@ -316,8 +319,10 @@ export class DungeonManager {
         battleConfig.id,
         battleNumber,
         maxTurns,
-        this.currentProgress.partyState,
-        enemies,
+        initialParty,
+        initialEnemies,
+        this.currentProgress.partyState, // final party
+        enemies, // final enemies
         turnHistory,
         result,
         battleStartTime,

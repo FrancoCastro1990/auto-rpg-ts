@@ -2,7 +2,6 @@ import { EnemyAI, EnemyDecision } from '../src/systems/EnemyAI';
 import { LootSystem } from '../src/systems/LootSystem';
 import { BattleSystem } from '../src/systems/BattleSystem';
 import { EnemyInstance, Character, Stats } from '../src/models/types';
-import { EntityFactory } from '../src/loaders/EntityFactory';
 
 // Mock data for testing
 const createMockEnemy = (type: string, name: string, isBoss: boolean = false): EnemyInstance => {

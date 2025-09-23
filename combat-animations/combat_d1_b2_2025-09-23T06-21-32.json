@@ -1,0 +1,775 @@
+{
+  "metadata": {
+    "dungeonId": 1,
+    "dungeonName": "Cavernas de la Sombra",
+    "battleId": 2,
+    "battleOrder": 2,
+    "timestamp": "2025-09-23T06:21:32.642Z",
+    "duration": 0,
+    "victory": true,
+    "totalTurns": 1,
+    "maxTurns": 100
+  },
+  "initialState": {
+    "party": [
+      {
+        "id": "char_kael",
+        "name": "Kael",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 150,
+          "maxHp": 150,
+          "mp": 20,
+          "maxMp": 20,
+          "str": 18,
+          "def": 15,
+          "mag": 5,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "power_strike",
+          "shield_bash",
+          "taunt",
+          "earthquake",
+          "barrier",
+          "goblin_rush",
+          "berserker_rage",
+          "war_cry",
+          "ultimate_strike",
+          "perfect_defense",
+          "rage"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_luna",
+        "name": "Luna",
+        "job": "WhiteMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 80,
+          "maxHp": 80,
+          "mp": 50,
+          "maxMp": 50,
+          "str": 6,
+          "def": 8,
+          "mag": 20,
+          "spd": 12
+        },
+        "abilities": [
+          "basic_attack",
+          "heal",
+          "greater_heal",
+          "blessing",
+          "holy_light",
+          "regeneration",
+          "divine_shield",
+          "heal_all",
+          "resurrection"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_zara",
+        "name": "Zara",
+        "job": "BlackMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 70,
+          "maxHp": 70,
+          "mp": 60,
+          "maxMp": 60,
+          "str": 5,
+          "def": 6,
+          "mag": 25,
+          "spd": 10
+        },
+        "abilities": [
+          "basic_attack",
+          "fireball",
+          "lightning_bolt",
+          "curse",
+          "meteor",
+          "ice_blast",
+          "chain_lightning",
+          "dark_bolt",
+          "hex",
+          "life_drain",
+          "shadow_strike",
+          "soul_crusher",
+          "darkness_wave",
+          "shadow_regeneration",
+          "terror",
+          "chain_reaction",
+          "blood_magic",
+          "doom",
+          "elemental_fusion",
+          "time_stop",
+          "mirror_image"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_raven",
+        "name": "Raven",
+        "job": "Rogue",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 100,
+          "maxHp": 100,
+          "mp": 30,
+          "maxMp": 30,
+          "str": 14,
+          "def": 10,
+          "mag": 8,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "backstab",
+          "poison_blade",
+          "shadow_step",
+          "smoke_bomb",
+          "venom_strike",
+          "teleport",
+          "acid_spray"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_thrain",
+        "name": "Thrain",
+        "job": "Warrior",
+        "level": 2,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 165,
+          "maxHp": 165,
+          "mp": 22,
+          "maxMp": 22,
+          "str": 19,
+          "def": 16,
+          "mag": 5,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "power_strike",
+          "shield_bash",
+          "taunt",
+          "earthquake",
+          "barrier",
+          "goblin_rush",
+          "berserker_rage",
+          "war_cry",
+          "ultimate_strike",
+          "perfect_defense",
+          "rage"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_elara",
+        "name": "Elara",
+        "job": "WhiteMage",
+        "level": 2,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 88,
+          "maxHp": 88,
+          "mp": 55,
+          "maxMp": 55,
+          "str": 6,
+          "def": 8,
+          "mag": 22,
+          "spd": 13
+        },
+        "abilities": [
+          "basic_attack",
+          "heal",
+          "greater_heal",
+          "blessing",
+          "holy_light",
+          "regeneration",
+          "divine_shield",
+          "heal_all",
+          "resurrection"
+        ],
+        "buffs": []
+      }
+    ],
+    "enemies": [
+      {
+        "id": "enemy_goblin_explorador",
+        "name": "Goblin Explorador",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": false,
+        "stats": {
+          "hp": 60,
+          "maxHp": 60,
+          "mp": 15,
+          "maxMp": 15,
+          "str": 12,
+          "def": 8,
+          "mag": 4,
+          "spd": 10
+        },
+        "abilities": [
+          "basic_attack",
+          "goblin_rush"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "enemy_slime_2",
+        "name": "Slime 2",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": false,
+        "stats": {
+          "hp": 45,
+          "maxHp": 45,
+          "mp": 10,
+          "maxMp": 10,
+          "str": 8,
+          "def": 4,
+          "mag": 2,
+          "spd": 5
+        },
+        "abilities": [
+          "basic_attack",
+          "slime_attack"
+        ],
+        "buffs": []
+      }
+    ],
+    "turnOrder": [
+      "char_elara",
+      "char_luna",
+      "enemy_goblin_explorador",
+      "char_zara",
+      "char_raven",
+      "char_thrain"
+    ]
+  },
+  "turns": [
+    {
+      "turnNumber": 1,
+      "timestamp": 1758608493642,
+      "actions": [
+        {
+          "id": "action_1_char_elara",
+          "actorId": "char_elara",
+          "actorName": "Elara",
+          "type": "ability",
+          "success": true,
+          "message": "Elara casts Blessing on Goblin Explorador (buff applied for 4 turns)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_goblin_explorador",
+          "targetName": "Goblin Explorador",
+          "abilityId": "blessing",
+          "abilityName": "Blessing",
+          "mpCost": 12
+        }
+      ],
+      "stateChanges": []
+    },
+    {
+      "turnNumber": 2,
+      "timestamp": 1758608494642,
+      "actions": [
+        {
+          "id": "action_1_char_luna",
+          "actorId": "char_luna",
+          "actorName": "Luna",
+          "type": "ability",
+          "success": true,
+          "message": "Luna casts Holy Light on Goblin Explorador for 35 damage (25/60 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_goblin_explorador",
+          "targetName": "Goblin Explorador",
+          "abilityId": "holy_light",
+          "abilityName": "Holy Light",
+          "mpCost": 10,
+          "damage": 35
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_goblin_explorador",
+          "participantName": "Goblin Explorador",
+          "statChanges": {
+            "hp": {
+              "before": 60,
+              "after": 25,
+              "change": -35
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {
+            "isAlive": {
+              "before": true,
+              "after": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "turnNumber": 3,
+      "timestamp": 1758608495642,
+      "actions": [
+        {
+          "id": "action_1_enemy_goblin_explorador",
+          "actorId": "enemy_goblin_explorador",
+          "actorName": "Goblin Explorador",
+          "type": "attack",
+          "success": true,
+          "message": "Goblin Explorador attacks Zara for 14 damage (56/70 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_zara",
+          "targetName": "Zara",
+          "damage": 14
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_zara",
+          "participantName": "Zara",
+          "statChanges": {
+            "hp": {
+              "before": 70,
+              "after": 56,
+              "change": -14
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 4,
+      "timestamp": 1758608496642,
+      "actions": [
+        {
+          "id": "action_1_char_zara",
+          "actorId": "char_zara",
+          "actorName": "Zara",
+          "type": "ability",
+          "success": true,
+          "message": "Zara casts Fireball on Slime 2 for 52 damage (0/45 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_slime_2",
+          "targetName": "Slime 2",
+          "abilityId": "fireball",
+          "abilityName": "Fireball",
+          "mpCost": 12,
+          "damage": 52
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_slime_2",
+          "participantName": "Slime 2",
+          "statChanges": {
+            "hp": {
+              "before": 45,
+              "after": 0,
+              "change": -52
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {
+            "isAlive": {
+              "before": true,
+              "after": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "turnNumber": 5,
+      "timestamp": 1758608497642,
+      "actions": [
+        {
+          "id": "action_1_char_raven",
+          "actorId": "char_raven",
+          "actorName": "Raven",
+          "type": "ability",
+          "success": true,
+          "message": "Raven casts Poison Blade on Goblin Explorador for 20 damage (5/60 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_goblin_explorador",
+          "targetName": "Goblin Explorador",
+          "abilityId": "poison_blade",
+          "abilityName": "Poison Blade",
+          "mpCost": 8,
+          "damage": 20
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_goblin_explorador",
+          "participantName": "Goblin Explorador",
+          "statChanges": {
+            "hp": {
+              "before": 25,
+              "after": 5,
+              "change": -20
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {
+            "isAlive": {
+              "before": true,
+              "after": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "turnNumber": 6,
+      "timestamp": 1758608498642,
+      "actions": [
+        {
+          "id": "action_1_char_thrain",
+          "actorId": "char_thrain",
+          "actorName": "Thrain",
+          "type": "ability",
+          "success": true,
+          "message": "Thrain casts Power Strike on Goblin Explorador for 24 damage (0/60 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_goblin_explorador",
+          "targetName": "Goblin Explorador",
+          "abilityId": "power_strike",
+          "abilityName": "Power Strike",
+          "mpCost": 5,
+          "damage": 24
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_goblin_explorador",
+          "participantName": "Goblin Explorador",
+          "statChanges": {
+            "hp": {
+              "before": 5,
+              "after": 0,
+              "change": -24
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {
+            "isAlive": {
+              "before": true,
+              "after": false
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "finalState": {
+    "party": [
+      {
+        "id": "char_kael",
+        "name": "Kael",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 150,
+          "maxHp": 150,
+          "mp": 20,
+          "maxMp": 20,
+          "str": 18,
+          "def": 15,
+          "mag": 5,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "power_strike",
+          "shield_bash",
+          "taunt",
+          "earthquake",
+          "barrier",
+          "goblin_rush",
+          "berserker_rage",
+          "war_cry",
+          "ultimate_strike",
+          "perfect_defense",
+          "rage"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_luna",
+        "name": "Luna",
+        "job": "WhiteMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 80,
+          "maxHp": 80,
+          "mp": 40,
+          "maxMp": 50,
+          "str": 6,
+          "def": 8,
+          "mag": 20,
+          "spd": 12
+        },
+        "abilities": [
+          "basic_attack",
+          "heal",
+          "greater_heal",
+          "blessing",
+          "holy_light",
+          "regeneration",
+          "divine_shield",
+          "heal_all",
+          "resurrection"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_zara",
+        "name": "Zara",
+        "job": "BlackMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 56,
+          "maxHp": 70,
+          "mp": 48,
+          "maxMp": 60,
+          "str": 5,
+          "def": 6,
+          "mag": 25,
+          "spd": 10
+        },
+        "abilities": [
+          "basic_attack",
+          "fireball",
+          "lightning_bolt",
+          "curse",
+          "meteor",
+          "ice_blast",
+          "chain_lightning",
+          "dark_bolt",
+          "hex",
+          "life_drain",
+          "shadow_strike",
+          "soul_crusher",
+          "darkness_wave",
+          "shadow_regeneration",
+          "terror",
+          "chain_reaction",
+          "blood_magic",
+          "doom",
+          "elemental_fusion",
+          "time_stop",
+          "mirror_image"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_raven",
+        "name": "Raven",
+        "job": "Rogue",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 100,
+          "maxHp": 100,
+          "mp": 22,
+          "maxMp": 30,
+          "str": 14,
+          "def": 10,
+          "mag": 8,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "backstab",
+          "poison_blade",
+          "shadow_step",
+          "smoke_bomb",
+          "venom_strike",
+          "teleport",
+          "acid_spray"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_thrain",
+        "name": "Thrain",
+        "job": "Warrior",
+        "level": 2,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 165,
+          "maxHp": 165,
+          "mp": 17,
+          "maxMp": 22,
+          "str": 19,
+          "def": 16,
+          "mag": 5,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "power_strike",
+          "shield_bash",
+          "taunt",
+          "earthquake",
+          "barrier",
+          "goblin_rush",
+          "berserker_rage",
+          "war_cry",
+          "ultimate_strike",
+          "perfect_defense",
+          "rage"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_elara",
+        "name": "Elara",
+        "job": "WhiteMage",
+        "level": 2,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 88,
+          "maxHp": 88,
+          "mp": 43,
+          "maxMp": 55,
+          "str": 6,
+          "def": 8,
+          "mag": 22,
+          "spd": 13
+        },
+        "abilities": [
+          "basic_attack",
+          "heal",
+          "greater_heal",
+          "blessing",
+          "holy_light",
+          "regeneration",
+          "divine_shield",
+          "heal_all",
+          "resurrection"
+        ],
+        "buffs": []
+      }
+    ],
+    "enemies": [
+      {
+        "id": "enemy_goblin_explorador",
+        "name": "Goblin Explorador",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": false,
+        "stats": {
+          "hp": 0,
+          "maxHp": 60,
+          "mp": 15,
+          "maxMp": 15,
+          "str": 20,
+          "def": 8,
+          "mag": 12,
+          "spd": 10
+        },
+        "abilities": [
+          "basic_attack",
+          "goblin_rush"
+        ],
+        "buffs": [
+          {
+            "name": "Blessing",
+            "type": "buff",
+            "duration": 4,
+            "remainingTurns": 4,
+            "statModifier": {
+              "str": 8,
+              "mag": 8
+            }
+          }
+        ]
+      },
+      {
+        "id": "enemy_slime_2",
+        "name": "Slime 2",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": false,
+        "stats": {
+          "hp": 0,
+          "maxHp": 45,
+          "mp": 10,
+          "maxMp": 10,
+          "str": 8,
+          "def": 4,
+          "mag": 2,
+          "spd": 5
+        },
+        "abilities": [
+          "basic_attack",
+          "slime_attack"
+        ],
+        "buffs": []
+      }
+    ],
+    "victory": true,
+    "reason": "All enemies defeated",
+    "survivors": [
+      "char_kael",
+      "char_luna",
+      "char_zara",
+      "char_raven",
+      "char_thrain",
+      "char_elara"
+    ],
+    "defeated": [
+      "enemy_goblin_explorador",
+      "enemy_slime_2"
+    ]
+  }
+}

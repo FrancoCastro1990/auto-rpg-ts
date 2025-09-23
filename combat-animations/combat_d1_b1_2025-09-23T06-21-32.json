@@ -1,0 +1,775 @@
+{
+  "metadata": {
+    "dungeonId": 1,
+    "dungeonName": "Cavernas de la Sombra",
+    "battleId": 1,
+    "battleOrder": 1,
+    "timestamp": "2025-09-23T06:21:32.635Z",
+    "duration": 0,
+    "victory": true,
+    "totalTurns": 1,
+    "maxTurns": 100
+  },
+  "initialState": {
+    "party": [
+      {
+        "id": "char_kael",
+        "name": "Kael",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 150,
+          "maxHp": 150,
+          "mp": 20,
+          "maxMp": 20,
+          "str": 18,
+          "def": 15,
+          "mag": 5,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "power_strike",
+          "shield_bash",
+          "taunt",
+          "earthquake",
+          "barrier",
+          "goblin_rush",
+          "berserker_rage",
+          "war_cry",
+          "ultimate_strike",
+          "perfect_defense",
+          "rage"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_luna",
+        "name": "Luna",
+        "job": "WhiteMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 80,
+          "maxHp": 80,
+          "mp": 50,
+          "maxMp": 50,
+          "str": 6,
+          "def": 8,
+          "mag": 20,
+          "spd": 12
+        },
+        "abilities": [
+          "basic_attack",
+          "heal",
+          "greater_heal",
+          "blessing",
+          "holy_light",
+          "regeneration",
+          "divine_shield",
+          "heal_all",
+          "resurrection"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_zara",
+        "name": "Zara",
+        "job": "BlackMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 70,
+          "maxHp": 70,
+          "mp": 60,
+          "maxMp": 60,
+          "str": 5,
+          "def": 6,
+          "mag": 25,
+          "spd": 10
+        },
+        "abilities": [
+          "basic_attack",
+          "fireball",
+          "lightning_bolt",
+          "curse",
+          "meteor",
+          "ice_blast",
+          "chain_lightning",
+          "dark_bolt",
+          "hex",
+          "life_drain",
+          "shadow_strike",
+          "soul_crusher",
+          "darkness_wave",
+          "shadow_regeneration",
+          "terror",
+          "chain_reaction",
+          "blood_magic",
+          "doom",
+          "elemental_fusion",
+          "time_stop",
+          "mirror_image"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_raven",
+        "name": "Raven",
+        "job": "Rogue",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 100,
+          "maxHp": 100,
+          "mp": 30,
+          "maxMp": 30,
+          "str": 14,
+          "def": 10,
+          "mag": 8,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "backstab",
+          "poison_blade",
+          "shadow_step",
+          "smoke_bomb",
+          "venom_strike",
+          "teleport",
+          "acid_spray"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_thrain",
+        "name": "Thrain",
+        "job": "Warrior",
+        "level": 2,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 165,
+          "maxHp": 165,
+          "mp": 22,
+          "maxMp": 22,
+          "str": 19,
+          "def": 16,
+          "mag": 5,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "power_strike",
+          "shield_bash",
+          "taunt",
+          "earthquake",
+          "barrier",
+          "goblin_rush",
+          "berserker_rage",
+          "war_cry",
+          "ultimate_strike",
+          "perfect_defense",
+          "rage"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_elara",
+        "name": "Elara",
+        "job": "WhiteMage",
+        "level": 2,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 88,
+          "maxHp": 88,
+          "mp": 55,
+          "maxMp": 55,
+          "str": 6,
+          "def": 8,
+          "mag": 22,
+          "spd": 13
+        },
+        "abilities": [
+          "basic_attack",
+          "heal",
+          "greater_heal",
+          "blessing",
+          "holy_light",
+          "regeneration",
+          "divine_shield",
+          "heal_all",
+          "resurrection"
+        ],
+        "buffs": []
+      }
+    ],
+    "enemies": [
+      {
+        "id": "enemy_slime_verde",
+        "name": "Slime Verde",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": false,
+        "stats": {
+          "hp": 45,
+          "maxHp": 45,
+          "mp": 10,
+          "maxMp": 10,
+          "str": 8,
+          "def": 4,
+          "mag": 2,
+          "spd": 5
+        },
+        "abilities": [
+          "basic_attack",
+          "slime_attack"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "enemy_slime_azul",
+        "name": "Slime Azul",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": false,
+        "stats": {
+          "hp": 45,
+          "maxHp": 45,
+          "mp": 10,
+          "maxMp": 10,
+          "str": 8,
+          "def": 4,
+          "mag": 2,
+          "spd": 5
+        },
+        "abilities": [
+          "basic_attack",
+          "slime_attack"
+        ],
+        "buffs": []
+      }
+    ],
+    "turnOrder": [
+      "char_elara",
+      "char_raven",
+      "char_luna",
+      "enemy_slime_azul",
+      "char_zara",
+      "char_thrain"
+    ]
+  },
+  "turns": [
+    {
+      "turnNumber": 1,
+      "timestamp": 1758608493635,
+      "actions": [
+        {
+          "id": "action_1_char_elara",
+          "actorId": "char_elara",
+          "actorName": "Elara",
+          "type": "ability",
+          "success": true,
+          "message": "Elara casts Blessing on Slime Verde (buff applied for 4 turns)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_slime_verde",
+          "targetName": "Slime Verde",
+          "abilityId": "blessing",
+          "abilityName": "Blessing",
+          "mpCost": 12
+        }
+      ],
+      "stateChanges": []
+    },
+    {
+      "turnNumber": 2,
+      "timestamp": 1758608494635,
+      "actions": [
+        {
+          "id": "action_1_char_raven",
+          "actorId": "char_raven",
+          "actorName": "Raven",
+          "type": "ability",
+          "success": true,
+          "message": "Raven casts Poison Blade on Slime Verde for 24 damage (21/45 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_slime_verde",
+          "targetName": "Slime Verde",
+          "abilityId": "poison_blade",
+          "abilityName": "Poison Blade",
+          "mpCost": 8,
+          "damage": 24
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_slime_verde",
+          "participantName": "Slime Verde",
+          "statChanges": {
+            "hp": {
+              "before": 45,
+              "after": 21,
+              "change": -24
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {
+            "isAlive": {
+              "before": true,
+              "after": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "turnNumber": 3,
+      "timestamp": 1758608495635,
+      "actions": [
+        {
+          "id": "action_1_char_luna",
+          "actorId": "char_luna",
+          "actorName": "Luna",
+          "type": "ability",
+          "success": true,
+          "message": "Luna casts Holy Light on Slime Azul for 40 damage (5/45 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_slime_azul",
+          "targetName": "Slime Azul",
+          "abilityId": "holy_light",
+          "abilityName": "Holy Light",
+          "mpCost": 10,
+          "damage": 40
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_slime_azul",
+          "participantName": "Slime Azul",
+          "statChanges": {
+            "hp": {
+              "before": 45,
+              "after": 5,
+              "change": -40
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {
+            "isAlive": {
+              "before": true,
+              "after": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "turnNumber": 4,
+      "timestamp": 1758608496635,
+      "actions": [
+        {
+          "id": "action_1_enemy_slime_azul",
+          "actorId": "enemy_slime_azul",
+          "actorName": "Slime Azul",
+          "type": "attack",
+          "success": true,
+          "message": "Slime Azul attacks Thrain for 1 damage (164/165 HP remaining)",
+          "animationKey": "basic_attack",
+          "duration": 1000,
+          "targetId": "char_thrain",
+          "targetName": "Thrain",
+          "damage": 1
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_thrain",
+          "participantName": "Thrain",
+          "statChanges": {
+            "hp": {
+              "before": 165,
+              "after": 164,
+              "change": -1
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 5,
+      "timestamp": 1758608497635,
+      "actions": [
+        {
+          "id": "action_1_char_zara",
+          "actorId": "char_zara",
+          "actorName": "Zara",
+          "type": "ability",
+          "success": true,
+          "message": "Zara casts Fireball on Slime Verde for 51 damage (0/45 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_slime_verde",
+          "targetName": "Slime Verde",
+          "abilityId": "fireball",
+          "abilityName": "Fireball",
+          "mpCost": 12,
+          "damage": 51
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_slime_verde",
+          "participantName": "Slime Verde",
+          "statChanges": {
+            "hp": {
+              "before": 21,
+              "after": 0,
+              "change": -51
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {
+            "isAlive": {
+              "before": true,
+              "after": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "turnNumber": 6,
+      "timestamp": 1758608498635,
+      "actions": [
+        {
+          "id": "action_1_char_thrain",
+          "actorId": "char_thrain",
+          "actorName": "Thrain",
+          "type": "ability",
+          "success": true,
+          "message": "Thrain casts Power Strike on Slime Azul for 28 damage (0/45 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_slime_azul",
+          "targetName": "Slime Azul",
+          "abilityId": "power_strike",
+          "abilityName": "Power Strike",
+          "mpCost": 5,
+          "damage": 28
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_slime_azul",
+          "participantName": "Slime Azul",
+          "statChanges": {
+            "hp": {
+              "before": 5,
+              "after": 0,
+              "change": -28
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {
+            "isAlive": {
+              "before": true,
+              "after": false
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "finalState": {
+    "party": [
+      {
+        "id": "char_kael",
+        "name": "Kael",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 150,
+          "maxHp": 150,
+          "mp": 20,
+          "maxMp": 20,
+          "str": 18,
+          "def": 15,
+          "mag": 5,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "power_strike",
+          "shield_bash",
+          "taunt",
+          "earthquake",
+          "barrier",
+          "goblin_rush",
+          "berserker_rage",
+          "war_cry",
+          "ultimate_strike",
+          "perfect_defense",
+          "rage"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_luna",
+        "name": "Luna",
+        "job": "WhiteMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 80,
+          "maxHp": 80,
+          "mp": 40,
+          "maxMp": 50,
+          "str": 6,
+          "def": 8,
+          "mag": 20,
+          "spd": 12
+        },
+        "abilities": [
+          "basic_attack",
+          "heal",
+          "greater_heal",
+          "blessing",
+          "holy_light",
+          "regeneration",
+          "divine_shield",
+          "heal_all",
+          "resurrection"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_zara",
+        "name": "Zara",
+        "job": "BlackMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 70,
+          "maxHp": 70,
+          "mp": 48,
+          "maxMp": 60,
+          "str": 5,
+          "def": 6,
+          "mag": 25,
+          "spd": 10
+        },
+        "abilities": [
+          "basic_attack",
+          "fireball",
+          "lightning_bolt",
+          "curse",
+          "meteor",
+          "ice_blast",
+          "chain_lightning",
+          "dark_bolt",
+          "hex",
+          "life_drain",
+          "shadow_strike",
+          "soul_crusher",
+          "darkness_wave",
+          "shadow_regeneration",
+          "terror",
+          "chain_reaction",
+          "blood_magic",
+          "doom",
+          "elemental_fusion",
+          "time_stop",
+          "mirror_image"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_raven",
+        "name": "Raven",
+        "job": "Rogue",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 100,
+          "maxHp": 100,
+          "mp": 22,
+          "maxMp": 30,
+          "str": 14,
+          "def": 10,
+          "mag": 8,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "backstab",
+          "poison_blade",
+          "shadow_step",
+          "smoke_bomb",
+          "venom_strike",
+          "teleport",
+          "acid_spray"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_thrain",
+        "name": "Thrain",
+        "job": "Warrior",
+        "level": 2,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 164,
+          "maxHp": 165,
+          "mp": 17,
+          "maxMp": 22,
+          "str": 19,
+          "def": 16,
+          "mag": 5,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "power_strike",
+          "shield_bash",
+          "taunt",
+          "earthquake",
+          "barrier",
+          "goblin_rush",
+          "berserker_rage",
+          "war_cry",
+          "ultimate_strike",
+          "perfect_defense",
+          "rage"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_elara",
+        "name": "Elara",
+        "job": "WhiteMage",
+        "level": 2,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 88,
+          "maxHp": 88,
+          "mp": 43,
+          "maxMp": 55,
+          "str": 6,
+          "def": 8,
+          "mag": 22,
+          "spd": 13
+        },
+        "abilities": [
+          "basic_attack",
+          "heal",
+          "greater_heal",
+          "blessing",
+          "holy_light",
+          "regeneration",
+          "divine_shield",
+          "heal_all",
+          "resurrection"
+        ],
+        "buffs": []
+      }
+    ],
+    "enemies": [
+      {
+        "id": "enemy_slime_verde",
+        "name": "Slime Verde",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": false,
+        "stats": {
+          "hp": 0,
+          "maxHp": 45,
+          "mp": 10,
+          "maxMp": 10,
+          "str": 16,
+          "def": 4,
+          "mag": 10,
+          "spd": 5
+        },
+        "abilities": [
+          "basic_attack",
+          "slime_attack"
+        ],
+        "buffs": [
+          {
+            "name": "Blessing",
+            "type": "buff",
+            "duration": 4,
+            "remainingTurns": 4,
+            "statModifier": {
+              "str": 8,
+              "mag": 8
+            }
+          }
+        ]
+      },
+      {
+        "id": "enemy_slime_azul",
+        "name": "Slime Azul",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": false,
+        "stats": {
+          "hp": 0,
+          "maxHp": 45,
+          "mp": 10,
+          "maxMp": 10,
+          "str": 8,
+          "def": 4,
+          "mag": 2,
+          "spd": 5
+        },
+        "abilities": [
+          "basic_attack",
+          "slime_attack"
+        ],
+        "buffs": []
+      }
+    ],
+    "victory": true,
+    "reason": "All enemies defeated",
+    "survivors": [
+      "char_kael",
+      "char_luna",
+      "char_zara",
+      "char_raven",
+      "char_thrain",
+      "char_elara"
+    ],
+    "defeated": [
+      "enemy_slime_verde",
+      "enemy_slime_azul"
+    ]
+  }
+}

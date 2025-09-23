@@ -1,0 +1,953 @@
+{
+  "metadata": {
+    "dungeonId": 1,
+    "dungeonName": "Cavernas de la Sombra",
+    "battleId": 5,
+    "battleOrder": 5,
+    "timestamp": "2025-09-23T06:21:32.661Z",
+    "duration": 0,
+    "victory": true,
+    "totalTurns": 2,
+    "maxTurns": 100
+  },
+  "initialState": {
+    "party": [
+      {
+        "id": "char_kael",
+        "name": "Kael",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 150,
+          "maxHp": 150,
+          "mp": 20,
+          "maxMp": 20,
+          "str": 18,
+          "def": 15,
+          "mag": 5,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "power_strike",
+          "shield_bash",
+          "taunt",
+          "earthquake",
+          "barrier",
+          "goblin_rush",
+          "berserker_rage",
+          "war_cry",
+          "ultimate_strike",
+          "perfect_defense",
+          "rage"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_luna",
+        "name": "Luna",
+        "job": "WhiteMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 80,
+          "maxHp": 80,
+          "mp": 50,
+          "maxMp": 50,
+          "str": 6,
+          "def": 8,
+          "mag": 20,
+          "spd": 12
+        },
+        "abilities": [
+          "basic_attack",
+          "heal",
+          "greater_heal",
+          "blessing",
+          "holy_light",
+          "regeneration",
+          "divine_shield",
+          "heal_all",
+          "resurrection"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_zara",
+        "name": "Zara",
+        "job": "BlackMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 70,
+          "maxHp": 70,
+          "mp": 60,
+          "maxMp": 60,
+          "str": 5,
+          "def": 6,
+          "mag": 25,
+          "spd": 10
+        },
+        "abilities": [
+          "basic_attack",
+          "fireball",
+          "lightning_bolt",
+          "curse",
+          "meteor",
+          "ice_blast",
+          "chain_lightning",
+          "dark_bolt",
+          "hex",
+          "life_drain",
+          "shadow_strike",
+          "soul_crusher",
+          "darkness_wave",
+          "shadow_regeneration",
+          "terror",
+          "chain_reaction",
+          "blood_magic",
+          "doom",
+          "elemental_fusion",
+          "time_stop",
+          "mirror_image"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_raven",
+        "name": "Raven",
+        "job": "Rogue",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 100,
+          "maxHp": 100,
+          "mp": 29,
+          "maxMp": 30,
+          "str": 14,
+          "def": 15,
+          "mag": 8,
+          "spd": 18
+        },
+        "abilities": [
+          "basic_attack",
+          "backstab",
+          "poison_blade",
+          "shadow_step",
+          "smoke_bomb",
+          "venom_strike",
+          "teleport",
+          "acid_spray"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_thrain",
+        "name": "Thrain",
+        "job": "Warrior",
+        "level": 2,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 165,
+          "maxHp": 165,
+          "mp": 22,
+          "maxMp": 22,
+          "str": 19,
+          "def": 16,
+          "mag": 5,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "power_strike",
+          "shield_bash",
+          "taunt",
+          "earthquake",
+          "barrier",
+          "goblin_rush",
+          "berserker_rage",
+          "war_cry",
+          "ultimate_strike",
+          "perfect_defense",
+          "rage"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_elara",
+        "name": "Elara",
+        "job": "WhiteMage",
+        "level": 2,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 88,
+          "maxHp": 88,
+          "mp": 55,
+          "maxMp": 55,
+          "str": 6,
+          "def": 8,
+          "mag": 22,
+          "spd": 13
+        },
+        "abilities": [
+          "basic_attack",
+          "heal",
+          "greater_heal",
+          "blessing",
+          "holy_light",
+          "regeneration",
+          "divine_shield",
+          "heal_all",
+          "resurrection"
+        ],
+        "buffs": []
+      }
+    ],
+    "enemies": [
+      {
+        "id": "enemy_hechicero_corrupto",
+        "name": "Hechicero Corrupto",
+        "job": "BlackMage",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": false,
+        "stats": {
+          "hp": 75,
+          "maxHp": 75,
+          "mp": 40,
+          "maxMp": 40,
+          "str": 6,
+          "def": 7,
+          "mag": 18,
+          "spd": 12
+        },
+        "abilities": [
+          "basic_attack",
+          "dark_bolt",
+          "hex",
+          "life_drain"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "enemy_orc_2",
+        "name": "Orc 2",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": false,
+        "stats": {
+          "hp": 90,
+          "maxHp": 90,
+          "mp": 20,
+          "maxMp": 20,
+          "str": 16,
+          "def": 12,
+          "mag": 3,
+          "spd": 6
+        },
+        "abilities": [
+          "basic_attack",
+          "berserker_rage",
+          "war_cry"
+        ],
+        "buffs": []
+      }
+    ],
+    "turnOrder": [
+      "char_raven",
+      "char_luna",
+      "char_elara",
+      "char_kael",
+      "char_zara",
+      "enemy_hechicero_corrupto",
+      "enemy_orc_2",
+      "char_thrain"
+    ]
+  },
+  "turns": [
+    {
+      "turnNumber": 1,
+      "timestamp": 1758608493661,
+      "actions": [
+        {
+          "id": "action_1_char_raven",
+          "actorId": "char_raven",
+          "actorName": "Raven",
+          "type": "ability",
+          "success": true,
+          "message": "Raven casts Poison Blade on Orc 2 for 20 damage (70/90 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_orc_2",
+          "targetName": "Orc 2",
+          "abilityId": "poison_blade",
+          "abilityName": "Poison Blade",
+          "mpCost": 8,
+          "damage": 20
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_orc_2",
+          "participantName": "Orc 2",
+          "statChanges": {
+            "hp": {
+              "before": 90,
+              "after": 70,
+              "change": -20
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {
+            "isAlive": {
+              "before": true,
+              "after": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "turnNumber": 2,
+      "timestamp": 1758608494661,
+      "actions": [
+        {
+          "id": "action_1_char_luna",
+          "actorId": "char_luna",
+          "actorName": "Luna",
+          "type": "ability",
+          "success": true,
+          "message": "Luna casts Holy Light on Hechicero Corrupto for 38 damage (37/75 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_hechicero_corrupto",
+          "targetName": "Hechicero Corrupto",
+          "abilityId": "holy_light",
+          "abilityName": "Holy Light",
+          "mpCost": 10,
+          "damage": 38
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_hechicero_corrupto",
+          "participantName": "Hechicero Corrupto",
+          "statChanges": {
+            "hp": {
+              "before": 75,
+              "after": 37,
+              "change": -38
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {
+            "isAlive": {
+              "before": true,
+              "after": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "turnNumber": 3,
+      "timestamp": 1758608495661,
+      "actions": [
+        {
+          "id": "action_1_char_elara",
+          "actorId": "char_elara",
+          "actorName": "Elara",
+          "type": "ability",
+          "success": true,
+          "message": "Elara casts Blessing on Orc 2 (buff applied for 4 turns)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_orc_2",
+          "targetName": "Orc 2",
+          "abilityId": "blessing",
+          "abilityName": "Blessing",
+          "mpCost": 12
+        }
+      ],
+      "stateChanges": []
+    },
+    {
+      "turnNumber": 4,
+      "timestamp": 1758608496661,
+      "actions": [
+        {
+          "id": "action_1_char_kael",
+          "actorId": "char_kael",
+          "actorName": "Kael",
+          "type": "ability",
+          "success": true,
+          "message": "Kael casts Power Strike on Orc 2 for 19 damage (51/90 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_orc_2",
+          "targetName": "Orc 2",
+          "abilityId": "power_strike",
+          "abilityName": "Power Strike",
+          "mpCost": 5,
+          "damage": 19
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_orc_2",
+          "participantName": "Orc 2",
+          "statChanges": {
+            "hp": {
+              "before": 70,
+              "after": 51,
+              "change": -19
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {
+            "isAlive": {
+              "before": true,
+              "after": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "turnNumber": 5,
+      "timestamp": 1758608497661,
+      "actions": [
+        {
+          "id": "action_1_char_zara",
+          "actorId": "char_zara",
+          "actorName": "Zara",
+          "type": "ability",
+          "success": true,
+          "message": "Zara casts Fireball on Orc 2 for 46 damage (5/90 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_orc_2",
+          "targetName": "Orc 2",
+          "abilityId": "fireball",
+          "abilityName": "Fireball",
+          "mpCost": 12,
+          "damage": 46
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_orc_2",
+          "participantName": "Orc 2",
+          "statChanges": {
+            "hp": {
+              "before": 51,
+              "after": 5,
+              "change": -46
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {
+            "isAlive": {
+              "before": true,
+              "after": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "turnNumber": 6,
+      "timestamp": 1758608498661,
+      "actions": [
+        {
+          "id": "action_1_enemy_hechicero_corrupto",
+          "actorId": "enemy_hechicero_corrupto",
+          "actorName": "Hechicero Corrupto",
+          "type": "ability",
+          "success": true,
+          "message": "Hechicero Corrupto casts Dark Bolt on Thrain for 30 damage (135/165 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "char_thrain",
+          "targetName": "Thrain",
+          "abilityId": "dark_bolt",
+          "abilityName": "Dark Bolt",
+          "mpCost": 12,
+          "damage": 30
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_thrain",
+          "participantName": "Thrain",
+          "statChanges": {
+            "hp": {
+              "before": 165,
+              "after": 135,
+              "change": -30
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 7,
+      "timestamp": 1758608499661,
+      "actions": [
+        {
+          "id": "action_1_enemy_orc_2",
+          "actorId": "enemy_orc_2",
+          "actorName": "Orc 2",
+          "type": "ability",
+          "success": true,
+          "message": "Orc 2 casts Berserker Rage on Kael for 23 damage (127/150 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "char_kael",
+          "targetName": "Kael",
+          "abilityId": "berserker_rage",
+          "abilityName": "Berserker Rage",
+          "mpCost": 8,
+          "damage": 23
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "char_kael",
+          "participantName": "Kael",
+          "statChanges": {
+            "hp": {
+              "before": 150,
+              "after": 127,
+              "change": -23
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {}
+        }
+      ]
+    },
+    {
+      "turnNumber": 8,
+      "timestamp": 1758608500661,
+      "actions": [
+        {
+          "id": "action_1_char_thrain",
+          "actorId": "char_thrain",
+          "actorName": "Thrain",
+          "type": "ability",
+          "success": true,
+          "message": "Thrain casts Power Strike on Hechicero Corrupto for 25 damage (12/75 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_hechicero_corrupto",
+          "targetName": "Hechicero Corrupto",
+          "abilityId": "power_strike",
+          "abilityName": "Power Strike",
+          "mpCost": 5,
+          "damage": 25
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_hechicero_corrupto",
+          "participantName": "Hechicero Corrupto",
+          "statChanges": {
+            "hp": {
+              "before": 37,
+              "after": 12,
+              "change": -25
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {
+            "isAlive": {
+              "before": true,
+              "after": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "turnNumber": 9,
+      "timestamp": 1758608501661,
+      "actions": [
+        {
+          "id": "action_2_char_raven",
+          "actorId": "char_raven",
+          "actorName": "Raven",
+          "type": "ability",
+          "success": true,
+          "message": "Raven casts Poison Blade on Hechicero Corrupto for 25 damage (0/75 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_hechicero_corrupto",
+          "targetName": "Hechicero Corrupto",
+          "abilityId": "poison_blade",
+          "abilityName": "Poison Blade",
+          "mpCost": 8,
+          "damage": 25
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_hechicero_corrupto",
+          "participantName": "Hechicero Corrupto",
+          "statChanges": {
+            "hp": {
+              "before": 12,
+              "after": 0,
+              "change": -25
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {
+            "isAlive": {
+              "before": true,
+              "after": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "turnNumber": 10,
+      "timestamp": 1758608502661,
+      "actions": [
+        {
+          "id": "action_2_char_luna",
+          "actorId": "char_luna",
+          "actorName": "Luna",
+          "type": "ability",
+          "success": true,
+          "message": "Luna casts Holy Light on Orc 2 for 33 damage (0/90 HP remaining)",
+          "animationKey": "skill_cast",
+          "duration": 2000,
+          "targetId": "enemy_orc_2",
+          "targetName": "Orc 2",
+          "abilityId": "holy_light",
+          "abilityName": "Holy Light",
+          "mpCost": 10,
+          "damage": 33
+        }
+      ],
+      "stateChanges": [
+        {
+          "participantId": "enemy_orc_2",
+          "participantName": "Orc 2",
+          "statChanges": {
+            "hp": {
+              "before": 5,
+              "after": 0,
+              "change": -33
+            }
+          },
+          "buffsAdded": [],
+          "buffsRemoved": [],
+          "statusChanged": {
+            "isAlive": {
+              "before": true,
+              "after": false
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "finalState": {
+    "party": [
+      {
+        "id": "char_kael",
+        "name": "Kael",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 127,
+          "maxHp": 150,
+          "mp": 15,
+          "maxMp": 20,
+          "str": 18,
+          "def": 15,
+          "mag": 5,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "power_strike",
+          "shield_bash",
+          "taunt",
+          "earthquake",
+          "barrier",
+          "goblin_rush",
+          "berserker_rage",
+          "war_cry",
+          "ultimate_strike",
+          "perfect_defense",
+          "rage"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_luna",
+        "name": "Luna",
+        "job": "WhiteMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 80,
+          "maxHp": 80,
+          "mp": 30,
+          "maxMp": 50,
+          "str": 6,
+          "def": 8,
+          "mag": 20,
+          "spd": 12
+        },
+        "abilities": [
+          "basic_attack",
+          "heal",
+          "greater_heal",
+          "blessing",
+          "holy_light",
+          "regeneration",
+          "divine_shield",
+          "heal_all",
+          "resurrection"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_zara",
+        "name": "Zara",
+        "job": "BlackMage",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 70,
+          "maxHp": 70,
+          "mp": 48,
+          "maxMp": 60,
+          "str": 5,
+          "def": 6,
+          "mag": 25,
+          "spd": 10
+        },
+        "abilities": [
+          "basic_attack",
+          "fireball",
+          "lightning_bolt",
+          "curse",
+          "meteor",
+          "ice_blast",
+          "chain_lightning",
+          "dark_bolt",
+          "hex",
+          "life_drain",
+          "shadow_strike",
+          "soul_crusher",
+          "darkness_wave",
+          "shadow_regeneration",
+          "terror",
+          "chain_reaction",
+          "blood_magic",
+          "doom",
+          "elemental_fusion",
+          "time_stop",
+          "mirror_image"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_raven",
+        "name": "Raven",
+        "job": "Rogue",
+        "level": 1,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 100,
+          "maxHp": 100,
+          "mp": 13,
+          "maxMp": 30,
+          "str": 14,
+          "def": 15,
+          "mag": 8,
+          "spd": 18
+        },
+        "abilities": [
+          "basic_attack",
+          "backstab",
+          "poison_blade",
+          "shadow_step",
+          "smoke_bomb",
+          "venom_strike",
+          "teleport",
+          "acid_spray"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_thrain",
+        "name": "Thrain",
+        "job": "Warrior",
+        "level": 2,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 135,
+          "maxHp": 165,
+          "mp": 17,
+          "maxMp": 22,
+          "str": 19,
+          "def": 16,
+          "mag": 5,
+          "spd": 8
+        },
+        "abilities": [
+          "basic_attack",
+          "power_strike",
+          "shield_bash",
+          "taunt",
+          "earthquake",
+          "barrier",
+          "goblin_rush",
+          "berserker_rage",
+          "war_cry",
+          "ultimate_strike",
+          "perfect_defense",
+          "rage"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "char_elara",
+        "name": "Elara",
+        "job": "WhiteMage",
+        "level": 2,
+        "isEnemy": false,
+        "isBoss": false,
+        "stats": {
+          "hp": 88,
+          "maxHp": 88,
+          "mp": 43,
+          "maxMp": 55,
+          "str": 6,
+          "def": 8,
+          "mag": 22,
+          "spd": 13
+        },
+        "abilities": [
+          "basic_attack",
+          "heal",
+          "greater_heal",
+          "blessing",
+          "holy_light",
+          "regeneration",
+          "divine_shield",
+          "heal_all",
+          "resurrection"
+        ],
+        "buffs": []
+      }
+    ],
+    "enemies": [
+      {
+        "id": "enemy_hechicero_corrupto",
+        "name": "Hechicero Corrupto",
+        "job": "BlackMage",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": false,
+        "stats": {
+          "hp": 0,
+          "maxHp": 75,
+          "mp": 28,
+          "maxMp": 40,
+          "str": 6,
+          "def": 7,
+          "mag": 18,
+          "spd": 12
+        },
+        "abilities": [
+          "basic_attack",
+          "dark_bolt",
+          "hex",
+          "life_drain"
+        ],
+        "buffs": []
+      },
+      {
+        "id": "enemy_orc_2",
+        "name": "Orc 2",
+        "job": "Warrior",
+        "level": 1,
+        "isEnemy": true,
+        "isBoss": false,
+        "stats": {
+          "hp": 0,
+          "maxHp": 90,
+          "mp": 12,
+          "maxMp": 20,
+          "str": 24,
+          "def": 12,
+          "mag": 11,
+          "spd": 6
+        },
+        "abilities": [
+          "basic_attack",
+          "berserker_rage",
+          "war_cry"
+        ],
+        "buffs": [
+          {
+            "name": "Blessing",
+            "type": "buff",
+            "duration": 4,
+            "remainingTurns": 3,
+            "statModifier": {
+              "str": 8,
+              "mag": 8
+            }
+          }
+        ]
+      }
+    ],
+    "victory": true,
+    "reason": "All enemies defeated",
+    "survivors": [
+      "char_kael",
+      "char_luna",
+      "char_zara",
+      "char_raven",
+      "char_thrain",
+      "char_elara"
+    ],
+    "defeated": [
+      "enemy_hechicero_corrupto",
+      "enemy_orc_2"
+    ]
+  }
+}

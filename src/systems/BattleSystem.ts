@@ -30,6 +30,8 @@ export interface TurnResult {
   success: boolean;
   message: string;
   turnNumber: number;
+  beforeHp?: number;
+  afterHp?: number;
 }
 
 export interface BattleState {
@@ -446,7 +448,9 @@ export class BattleSystem {
     const defense = target.currentStats.def;
     const damage = Math.max(1, baseDamage - defense + Math.floor(Math.random() * 5));
 
+    const beforeHp = target.currentStats.hp;
     target.currentStats.hp = Math.max(0, target.currentStats.hp - damage);
+    const afterHp = target.currentStats.hp;
 
     if (target.currentStats.hp <= 0) {
       target.isAlive = false;
@@ -459,7 +463,9 @@ export class BattleSystem {
       damage,
       success: true,
       message: `${actor.name} attacks ${target.name} for ${damage} damage (${target.currentStats.hp}/${target.maxStats.hp} HP remaining)`,
-      turnNumber: this.battleState!.turnNumber
+      turnNumber: this.battleState!.turnNumber,
+      beforeHp,
+      afterHp
     };
   }
 
@@ -539,7 +545,9 @@ export class BattleSystem {
 
     const totalDamage = Math.max(1, baseDamage + magicPower - defense + Math.floor(Math.random() * 5));
 
+    const beforeHp = target.currentStats.hp;
     target.currentStats.hp = Math.max(0, target.currentStats.hp - totalDamage);
+    const afterHp = target.currentStats.hp;
 
     if (target.currentStats.hp <= 0) {
       target.isAlive = false;
@@ -552,7 +560,9 @@ export class BattleSystem {
       damage: totalDamage,
       success: true,
       message: `${actor.name} casts ${skill.name} on ${target.name} for ${totalDamage} damage (${target.currentStats.hp}/${target.maxStats.hp} HP remaining)`,
-      turnNumber: this.battleState!.turnNumber
+      turnNumber: this.battleState!.turnNumber,
+      beforeHp,
+      afterHp
     };
   }
 
@@ -563,7 +573,9 @@ export class BattleSystem {
     const totalHeal = baseHeal + Math.floor(magicPower * 0.5) + Math.floor(Math.random() * 5);
     const actualHeal = Math.min(totalHeal, target.maxStats.hp - target.currentStats.hp);
 
+    const beforeHp = target.currentStats.hp;
     target.currentStats.hp += actualHeal;
+    const afterHp = target.currentStats.hp;
 
     return {
       actor,
@@ -572,7 +584,9 @@ export class BattleSystem {
       heal: actualHeal,
       success: true,
       message: `${actor.name} casts ${skill.name} on ${target.name} healing ${actualHeal} HP (${target.currentStats.hp}/${target.maxStats.hp} HP)`,
-      turnNumber: this.battleState!.turnNumber
+      turnNumber: this.battleState!.turnNumber,
+      beforeHp,
+      afterHp
     };
   }
 

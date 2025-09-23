@@ -34,8 +34,10 @@ export class CombatDataExporter {
     battleId: number,
     battleOrder: number,
     maxTurns: number,
-    party: BattleParticipant[],
-    enemies: BattleParticipant[],
+    initialParty: BattleParticipant[],
+    initialEnemies: BattleParticipant[],
+    finalParty: BattleParticipant[],
+    finalEnemies: BattleParticipant[],
     turnHistory: TurnResult[],
     battleResult: BattleResult,
     startTime: Date,
@@ -54,8 +56,8 @@ export class CombatDataExporter {
     };
 
     const initialState: CombatInitialState = {
-      party: party.map(p => this.convertParticipant(p)),
-      enemies: enemies.map(e => this.convertParticipant(e)),
+      party: initialParty.map(p => this.convertParticipant(p)),
+      enemies: initialEnemies.map(e => this.convertParticipant(e)),
       turnOrder: this.extractTurnOrder(turnHistory)
     };
 
@@ -64,8 +66,8 @@ export class CombatDataExporter {
     );
 
     const finalState: CombatFinalState = {
-      party: party.map(p => this.convertParticipant(p)),
-      enemies: enemies.map(e => this.convertParticipant(e)),
+      party: finalParty.map(p => this.convertParticipant(p)),
+      enemies: finalEnemies.map(e => this.convertParticipant(e)),
       victory: battleResult.victory,
       reason: battleResult.reason,
       survivors: battleResult.survivingAllies.map(a => a.id),
@@ -221,8 +223,8 @@ export class CombatDataExporter {
         participantName: turn.target.name,
         statChanges: {
           hp: {
-            before: turn.target.currentStats.hp - hpChange,
-            after: turn.target.currentStats.hp,
+            before: turn.beforeHp || turn.target.currentStats.hp,
+            after: turn.afterHp || turn.target.currentStats.hp,
             change: hpChange
           }
         },
